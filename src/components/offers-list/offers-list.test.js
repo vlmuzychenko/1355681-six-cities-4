@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import OffersList from "./offers-list.jsx";
 
 const mock = [
   {
@@ -21,10 +21,9 @@ const mock = [
   }
 ];
 
-it(`Render App`, () => {
+it(`Should Offer List render correctly`, () => {
   const tree = renderer
-    .create(<App
-      offersCount={1234}
+    .create(<OffersList
       offers={mock}
     />)
     .toJSON();
