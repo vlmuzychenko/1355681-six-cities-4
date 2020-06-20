@@ -268,6 +268,8 @@ Array [
             >
               <article
                 className="cities__place-card place-card"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
               >
                 <div
                   className="place-card__mark"
@@ -303,7 +305,8 @@ Array [
                       <b
                         className="place-card__price-value"
                       >
-                        €120
+                        €
+                        120
                       </b>
                       <span
                         className="place-card__price-text"
@@ -363,20 +366,16 @@ Array [
                   <p
                     className="place-card__type"
                   >
-                    Apartment
+                    apartment
                   </p>
                 </div>
               </article>
               <article
                 className="cities__place-card place-card"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
               >
-                <div
-                  className="place-card__mark"
-                >
-                  <span>
-                    Premium
-                  </span>
-                </div>
+                
                 <div
                   className="cities__image-wrapper place-card__image-wrapper"
                 >
@@ -387,7 +386,7 @@ Array [
                       alt="Place image"
                       className="place-card__image"
                       height="200"
-                      src="img/apartment-01.jpg"
+                      src="img/room.jpg"
                       width="260"
                     />
                   </a>
@@ -404,7 +403,8 @@ Array [
                       <b
                         className="place-card__price-value"
                       >
-                        €120
+                        €
+                        80
                       </b>
                       <span
                         className="place-card__price-text"
@@ -464,7 +464,7 @@ Array [
                   <p
                     className="place-card__type"
                   >
-                    Apartment
+                    hotel
                   </p>
                 </div>
               </article>

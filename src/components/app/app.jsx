@@ -5,12 +5,12 @@ import PropTypes from "prop-types";
 const headingClickHandler = () => {};
 
 const App = (props) => {
-  const {offersCount, offersTitles} = props;
+  const {offersCount, offers} = props;
 
   return (
     <Main
       offersCount={offersCount}
-      offersTitles={offersTitles}
+      offers={offers}
       onHeadingClick={headingClickHandler}
     />
   );
@@ -18,7 +18,16 @@ const App = (props) => {
 
 App.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offersTitles: PropTypes.arrayOf(PropTypes.string).isRequired
+  offers: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        photo: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+      })
+  )
 };
 
 export default App;
