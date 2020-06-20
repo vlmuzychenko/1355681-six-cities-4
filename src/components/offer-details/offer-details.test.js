@@ -1,7 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Offer from "./offer.jsx";
-import {BrowserRouter} from "react-router-dom";
+import OfferDetails from "./offer-details.jsx";
 
 const offerMock = {
   title: `Beautiful & luxurious apartment at great location`,
@@ -22,16 +21,11 @@ const offerMock = {
   }
 };
 
-it(`Should Offer render correctly`, () => {
+it(`Should Offer Details render correctly`, () => {
   const tree = renderer
-    .create(
-        <BrowserRouter>
-          <Offer
-            offer={offerMock}
-            onOfferHover={() => {}}
-          />
-        </BrowserRouter>
-    )
+    .create(<OfferDetails
+      offer={offerMock}
+    />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

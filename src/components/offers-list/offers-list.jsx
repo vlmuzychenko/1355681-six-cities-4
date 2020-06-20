@@ -19,7 +19,7 @@ class OffersList extends PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {offers, onOfferTitleClick} = this.props;
 
     return (
       <div className="cities__places-list places__list tabs__content">
@@ -29,6 +29,7 @@ class OffersList extends PureComponent {
               key={offer.price + offer.rating}
               offer={offer}
               onOfferHover={this._handleOfferHover}
+              onOfferTitleClick={onOfferTitleClick}
             />
           );
         })}
@@ -42,12 +43,23 @@ OffersList.propTypes = {
       PropTypes.shape({
         title: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
-        photo: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
+        previewImage: PropTypes.string.isRequired,
+        images: PropTypes.arrayOf(PropTypes.string).isRequired,
+        description: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
         isPremium: PropTypes.bool.isRequired,
+        type: PropTypes.string.isRequired,
+        bedrooms: PropTypes.number.isRequired,
+        maxAdults: PropTypes.number.isRequired,
+        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+        host: PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          super: PropTypes.bool.isRequired,
+          avatarUrl: PropTypes.string.isRequired,
+        }),
       })
-  )
+  ),
+  onOfferTitleClick: PropTypes.func.isRequired,
 };
 
 export default OffersList;

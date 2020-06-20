@@ -96,7 +96,8 @@ exports[`Should Offer List render correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer"
+          onClick={[Function]}
         >
           Beautiful & luxurious apartment at great location
         </a>
@@ -104,7 +105,7 @@ exports[`Should Offer List render correctly 1`] = `
       <p
         className="place-card__type"
       >
-        apartment
+        Apartment
       </p>
     </div>
   </article>
@@ -194,7 +195,8 @@ exports[`Should Offer List render correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer"
+          onClick={[Function]}
         >
           Wood and stone place
         </a>
@@ -202,7 +204,7 @@ exports[`Should Offer List render correctly 1`] = `
       <p
         className="place-card__type"
       >
-        hotel
+        Hotel
       </p>
     </div>
   </article>
