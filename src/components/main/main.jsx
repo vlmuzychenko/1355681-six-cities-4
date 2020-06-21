@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list.jsx";
 
 const Main = (props) => {
-  const {offersCount, offers, onHeadingClick} = props;
+  const {offersCount, offers, onHeadingClick, onOfferTitleClick} = props;
 
   return (
     <React.Fragment>
@@ -102,6 +102,7 @@ const Main = (props) => {
 
                 <OffersList
                   offers={offers}
+                  onOfferTitleClick={onOfferTitleClick}
                 />
 
               </section>
@@ -122,13 +123,24 @@ Main.propTypes = {
       PropTypes.shape({
         title: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
-        photo: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
+        previewImage: PropTypes.string.isRequired,
+        images: PropTypes.arrayOf(PropTypes.string).isRequired,
+        description: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
         isPremium: PropTypes.bool.isRequired,
+        type: PropTypes.string.isRequired,
+        bedrooms: PropTypes.number.isRequired,
+        maxAdults: PropTypes.number.isRequired,
+        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+        host: PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          super: PropTypes.bool.isRequired,
+          avatarUrl: PropTypes.string.isRequired,
+        }),
       })
   ),
-  onHeadingClick: PropTypes.func.isRequired
+  onHeadingClick: PropTypes.func.isRequired,
+  onOfferTitleClick: PropTypes.func.isRequired,
 };
 
 export default Main;
