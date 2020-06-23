@@ -1,7 +1,6 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import Main from "./main";
+import renderer from "react-test-renderer";
+import Map from "./map.jsx";
 
 const offersMock = [
   {
@@ -40,30 +39,21 @@ const offersMock = [
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
-    coords: [52.3909553943508, 4.929309666406198],
+    coords: [52.369553943508, 4.85309666406198],
   }
 ];
 
-Enzyme.configure({
-  adapter: new Adapter(),
-});
+it(`Should Map render correctly`, () => {
+  const tree = renderer
+    .create(
+        <Map
+          offers={offersMock}
+        />,
+        {
+          createNodeMock: () => document.createElement(`div`)
+        }
+    )
+    .toJSON();
 
-it(`Should heading be pressed`, () => {
-  const onHeadingClick = jest.fn();
-  const onOfferTitleClick = jest.fn();
-
-  const main = shallow(
-      <Main
-        offersCount={1234}
-        offers={offersMock}
-        onHeadingClick={onHeadingClick}
-        onOfferTitleClick={onOfferTitleClick}
-      />
-  );
-
-  const heading = main.find(`.places__found`);
-
-  heading.props().onClick();
-
-  expect(onHeadingClick.mock.calls.length).toBe(1);
+  expect(tree).toMatchSnapshot();
 });
