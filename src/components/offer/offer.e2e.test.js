@@ -20,7 +20,8 @@ const offerMock = {
     name: `Angelina`,
     super: true,
     avatarUrl: `img/avatar-angelina.jpg`,
-  }
+  },
+  coords: [52.3909553943508, 4.85309666406198],
 };
 
 Enzyme.configure({

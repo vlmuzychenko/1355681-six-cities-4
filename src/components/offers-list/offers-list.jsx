@@ -57,6 +57,7 @@ OffersList.propTypes = {
           super: PropTypes.bool.isRequired,
           avatarUrl: PropTypes.string.isRequired,
         }),
+        coords: PropTypes.arrayOf(PropTypes.number).isRequired,
       })
   ),
   onOfferTitleClick: PropTypes.func.isRequired,

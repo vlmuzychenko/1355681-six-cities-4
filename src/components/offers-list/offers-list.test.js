@@ -20,7 +20,8 @@ const offersMock = [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
-    }
+    },
+    coords: [52.3909553943508, 4.85309666406198],
   },
   {
     title: `Wood and stone place`,
@@ -39,6 +40,7 @@ const offersMock = [
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
+    coords: [52.369553943508, 4.85309666406198],
   }
 ];
 

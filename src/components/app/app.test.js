@@ -19,7 +19,8 @@ const offersMock = [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
-    }
+    },
+    coords: [52.3909553943508, 4.85309666406198],
   },
   {
     title: `Wood and stone place`,
@@ -38,15 +39,21 @@ const offersMock = [
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
+    coords: [52.3909553943508, 4.85309666406198],
   }
 ];
 
 it(`Render App`, () => {
   const tree = renderer
-    .create(<App
-      offersCount={1234}
-      offers={offersMock}
-    />)
+    .create(
+        <App
+          offersCount={1234}
+          offers={offersMock}
+        />,
+        {
+          createNodeMock: () => document.createElement(`div`)
+        }
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
