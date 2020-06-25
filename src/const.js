@@ -4,3 +4,8 @@ export const OfferTypes = new Map([
   [`house`, `House`],
   [`hotel`, `Hotel`]
 ]);
+
+export const PlaceCardTypes = {
+  CITY: `city`,
+  NEAR: `near`
+};

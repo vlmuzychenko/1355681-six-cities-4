@@ -5,6 +5,7 @@ import {BrowserRouter} from "react-router-dom";
 
 const offersMock = [
   {
+    id: 1,
     title: `Beautiful & luxurious apartment at great location`,
     price: 120,
     previewImage: `img/apartment-01.jpg`,
@@ -24,6 +25,7 @@ const offersMock = [
     coords: [52.3909553943508, 4.85309666406198],
   },
   {
+    id: 2,
     title: `Wood and stone place`,
     price: 80,
     previewImage: `img/room.jpg`,

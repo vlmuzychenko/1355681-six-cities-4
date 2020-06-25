@@ -4,20 +4,20 @@ import {Link} from "react-router-dom";
 import {getRatingInPercent} from "../../utils/common.js";
 import {OfferTypes} from "../../const.js";
 
-const Offer = (props) => {
-  const {offer, onOfferHover, onOfferTitleClick} = props;
+const OfferCard = (props) => {
+  const {offer, onOfferHover, onOfferTitleClick, className, imageWrapperClassName} = props;
   const {title, price, previewImage, type, rating, isPremium} = offer;
   const premiumMark = isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ``;
 
   return (
     <article
-      className="cities__place-card place-card"
+      className={`place-card ${className || ``}`}
       key={offer.price + offer.rating}
       onMouseEnter={() => onOfferHover(offer)}
       onMouseLeave={() => onOfferHover(null)}
     >
       {premiumMark}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`place-card__image-wrapper ${imageWrapperClassName || ``}`}>
         <a href="#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
         </a>
@@ -50,8 +50,9 @@ const Offer = (props) => {
   );
 };
 
-Offer.propTypes = {
+OfferCard.propTypes = {
   offer: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     previewImage: PropTypes.string.isRequired,
@@ -72,6 +73,8 @@ Offer.propTypes = {
   }).isRequired,
   onOfferHover: PropTypes.func.isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  imageWrapperClassName: PropTypes.string,
 };
 
-export default Offer;
+export default OfferCard;

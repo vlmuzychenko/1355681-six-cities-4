@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import NearOffersList from "./near-offers-list.jsx";
+import {BrowserRouter} from "react-router-dom";
 
 const offersMock = [
   {
@@ -41,20 +42,22 @@ const offersMock = [
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
-    coords: [52.3909553943508, 4.85309666406198],
+    coords: [52.369553943508, 4.85309666406198],
   }
 ];
 
-it(`Render App`, () => {
+const classNameMock = `near-places__list`;
+
+it(`Should Near Offer List render correctly`, () => {
   const tree = renderer
     .create(
-        <App
-          offersCount={1234}
-          offers={offersMock}
-        />,
-        {
-          createNodeMock: () => document.createElement(`div`)
-        }
+        <BrowserRouter>
+          <NearOffersList
+            className={classNameMock}
+            offers={offersMock}
+            onOfferTitleClick={() => {}}
+          />
+        </BrowserRouter>
     )
     .toJSON();
 

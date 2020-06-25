@@ -40,9 +40,7 @@ class Map extends PureComponent {
 
   render() {
     return (
-      <section className="cities__map map">
-        <div id="map" ref={this._mapContainer}></div>
-      </section>
+      <div id="map" ref={this._mapContainer}></div>
     );
   }
 }
@@ -50,6 +48,7 @@ class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape({
+        id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         previewImage: PropTypes.string.isRequired,

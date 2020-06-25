@@ -1,6 +1,9 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import Offer from "../offer/offer.jsx";
+import CityOfferCard from "../city-offer-card/city-offer-card.jsx";
+import NearOfferCard from "../near-offer-card/near-offer-card.jsx";
+import OfferCard from "../offer-card/offer-card.jsx";
+import {PlaceCardTypes} from "../../const.js";
 
 class OffersList extends PureComponent {
   constructor(props) {
@@ -18,20 +21,45 @@ class OffersList extends PureComponent {
     });
   }
 
+  _getOfferCardByType(type, offer, onOfferTitleClick, index) {
+    switch (type) {
+      case PlaceCardTypes.CITY:
+        return (
+          <CityOfferCard
+            key={offer.price + index}
+            offer={offer}
+            onOfferHover={this._handleOfferHover}
+            onOfferTitleClick={onOfferTitleClick}
+          />
+        );
+      case PlaceCardTypes.NEAR:
+        return (
+          <NearOfferCard
+            key={offer.price + index}
+            offer={offer}
+            onOfferHover={this._handleOfferHover}
+            onOfferTitleClick={onOfferTitleClick}
+          />
+        );
+      default:
+        return (
+          <OfferCard
+            key={offer.price + index}
+            offer={offer}
+            onOfferHover={this._handleOfferHover}
+            onOfferTitleClick={onOfferTitleClick}
+          />
+        );
+    }
+  }
+
   render() {
-    const {offers, onOfferTitleClick} = this.props;
+    const {offers, onOfferTitleClick, type, className} = this.props;
 
     return (
-      <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer) => {
-          return (
-            <Offer
-              key={offer.price + offer.rating}
-              offer={offer}
-              onOfferHover={this._handleOfferHover}
-              onOfferTitleClick={onOfferTitleClick}
-            />
-          );
+      <div className={`places__list ${className || ``}`}>
+        {offers.map((offer, index) => {
+          return this._getOfferCardByType(type, offer, onOfferTitleClick, index);
         })}
       </div>
     );
@@ -41,6 +69,7 @@ class OffersList extends PureComponent {
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape({
+        id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         previewImage: PropTypes.string.isRequired,
@@ -61,6 +90,8 @@ OffersList.propTypes = {
       })
   ),
   onOfferTitleClick: PropTypes.func.isRequired,
+  type: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default OffersList;

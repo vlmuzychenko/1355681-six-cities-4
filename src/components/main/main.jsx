@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import OffersList from "../offers-list/offers-list.jsx";
+import CityOffersList from "../city-offers-list/city-offers-list.jsx";
 import Map from "../map/map.jsx";
 
 const Main = (props) => {
@@ -101,16 +101,18 @@ const Main = (props) => {
                   </select> */}
                 </form>
 
-                <OffersList
+                <CityOffersList
                   offers={offers}
                   onOfferTitleClick={onOfferTitleClick}
                 />
 
               </section>
               <div className="cities__right-section">
-                <Map
-                  offers={offers}
-                />
+                <section className="cities__map map">
+                  <Map
+                    offers={offers}
+                  />
+                </section>
               </div>
             </div>
           </div>
@@ -124,6 +126,7 @@ Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape({
+        id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         previewImage: PropTypes.string.isRequired,

@@ -1,10 +1,11 @@
 import React from "react";
 import Enzyme, {shallow, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import Offer from "./offer";
+import OfferCard from "./offer-card";
 import {BrowserRouter} from "react-router-dom";
 
-const offerMock = {
+const offerCardMock = {
+  id: 1,
   title: `Beautiful & luxurious apartment at great location`,
   price: 120,
   previewImage: `img/apartment-01.jpg`,
@@ -32,32 +33,32 @@ it(`The state should change when the mouse is on the offer`, () => {
   const onOfferHover = jest.fn();
   const onOfferTitleClick = jest.fn();
 
-  const offer = shallow(
-      <Offer
-        offer={offerMock}
+  const offerCard = shallow(
+      <OfferCard
+        offer={offerCardMock}
         onOfferHover={onOfferHover}
         onOfferTitleClick={onOfferTitleClick}
       />
   );
 
-  offer.simulate(`mouseenter`);
+  offerCard.simulate(`mouseenter`);
   expect(onOfferHover).toHaveBeenCalledTimes(1);
-  expect(onOfferHover.mock.calls[0][0]).toMatchObject(offerMock);
+  expect(onOfferHover.mock.calls[0][0]).toMatchObject(offerCardMock);
 });
 
 it(`The state should change when the cursor leaves the card`, () => {
   const onOfferHover = jest.fn();
   const onOfferTitleClick = jest.fn();
 
-  const offer = shallow(
-      <Offer
-        offer={offerMock}
+  const offerCard = shallow(
+      <OfferCard
+        offer={offerCardMock}
         onOfferHover={onOfferHover}
         onOfferTitleClick={onOfferTitleClick}
       />
   );
 
-  offer.simulate(`mouseleave`);
+  offerCard.simulate(`mouseleave`);
   expect(onOfferHover).toHaveBeenCalledTimes(1);
   expect(onOfferHover.mock.calls[0][0]).toEqual(null);
 });
@@ -66,20 +67,20 @@ it(`Shoud offer title be pressed`, () => {
   const onOfferHover = jest.fn();
   const onOfferTitleClick = jest.fn();
 
-  const offer = mount(
+  const offerCard = mount(
       <BrowserRouter>
-        <Offer
-          offer={offerMock}
+        <OfferCard
+          offer={offerCardMock}
           onOfferHover={onOfferHover}
           onOfferTitleClick={onOfferTitleClick}
         />
       </BrowserRouter>
   );
 
-  const link = offer.find(`.place-card__name a`);
+  const link = offerCard.find(`.place-card__name a`);
 
   link.simulate(`click`);
 
   expect(onOfferTitleClick.mock.calls.length).toBe(1);
-  expect(onOfferTitleClick.mock.calls[0][0]).toMatchObject(offerMock);
+  expect(onOfferTitleClick.mock.calls[0][0]).toMatchObject(offerCardMock);
 });
