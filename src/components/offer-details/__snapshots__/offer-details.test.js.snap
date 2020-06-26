@@ -242,13 +242,17 @@ Array [
               <li
                 className="property__feature property__feature--bedrooms"
               >
-                4 Bedrooms
+                4
+                 
+                Bedrooms
               </li>
               <li
                 className="property__feature property__feature--adults"
               >
                 Max 
-                4 adults
+                4
+                 
+                adults
               </li>
             </ul>
             <div
@@ -373,7 +377,8 @@ Array [
               <h2
                 className="reviews__title"
               >
-                Reviews · 
+                Review
+                 · 
                 <span
                   className="reviews__amount"
                 >
@@ -436,7 +441,7 @@ Array [
                     </p>
                     <time
                       className="reviews__time"
-                      dateTime="2019-04-24"
+                      dateTime="2019-24-04"
                     >
                       April 2019
                     </time>
@@ -608,7 +613,11 @@ Array [
         </div>
         <section
           className="property__map map"
-        />
+        >
+          <div
+            id="map"
+          />
+        </section>
       </section>
       <div
         className="container"
@@ -622,13 +631,16 @@ Array [
             Other places in the neighbourhood
           </h2>
           <div
-            className="near-places__list places__list"
+            className="places__list near-places__list "
           >
             <article
-              className="near-places__card place-card"
+              className="place-card near-places__card "
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
+              
               <div
-                className="near-places__image-wrapper place-card__image-wrapper"
+                className="place-card__image-wrapper near-places__image-wrapper"
               >
                 <a
                   href="#"
@@ -654,101 +666,8 @@ Array [
                     <b
                       className="place-card__price-value"
                     >
-                      €80
-                    </b>
-                    <span
-                      className="place-card__price-text"
-                    >
-                      / night
-                    </span>
-                  </div>
-                  <button
-                    className="place-card__bookmark-button place-card__bookmark-button--active button"
-                    type="button"
-                  >
-                    <svg
-                      className="place-card__bookmark-icon"
-                      height="19"
-                      width="18"
-                    >
-                      <use
-                        xlinkHref="#icon-bookmark"
-                      />
-                    </svg>
-                    <span
-                      className="visually-hidden"
-                    >
-                      In bookmarks
-                    </span>
-                  </button>
-                </div>
-                <div
-                  className="place-card__rating rating"
-                >
-                  <div
-                    className="place-card__stars rating__stars"
-                  >
-                    <span
-                      style={
-                        Object {
-                          "width": "80%",
-                        }
-                      }
-                    />
-                    <span
-                      className="visually-hidden"
-                    >
-                      Rating
-                    </span>
-                  </div>
-                </div>
-                <h2
-                  className="place-card__name"
-                >
-                  <a
-                    href="#"
-                  >
-                    Wood and stone place
-                  </a>
-                </h2>
-                <p
-                  className="place-card__type"
-                >
-                  Private room
-                </p>
-              </div>
-            </article>
-            <article
-              className="near-places__card place-card"
-            >
-              <div
-                className="near-places__image-wrapper place-card__image-wrapper"
-              >
-                <a
-                  href="#"
-                >
-                  <img
-                    alt="Place image"
-                    className="place-card__image"
-                    height="200"
-                    src="img/apartment-02.jpg"
-                    width="260"
-                  />
-                </a>
-              </div>
-              <div
-                className="place-card__info"
-              >
-                <div
-                  className="place-card__price-wrapper"
-                >
-                  <div
-                    className="place-card__price"
-                  >
-                    <b
-                      className="place-card__price-value"
-                    >
-                      €132
+                      €
+                      80
                     </b>
                     <span
                       className="place-card__price-text"
@@ -800,23 +719,27 @@ Array [
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/offer"
+                    onClick={[Function]}
                   >
-                    Canal View Prinsengracht
+                    Wood and stone place 1
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  Private Room
                 </p>
               </div>
             </article>
             <article
-              className="near-places__card place-card"
+              className="place-card near-places__card "
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
+              
               <div
-                className="near-places__image-wrapper place-card__image-wrapper"
+                className="place-card__image-wrapper near-places__image-wrapper"
               >
                 <a
                   href="#"
@@ -825,7 +748,7 @@ Array [
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-03.jpg"
+                    src="img/room.jpg"
                     width="260"
                   />
                 </a>
@@ -842,7 +765,8 @@ Array [
                     <b
                       className="place-card__price-value"
                     >
-                      €180
+                      €
+                      80
                     </b>
                     <span
                       className="place-card__price-text"
@@ -879,7 +803,7 @@ Array [
                     <span
                       style={
                         Object {
-                          "width": "100%",
+                          "width": "80%",
                         }
                       }
                     />
@@ -894,15 +818,115 @@ Array [
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/offer"
+                    onClick={[Function]}
                   >
-                    Nice, cozy, warm big bed apartment
+                    Wood and stone place 11
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  Private Room
+                </p>
+              </div>
+            </article>
+            <article
+              className="place-card near-places__card "
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              
+              <div
+                className="place-card__image-wrapper near-places__image-wrapper"
+              >
+                <a
+                  href="#"
+                >
+                  <img
+                    alt="Place image"
+                    className="place-card__image"
+                    height="200"
+                    src="img/room.jpg"
+                    width="260"
+                  />
+                </a>
+              </div>
+              <div
+                className="place-card__info"
+              >
+                <div
+                  className="place-card__price-wrapper"
+                >
+                  <div
+                    className="place-card__price"
+                  >
+                    <b
+                      className="place-card__price-value"
+                    >
+                      €
+                      80
+                    </b>
+                    <span
+                      className="place-card__price-text"
+                    >
+                      / night
+                    </span>
+                  </div>
+                  <button
+                    className="place-card__bookmark-button button"
+                    type="button"
+                  >
+                    <svg
+                      className="place-card__bookmark-icon"
+                      height="19"
+                      width="18"
+                    >
+                      <use
+                        xlinkHref="#icon-bookmark"
+                      />
+                    </svg>
+                    <span
+                      className="visually-hidden"
+                    >
+                      To bookmarks
+                    </span>
+                  </button>
+                </div>
+                <div
+                  className="place-card__rating rating"
+                >
+                  <div
+                    className="place-card__stars rating__stars"
+                  >
+                    <span
+                      style={
+                        Object {
+                          "width": "80%",
+                        }
+                      }
+                    />
+                    <span
+                      className="visually-hidden"
+                    >
+                      Rating
+                    </span>
+                  </div>
+                </div>
+                <h2
+                  className="place-card__name"
+                >
+                  <a
+                    href="/offer"
+                    onClick={[Function]}
+                  >
+                    Wood and stone place 111
+                  </a>
+                </h2>
+                <p
+                  className="place-card__type"
+                >
+                  Private Room
                 </p>
               </div>
             </article>

@@ -38,7 +38,9 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/offer">
             <OfferDetails
-              offer={this.state.currentOffer} />
+              offer={this.state.currentOffer}
+              onOfferTitleClick={this._handleOfferTitleClick}
+            />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -50,6 +52,7 @@ App.propTypes = {
   offersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape({
+        id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         previewImage: PropTypes.string.isRequired,

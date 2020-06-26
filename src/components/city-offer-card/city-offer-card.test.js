@@ -1,9 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Offer from "./offer.jsx";
+import CityOfferCard from "./city-offer-card.jsx";
 import {BrowserRouter} from "react-router-dom";
 
-const offerMock = {
+const offerCardMock = {
+  id: 1,
   title: `Beautiful & luxurious apartment at great location`,
   price: 120,
   previewImage: `img/apartment-01.jpg`,
@@ -23,13 +24,20 @@ const offerMock = {
   coords: [52.3909553943508, 4.85309666406198],
 };
 
-it(`Should Offer render correctly`, () => {
+const typeMock = `city`;
+
+const classNameMock = `cities__place-card`;
+
+it(`Should City Offer render correctly`, () => {
   const tree = renderer
     .create(
         <BrowserRouter>
-          <Offer
-            offer={offerMock}
+          <CityOfferCard
+            type={typeMock}
+            className={classNameMock}
+            offer={offerCardMock}
             onOfferHover={() => {}}
+            onOfferTitleClick={() => {}}
           />
         </BrowserRouter>
     )

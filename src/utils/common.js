@@ -3,5 +3,9 @@ export const getRatingInPercent = (rating) => {
 };
 
 export const getPluralizedString = (count, noun, suffix = `s`) => {
-  return `${count} ${noun}${count !== 1 ? suffix : ``}`;
+  return `${noun}${count !== 1 ? suffix : ``}`;
+};
+
+export const getItemsById = (items, id) => {
+  return items.filter((item) => item.id === id);
 };

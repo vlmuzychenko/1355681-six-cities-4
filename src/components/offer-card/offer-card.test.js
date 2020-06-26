@@ -1,9 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import OfferDetails from "./offer-details.jsx";
+import OfferCard from "./offer-card.jsx";
 import {BrowserRouter} from "react-router-dom";
 
-const offerMock = {
+const offerCardMock = {
   id: 1,
   title: `Beautiful & luxurious apartment at great location`,
   price: 120,
@@ -24,17 +24,37 @@ const offerMock = {
   coords: [52.3909553943508, 4.85309666406198],
 };
 
-it(`Should Offer Details render correctly`, () => {
+const classNameMock = `cities__place-card `;
+const imageWrapperClassNameMock = `cities__image-wrapper`;
+
+it(`Should Offer render correctly`, () => {
   const tree = renderer
     .create(
         <BrowserRouter>
-          <OfferDetails
-            offer={offerMock}
+          <OfferCard
+            offer={offerCardMock}
+            onOfferHover={() => {}}
+            onOfferTitleClick={() => {}}
           />
-        </BrowserRouter>,
-        {
-          createNodeMock: () => document.createElement(`div`)
-        }
+        </BrowserRouter>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`Should Offer with class names render correctly`, () => {
+  const tree = renderer
+    .create(
+        <BrowserRouter>
+          <OfferCard
+            className={classNameMock}
+            imageWrapperClassName={imageWrapperClassNameMock}
+            offer={offerCardMock}
+            onOfferHover={() => {}}
+            onOfferTitleClick={() => {}}
+          />
+        </BrowserRouter>
     )
     .toJSON();
 

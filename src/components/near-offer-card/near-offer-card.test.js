@@ -1,9 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import OfferDetails from "./offer-details.jsx";
+import NearOfferCard from "./near-offer-card.jsx";
 import {BrowserRouter} from "react-router-dom";
 
-const offerMock = {
+const offerCardMock = {
   id: 1,
   title: `Beautiful & luxurious apartment at great location`,
   price: 120,
@@ -24,17 +24,22 @@ const offerMock = {
   coords: [52.3909553943508, 4.85309666406198],
 };
 
-it(`Should Offer Details render correctly`, () => {
+const typeMock = `near`;
+
+const classNameMock = `near-places__list`;
+
+it(`Should Near Offer render correctly`, () => {
   const tree = renderer
     .create(
         <BrowserRouter>
-          <OfferDetails
-            offer={offerMock}
+          <NearOfferCard
+            type={typeMock}
+            className={classNameMock}
+            offer={offerCardMock}
+            onOfferHover={() => {}}
+            onOfferTitleClick={() => {}}
           />
-        </BrowserRouter>,
-        {
-          createNodeMock: () => document.createElement(`div`)
-        }
+        </BrowserRouter>
     )
     .toJSON();
 
