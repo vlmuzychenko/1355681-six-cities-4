@@ -1,4 +1,7 @@
-export default [
+import {reducer, ActionCreator, ActionType} from "./reducer.js";
+import {getOffersByCity} from "./utils/common.js";
+
+const offersMock = [
   {
     id: 1,
     title: `Beautiful & luxurious apartment at great location`,
@@ -386,3 +389,104 @@ export default [
     },
   },
 ];
+
+describe(`Reducer works correctly`, () => {
+  it(`Reducer without additional parameters should return initial state`, () => {
+    expect(reducer(void 0, {})).toEqual({
+      currentCity: offersMock[0].city,
+      currentOffers: getOffersByCity(offersMock, offersMock[0].city),
+      offers: offersMock
+    });
+  });
+
+  it(`Reducer should change currentCity by a given city value`, () => {
+    expect(reducer({
+      currentCity: offersMock[0].city,
+      currentOffers: getOffersByCity(offersMock, offersMock[0].city),
+      offersMock,
+    }, {
+      type: ActionType.CHANGE_CITY,
+      payload: {
+        name: `Brussels`,
+        coords: [50.85, 4.35]
+      },
+    })).toEqual({
+      currentCity: {
+        name: `Brussels`,
+        coords: [50.85, 4.35]
+      },
+      currentOffers: getOffersByCity(offersMock, offersMock[0].city),
+      offersMock,
+    });
+
+    expect(reducer({
+      currentCity: offersMock[0].city,
+      currentOffers: getOffersByCity(offersMock, offersMock[0].city),
+      offersMock,
+    }, {
+      type: ActionType.CHANGE_CITY,
+      payload: offersMock[0].city,
+    })).toEqual({
+      currentCity: offersMock[0].city,
+      currentOffers: getOffersByCity(offersMock, offersMock[0].city),
+      offersMock,
+    });
+  });
+
+  it(`Reducer should change currentOffers by a given offers value`, () => {
+    expect(reducer({
+      currentCity: offersMock[0].city,
+      currentOffers: getOffersByCity(offersMock, offersMock[0].city),
+      offersMock,
+    }, {
+      type: ActionType.CHANGE_OFFERS,
+      payload: offersMock.slice(2, 3),
+    })).toEqual({
+      currentCity: offersMock[0].city,
+      currentOffers: offersMock.slice(2, 3),
+      offersMock,
+    });
+
+    expect(reducer({
+      currentCity: offersMock[2].city,
+      currentOffers: getOffersByCity(offersMock, offersMock[0].city),
+      offersMock,
+    }, {
+      type: ActionType.CHANGE_OFFERS,
+      payload: offersMock.slice(2, 3),
+    })).toEqual({
+      currentCity: offersMock[2].city,
+      currentOffers: offersMock.slice(2, 3),
+      offersMock,
+    });
+  });
+});
+
+describe(`Action creators work correctly`, () => {
+  it(`Action creator for change city returns correct action`, () => {
+    expect(ActionCreator.changeCity({
+      name: `Brussels`,
+      coords: [50.85, 4.35]
+    })).toEqual({
+      type: ActionType.CHANGE_CITY,
+      payload: {
+        name: `Brussels`,
+        coords: [50.85, 4.35]
+      },
+    });
+  });
+
+  it(`Action creator for change city returns correct action`, () => {
+    expect(ActionCreator.changeOffers({
+      name: `Brussels`,
+      coords: [50.85, 4.35]
+    })).toEqual({
+      type: ActionType.CHANGE_OFFERS,
+      payload: getOffersByCity(offersMock, {
+        name: `Brussels`,
+        coords: [50.85, 4.35]
+      }),
+    });
+  });
+});
+

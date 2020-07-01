@@ -10,7 +10,7 @@ import {OfferTypes} from "../../const.js";
 
 
 const OfferDetails = (props) => {
-  const {offer, onOfferTitleClick} = props;
+  const {offer, currentCity, onOfferTitleClick} = props;
   const {id, title, price, images, description, rating, isPremium, type, bedrooms, maxAdults, goods, host} = offer;
   const filtredReviews = getItemsById(reviews, id);
   const filtredNearOffers = getItemsById(nearOffers, id);
@@ -179,6 +179,8 @@ const OfferDetails = (props) => {
             </div>
             <section className="property__map map">
               <Map
+                currentOffer={offer}
+                currentCity={currentCity}
                 offers={filtredNearOffers}
               />
             </section>
@@ -216,9 +218,17 @@ OfferDetails.propTypes = {
       name: PropTypes.string.isRequired,
       super: PropTypes.bool.isRequired,
       avatarUrl: PropTypes.string.isRequired,
-    }),
+    }).isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }).isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
+  currentCity: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+  }).isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
 };
 

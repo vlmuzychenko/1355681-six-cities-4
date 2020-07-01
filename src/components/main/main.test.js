@@ -22,6 +22,10 @@ const offersMock = [
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
+    city: {
+      name: `Paris`,
+      coords: [48.865, 2.35],
+    },
     coords: [52.3909553943508, 4.85309666406198],
   },
   {
@@ -42,19 +46,30 @@ const offersMock = [
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
+    city: {
+      name: `Paris`,
+      coords: [48.865, 2.35],
+    },
     coords: [52.369553943508, 4.85309666406198],
   }
 ];
+
+const currentCityMock = {
+  name: `Paris`,
+  coords: [48.865, 2.35],
+};
 
 it(`Should Main render correctly`, () => {
   const tree = renderer
     .create(
         <BrowserRouter>
           <Main
-            offersCount={1234}
+            currentOffers={offersMock.slice(0, 1)}
+            currentCity={currentCityMock}
             offers={offersMock}
             onHeadingClick={() => {}}
             onOfferTitleClick={() => {}}
+            onCityNameClick={() => {}}
           />
         </BrowserRouter>,
         {

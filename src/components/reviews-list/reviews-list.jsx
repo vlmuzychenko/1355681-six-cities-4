@@ -5,14 +5,13 @@ import moment from "moment";
 
 const ReviewsList = (props) => {
   const {reviews} = props;
+  const sortedReviews = reviews.sort((a, b) => moment(a.date) - moment(b.date));
+  const slisedReviews = sortedReviews.slice(0, 10);
+
 
   return (
     <ul className="reviews__list">
-      {reviews
-        .sort((a, b) => {
-          return moment(a) - moment(b);
-        })
-        .slice(0, 10)
+      {slisedReviews
         .map((review, index) => {
           return (
             <Review
@@ -33,7 +32,7 @@ ReviewsList.propTypes = {
         user: PropTypes.shape({
           name: PropTypes.string.isRequired,
           avatarUrl: PropTypes.string.isRequired,
-        }),
+        }).isRequired,
         rating: PropTypes.number.isRequired,
         comment: PropTypes.string.isRequired,
         date: PropTypes.string.isRequired,

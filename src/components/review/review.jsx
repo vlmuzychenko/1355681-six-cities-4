@@ -4,8 +4,7 @@ import moment from "moment";
 import {getRatingInPercent} from "../../utils/common.js";
 
 const Review = (props) => {
-  const {review} = props;
-  const {user, rating, comment, date} = review;
+  const {review: {user, rating, comment, date}} = props;
 
   return (
     <li className="reviews__item">
@@ -39,7 +38,7 @@ Review.propTypes = {
     user: PropTypes.shape({
       name: PropTypes.string.isRequired,
       avatarUrl: PropTypes.string.isRequired,
-    }),
+    }).isRequired,
     rating: PropTypes.number.isRequired,
     comment: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,

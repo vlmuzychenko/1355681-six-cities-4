@@ -21,7 +21,16 @@ const offerMock = {
     super: true,
     avatarUrl: `img/avatar-angelina.jpg`,
   },
+  city: {
+    name: `Paris`,
+    coords: [48.865, 2.35],
+  },
   coords: [52.3909553943508, 4.85309666406198],
+};
+
+const currentCityMock = {
+  name: `Paris`,
+  coords: [48.865, 2.35],
 };
 
 it(`Should Offer Details render correctly`, () => {
@@ -30,6 +39,8 @@ it(`Should Offer Details render correctly`, () => {
         <BrowserRouter>
           <OfferDetails
             offer={offerMock}
+            currentCity={currentCityMock}
+            onOfferTitleClick={() => {}}
           />
         </BrowserRouter>,
         {

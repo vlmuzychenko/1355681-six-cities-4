@@ -3,6 +3,8 @@ import Main from "../main/main.jsx";
 import OfferDetails from "../offer-details/offer-details.jsx";
 import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 
 const headingClickHandler = () => {};
 
@@ -12,33 +14,36 @@ class App extends PureComponent {
     this._handleOfferTitleClick = this._handleOfferTitleClick.bind(this);
 
     this.state = {
-      currentOffer: null
+      currentOffer: null,
     };
   }
 
   _handleOfferTitleClick(offer) {
     this.setState({
-      currentOffer: offer
+      currentOffer: offer,
     });
   }
 
   render() {
-    const {offersCount, offers} = this.props;
+    const {currentOffers, currentCity, offers, onCityNameClick} = this.props;
 
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
             <Main
-              offersCount={offersCount}
+              currentOffers={currentOffers}
+              currentCity={currentCity}
               offers={offers}
               onHeadingClick={headingClickHandler}
               onOfferTitleClick={this._handleOfferTitleClick}
+              onCityNameClick={onCityNameClick}
             />
           </Route>
           <Route exact path="/offer">
             <OfferDetails
               offer={this.state.currentOffer}
+              currentCity={currentCity}
               onOfferTitleClick={this._handleOfferTitleClick}
             />
           </Route>
@@ -49,7 +54,32 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
+  currentOffers: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        previewImage: PropTypes.string.isRequired,
+        images: PropTypes.arrayOf(PropTypes.string).isRequired,
+        description: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        isPremium: PropTypes.bool.isRequired,
+        type: PropTypes.string.isRequired,
+        bedrooms: PropTypes.number.isRequired,
+        maxAdults: PropTypes.number.isRequired,
+        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+        host: PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          super: PropTypes.bool.isRequired,
+          avatarUrl: PropTypes.string.isRequired,
+        }).isRequired,
+        city: PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+        }).isRequired,
+        coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+      }).isRequired
+  ),
   offers: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -68,10 +98,34 @@ App.propTypes = {
           name: PropTypes.string.isRequired,
           super: PropTypes.bool.isRequired,
           avatarUrl: PropTypes.string.isRequired,
-        }),
+        }).isRequired,
+        city: PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+        }).isRequired,
         coords: PropTypes.arrayOf(PropTypes.number).isRequired,
       })
-  )
+  ).isRequired,
+  currentCity: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+  }).isRequired,
+  onCityNameClick: PropTypes.func.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  currentCity: state.currentCity,
+  currentOffers: state.currentOffers,
+  offers: state.offers,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onCityNameClick(city) {
+    dispatch(ActionCreator.changeCity(city));
+    dispatch(ActionCreator.changeOffers(city));
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
