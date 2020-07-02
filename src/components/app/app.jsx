@@ -5,22 +5,41 @@ import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
+import {SortType} from "../../const.js";
+import {getSortedOffers} from "../../utils/common.js";
 
 const headingClickHandler = () => {};
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
+
     this._handleOfferTitleClick = this._handleOfferTitleClick.bind(this);
+    this._handleSortTypeClick = this._handleSortTypeClick.bind(this);
+    this._handleOfferHover = this._handleOfferHover.bind(this);
 
     this.state = {
       currentOffer: null,
+      activeSortType: SortType.DEFAULT,
+      hoveredOffer: null
     };
   }
 
   _handleOfferTitleClick(offer) {
     this.setState({
       currentOffer: offer,
+    });
+  }
+
+  _handleSortTypeClick(sortType) {
+    this.setState({
+      activeSortType: sortType,
+    });
+  }
+
+  _handleOfferHover(offer) {
+    this.setState({
+      hoveredOffer: offer
     });
   }
 
@@ -32,12 +51,16 @@ class App extends PureComponent {
         <Switch>
           <Route exact path="/">
             <Main
-              currentOffers={currentOffers}
+              currentOffers={getSortedOffers(currentOffers, this.state.activeSortType)}
               currentCity={currentCity}
               offers={offers}
               onHeadingClick={headingClickHandler}
               onOfferTitleClick={this._handleOfferTitleClick}
+              onSortTypeClick={this._handleSortTypeClick}
+              activeSortType={this.state.activeSortType}
               onCityNameClick={onCityNameClick}
+              onOfferHover={this._handleOfferHover}
+              hoveredOffer={this.state.hoveredOffer}
             />
           </Route>
           <Route exact path="/offer">

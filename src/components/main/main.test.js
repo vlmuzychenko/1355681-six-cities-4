@@ -59,24 +59,62 @@ const currentCityMock = {
   coords: [48.865, 2.35],
 };
 
-it(`Should Main render correctly`, () => {
-  const tree = renderer
-    .create(
-        <BrowserRouter>
-          <Main
-            currentOffers={offersMock.slice(0, 1)}
-            currentCity={currentCityMock}
-            offers={offersMock}
-            onHeadingClick={() => {}}
-            onOfferTitleClick={() => {}}
-            onCityNameClick={() => {}}
-          />
-        </BrowserRouter>,
-        {
-          createNodeMock: () => document.createElement(`div`)
-        }
-    )
-    .toJSON();
+const SortTypeMock = {
+  DEFAULT: `popular`,
+  PRICE_TO_HIGH: `to-high`,
+  PRICE_TO_LOW: `to-low`,
+  TOP_RATED: `top-rated`,
+};
 
-  expect(tree).toMatchSnapshot();
+describe(`Main render correctly`, () => {
+  it(`Should default Main render correctly`, () => {
+    const tree = renderer
+      .create(
+          <BrowserRouter>
+            <Main
+              currentOffers={offersMock.slice(0, 1)}
+              currentCity={currentCityMock}
+              offers={offersMock}
+              onHeadingClick={() => {}}
+              onOfferTitleClick={() => {}}
+              onCityNameClick={() => {}}
+              onSortTypeClick={() => {}}
+              activeSortType={SortTypeMock.DEFAULT}
+              onOfferHover={() => {}}
+            />
+          </BrowserRouter>,
+          {
+            createNodeMock: () => document.createElement(`div`)
+          }
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Should Main with hovered offer render correctly`, () => {
+    const tree = renderer
+      .create(
+          <BrowserRouter>
+            <Main
+              currentOffers={offersMock.slice(0, 1)}
+              currentCity={currentCityMock}
+              offers={offersMock}
+              onHeadingClick={() => {}}
+              onOfferTitleClick={() => {}}
+              onCityNameClick={() => {}}
+              onSortTypeClick={() => {}}
+              activeSortType={SortTypeMock.DEFAULT}
+              onOfferHover={() => {}}
+              hoveredOffer={offersMock.slice(2, 3)}
+            />
+          </BrowserRouter>,
+          {
+            createNodeMock: () => document.createElement(`div`)
+          }
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });

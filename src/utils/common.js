@@ -1,3 +1,5 @@
+import {SortType} from "../const.js";
+
 export const getRatingInPercent = (rating) => {
   return `${Math.round(rating) * 100 / 5}%`;
 };
@@ -17,3 +19,22 @@ export const extend = (a, b) => {
 export const getOffersByCity = (offers, city) => offers.filter((offer) => {
   return offer.city.name === city.name;
 });
+
+export const getSortedOffers = (offers, sortType) => {
+  switch (sortType) {
+    case SortType.PRICE_TO_HIGH:
+      return [...offers].sort((a, b) => {
+        return a.price - b.price;
+      });
+    case SortType.PRICE_TO_LOW:
+      return [...offers].sort((a, b) => {
+        return b.price - a.price;
+      });
+    case SortType.TOP_RATED:
+      return [...offers].sort((a, b) => {
+        return b.rating - a.rating;
+      });
+    default:
+      return offers;
+  }
+};
