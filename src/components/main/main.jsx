@@ -3,9 +3,21 @@ import PropTypes from "prop-types";
 import CityOffersList from "../city-offers-list/city-offers-list.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import Map from "../map/map.jsx";
+import Sort from "../sort/sort.jsx";
 
 const Main = (props) => {
-  const {currentOffers, currentCity, offers, onHeadingClick, onOfferTitleClick, onCityNameClick} = props;
+  const {
+    currentOffers,
+    currentCity,
+    offers,
+    onHeadingClick,
+    onOfferTitleClick,
+    onCityNameClick,
+    onSortTypeClick,
+    activeSortType,
+    onOfferHover,
+    hoveredOffer
+  } = props;
 
   const cities = [];
   offers.map((item) => cities.push(item.city));
@@ -57,31 +69,14 @@ const Main = (props) => {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found" onClick={onHeadingClick}>{currentOffers.length} places to stay in {currentCity.name}</b>
-                <form className="places__sorting" action="#" method="get">
-                  <span className="places__sorting-caption">Sort by</span>
-                  <span className="places__sorting-type" tabIndex="0">
-                    Popular
-                    <svg className="places__sorting-arrow" width="7" height="4">
-                      <use xlinkHref="#icon-arrow-select"></use>
-                    </svg>
-                  </span>
-                  <ul className="places__options places__options--custom places__options--opened">
-                    <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                    <li className="places__option" tabIndex="0">Price: low to high</li>
-                    <li className="places__option" tabIndex="0">Price: high to low</li>
-                    <li className="places__option" tabIndex="0">Top rated first</li>
-                  </ul>
-                  {/* <select className="places__sorting-type" id="places-sorting">
-                    <option className="places__option" value="popular" selected="">Popular</option>
-                    <option className="places__option" value="to-high">Price: low to high</option>
-                    <option className="places__option" value="to-low">Price: high to low</option>
-                    <option className="places__option" value="top-rated">Top rated first</option>
-                  </select> */}
-                </form>
-
+                <Sort
+                  onSortTypeClick={onSortTypeClick}
+                  activeSortType={activeSortType}
+                />
                 <CityOffersList
                   offers={currentOffers}
                   onOfferTitleClick={onOfferTitleClick}
+                  onOfferHover={onOfferHover}
                 />
 
               </section>
@@ -90,6 +85,7 @@ const Main = (props) => {
                   <Map
                     offers={currentOffers}
                     currentCity={currentCity}
+                    hoveredOffer={hoveredOffer}
                   />
                 </section>
               </div>
@@ -161,6 +157,33 @@ Main.propTypes = {
   onHeadingClick: PropTypes.func.isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
   onCityNameClick: PropTypes.func.isRequired,
+  onSortTypeClick: PropTypes.func.isRequired,
+  activeSortType: PropTypes.string.isRequired,
+  onOfferHover: PropTypes.func.isRequired,
+  hoveredOffer: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+    host: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      super: PropTypes.bool.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    }).isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }).isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+  }),
 };
 
 export default Main;

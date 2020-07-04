@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
+import {MapIconUrl} from "../../const.js";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -18,10 +19,9 @@ class Map extends PureComponent {
     this._createMap(city);
     this._setMapView(city);
     this._setMapLayers();
+    this._renderMarkers(offers);
     if (currentOffer) {
-      this._renderMarkers([currentOffer, ...offers]);
-    } else {
-      this._renderMarkers(offers);
+      this._renderMarker(currentOffer, this._getIcon(MapIconUrl.ACTIVE));
     }
   }
 
@@ -30,16 +30,12 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    const {offers, currentOffer, currentCity} = this.props;
+    const {offers, currentCity, hoveredOffer} = this.props;
     const city = currentCity.coords;
 
     this._removeMarkers();
     this._setMapView(city);
-    if (currentOffer) {
-      this._renderMarkers([currentOffer, ...offers]);
-    } else {
-      this._renderMarkers(offers);
-    }
+    this._renderMarkers(offers, hoveredOffer);
   }
 
   render() {
@@ -69,11 +65,13 @@ class Map extends PureComponent {
       .addTo(this._map);
   }
 
-  _renderMarkers(offers, icon = this._getIcon()) {
+  _renderMarkers(offers, hoveredOffer, icon = this._getIcon(MapIconUrl.DEFAULT)) {
     offers.map((offer) => {
-      leaflet
-        .marker(offer.coords, {icon})
-        .addTo(this._map);
+      if (hoveredOffer && offer.id === hoveredOffer.id) {
+        this._renderMarker(offer, this._getIcon(MapIconUrl.ACTIVE));
+      } else {
+        this._renderMarker(offer, icon);
+      }
     });
   }
 
@@ -85,9 +83,15 @@ class Map extends PureComponent {
     }
   }
 
-  _getIcon() {
+  _renderMarker(offer, icon) {
+    leaflet
+        .marker(offer.coords, {icon})
+        .addTo(this._map);
+  }
+
+  _getIcon(iconUrl) {
     return leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl,
       iconSize: [30, 30]
     });
   }
@@ -148,6 +152,30 @@ Map.propTypes = {
     name: PropTypes.string.isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   }).isRequired,
+  hoveredOffer: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+    host: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      super: PropTypes.bool.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    }).isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }).isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+  }),
 };
 
 export default Map;

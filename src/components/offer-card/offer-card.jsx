@@ -5,7 +5,7 @@ import {getRatingInPercent} from "../../utils/common.js";
 import {OfferTypes} from "../../const.js";
 
 const OfferCard = (props) => {
-  const {offer, onOfferHover, onOfferTitleClick, className, imageWrapperClassName} = props;
+  const {offer, onOfferTitleClick, onOfferHover, className, imageWrapperClassName} = props;
   const {title, price, previewImage, type, rating, isPremium} = offer;
   const premiumMark = isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ``;
 
@@ -75,7 +75,7 @@ OfferCard.propTypes = {
     }).isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   }).isRequired,
-  onOfferHover: PropTypes.func.isRequired,
+  onOfferHover: PropTypes.func,
   onOfferTitleClick: PropTypes.func.isRequired,
   className: PropTypes.string,
   imageWrapperClassName: PropTypes.string,

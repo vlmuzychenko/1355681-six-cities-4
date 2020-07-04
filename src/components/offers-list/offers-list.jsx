@@ -8,45 +8,33 @@ import {PlaceCardTypes} from "../../const.js";
 class OffersList extends PureComponent {
   constructor(props) {
     super(props);
-    this._handleOfferHover = this._handleOfferHover.bind(this);
-
-    this.state = {
-      activeOffer: null
-    };
   }
 
-  _handleOfferHover(offer) {
-    this.setState({
-      activeOffer: offer
-    });
-  }
-
-  _getOfferCardByType(type, offer, onOfferTitleClick, index) {
+  _getOfferCardByType(offer, type, onOfferTitleClick, onOfferHover) {
     switch (type) {
       case PlaceCardTypes.CITY:
         return (
           <CityOfferCard
-            key={offer.price + index}
+            key={offer.price + offer.title}
             offer={offer}
-            onOfferHover={this._handleOfferHover}
+            onOfferHover={onOfferHover}
             onOfferTitleClick={onOfferTitleClick}
           />
         );
       case PlaceCardTypes.NEAR:
         return (
           <NearOfferCard
-            key={offer.price + index}
+            key={offer.price + offer.title}
             offer={offer}
-            onOfferHover={this._handleOfferHover}
             onOfferTitleClick={onOfferTitleClick}
           />
         );
       default:
         return (
           <OfferCard
-            key={offer.price + index}
+            key={offer.price + offer.title}
             offer={offer}
-            onOfferHover={this._handleOfferHover}
+            onOfferHover={onOfferHover}
             onOfferTitleClick={onOfferTitleClick}
           />
         );
@@ -54,12 +42,12 @@ class OffersList extends PureComponent {
   }
 
   render() {
-    const {offers, onOfferTitleClick, type, className} = this.props;
+    const {offers, onOfferTitleClick, onOfferHover, type, className} = this.props;
 
     return (
       <div className={`places__list ${className || ``}`}>
-        {offers.map((offer, index) => {
-          return this._getOfferCardByType(type, offer, onOfferTitleClick, index);
+        {offers.map((offer) => {
+          return this._getOfferCardByType(offer, type, onOfferTitleClick, onOfferHover);
         })}
       </div>
     );
@@ -94,6 +82,7 @@ OffersList.propTypes = {
       })
   ).isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
+  onOfferHover: PropTypes.func,
   type: PropTypes.string,
   className: PropTypes.string
 };

@@ -61,6 +61,7 @@ it(`Should Offer List render correctly`, () => {
           <OffersList
             offers={offersMock}
             onOfferTitleClick={() => {}}
+            onOfferHover={() => {}}
           />
         </BrowserRouter>
     )
