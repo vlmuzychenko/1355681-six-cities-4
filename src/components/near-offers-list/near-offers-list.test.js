@@ -22,6 +22,10 @@ const offersMock = [
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
+    city: {
+      name: `Paris`,
+      coords: [48.865, 2.35],
+    },
     coords: [52.3909553943508, 4.85309666406198],
   },
   {
@@ -41,6 +45,10 @@ const offersMock = [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+    },
+    city: {
+      name: `Paris`,
+      coords: [48.865, 2.35],
     },
     coords: [52.369553943508, 4.85309666406198],
   }

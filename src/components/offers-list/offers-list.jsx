@@ -85,10 +85,14 @@ OffersList.propTypes = {
           name: PropTypes.string.isRequired,
           super: PropTypes.bool.isRequired,
           avatarUrl: PropTypes.string.isRequired,
-        }),
+        }).isRequired,
+        city: PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+        }).isRequired,
         coords: PropTypes.arrayOf(PropTypes.number).isRequired,
       })
-  ),
+  ).isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
   type: PropTypes.string,
   className: PropTypes.string

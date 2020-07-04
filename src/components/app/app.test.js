@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import {App} from "./app.jsx";
 
 const offersMock = [
   {
@@ -22,6 +22,10 @@ const offersMock = [
       avatarUrl: `img/avatar-angelina.jpg`,
     },
     coords: [52.3909553943508, 4.85309666406198],
+    city: {
+      name: `Paris`,
+      coords: [48.865, 2.35],
+    },
   },
   {
     id: 2,
@@ -42,15 +46,26 @@ const offersMock = [
       avatarUrl: `img/avatar-angelina.jpg`,
     },
     coords: [52.3909553943508, 4.85309666406198],
+    city: {
+      name: `Paris`,
+      coords: [48.865, 2.35],
+    },
   }
 ];
+
+const currentCityMock = {
+  name: `Paris`,
+  coords: [48.865, 2.35],
+};
 
 it(`Render App`, () => {
   const tree = renderer
     .create(
         <App
-          offersCount={1234}
           offers={offersMock}
+          currentOffers={offersMock.slice(0, 1)}
+          currentCity={currentCityMock}
+          onCityNameClick={() => {}}
         />,
         {
           createNodeMock: () => document.createElement(`div`)

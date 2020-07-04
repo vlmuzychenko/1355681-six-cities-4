@@ -17,6 +17,10 @@ export default [
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
+    city: {
+      name: `Amsterdam`,
+      coords: [52.377956, 4.897070],
+    },
     coords: [52.369553943508, 4.85309666406198],
   },
   {
@@ -36,6 +40,10 @@ export default [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+    },
+    city: {
+      name: `Amsterdam`,
+      coords: [52.377956, 4.897070],
     },
     coords: [52.3909553943508, 4.929309666406198],
   },
@@ -57,6 +65,10 @@ export default [
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
+    city: {
+      name: `Amsterdam`,
+      coords: [52.377956, 4.897070],
+    },
     coords: [52.3809553943508, 4.939309666406198],
   },
   {
@@ -76,6 +88,10 @@ export default [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+    },
+    city: {
+      name: `Amsterdam`,
+      coords: [52.377956, 4.897070],
     },
     coords: [52.3909553943508, 4.85309666406198],
   },
@@ -97,6 +113,10 @@ export default [
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
+    city: {
+      name: `Amsterdam`,
+      coords: [52.377956, 4.897070],
+    },
     coords: [52.3909553943508, 4.929309666406198],
   },
   {
@@ -116,6 +136,10 @@ export default [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+    },
+    city: {
+      name: `Amsterdam`,
+      coords: [52.377956, 4.897070],
     },
     coords: [52.3809553943508, 4.939309666406198],
   },
@@ -137,6 +161,10 @@ export default [
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
+    city: {
+      name: `Amsterdam`,
+      coords: [52.377956, 4.897070],
+    },
     coords: [52.3809553943508, 4.939309666406198],
   },
   {
@@ -156,6 +184,10 @@ export default [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+    },
+    city: {
+      name: `Amsterdam`,
+      coords: [52.377956, 4.897070],
     },
     coords: [52.369553943508, 4.85309666406198],
   },
@@ -177,6 +209,10 @@ export default [
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
+    city: {
+      name: `Amsterdam`,
+      coords: [52.377956, 4.897070],
+    },
     coords: [52.3909553943508, 4.85309666406198],
   },
   {
@@ -196,6 +232,10 @@ export default [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+    },
+    city: {
+      name: `Amsterdam`,
+      coords: [52.377956, 4.897070],
     },
     coords: [52.3909553943508, 4.929309666406198],
   },
@@ -217,6 +257,10 @@ export default [
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
     },
+    city: {
+      name: `Amsterdam`,
+      coords: [52.377956, 4.897070],
+    },
     coords: [52.369553943508, 4.85309666406198],
   },
   {
@@ -236,6 +280,10 @@ export default [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+    },
+    city: {
+      name: `Amsterdam`,
+      coords: [52.377956, 4.897070],
     },
     coords: [52.3909553943508, 4.85309666406198],
   },
