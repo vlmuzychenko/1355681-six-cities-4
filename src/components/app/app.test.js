@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
 import {App} from "./app.jsx";
+
+const mockStore = configureStore();
 
 const offersMock = [
   {
@@ -58,15 +62,50 @@ const currentCityMock = {
   coords: [48.865, 2.35],
 };
 
+const SortTypeMock = {
+  DEFAULT: `popular`,
+  PRICE_TO_HIGH: `to-high`,
+  PRICE_TO_LOW: `to-low`,
+  TOP_RATED: `top-rated`,
+};
+
+const citiesMock = [
+  {
+    name: `Amsterdam`,
+    coords: [48.865, 2.35],
+  },
+  {
+    name: `Paris`,
+    coords: [48.865, 2.35],
+  },
+  {
+    name: `Berlin`,
+    coords: [48.865, 2.35],
+  }
+];
+
 it(`Render App`, () => {
+  const store = mockStore({
+    currentCity: offersMock[0].city,
+    cities: citiesMock,
+    currentOffers: offersMock.slice(0, 2),
+    currentOffer: null,
+    offers: offersMock,
+    activeSortType: SortTypeMock.DEFAULT
+  });
   const tree = renderer
     .create(
-        <App
-          offers={offersMock}
-          currentOffers={offersMock.slice(0, 1)}
-          currentCity={currentCityMock}
-          onCityNameClick={() => {}}
-        />,
+        <Provider store={store}>
+          <App
+            currentOffers={offersMock.slice(0, 1)}
+            currentOffer={offersMock[0]}
+            currentCity={currentCityMock}
+            activeSortType={SortTypeMock.DEFAULT}
+            onCityNameClick={() => {}}
+            onSortTypeClick={() => {}}
+            onOfferTitleClick={() => {}}
+          />
+        </Provider>,
         {
           createNodeMock: () => document.createElement(`div`)
         }

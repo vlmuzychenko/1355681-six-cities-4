@@ -118,12 +118,38 @@ Array [
               className="locations__item"
             >
               <a
+                className="locations__item-link tabs__item false"
+                href="#"
+                onClick={[Function]}
+              >
+                <span>
+                  Amsterdam
+                </span>
+              </a>
+            </li>
+            <li
+              className="locations__item"
+            >
+              <a
                 className="locations__item-link tabs__item tabs__item--active"
                 href="#"
                 onClick={[Function]}
               >
                 <span>
                   Paris
+                </span>
+              </a>
+            </li>
+            <li
+              className="locations__item"
+            >
+              <a
+                className="locations__item-link tabs__item false"
+                href="#"
+                onClick={[Function]}
+              >
+                <span>
+                  Berlin
                 </span>
               </a>
             </li>
@@ -146,7 +172,6 @@ Array [
             </h2>
             <b
               className="places__found"
-              onClick={[Function]}
             >
               1
                places to stay in 
@@ -179,7 +204,7 @@ Array [
                 </svg>
               </span>
               <ul
-                className="places__options places__options--custom false"
+                className="places__options places__options--custom "
               >
                 <li
                   className="places__option places__option--active"
@@ -189,21 +214,21 @@ Array [
                   Popular
                 </li>
                 <li
-                  className="places__option false"
+                  className="places__option "
                   onClick={[Function]}
                   tabIndex="0"
                 >
                   Price: low to high
                 </li>
                 <li
-                  className="places__option false"
+                  className="places__option "
                   onClick={[Function]}
                   tabIndex="0"
                 >
                   Price: high to low
                 </li>
                 <li
-                  className="places__option false"
+                  className="places__option "
                   onClick={[Function]}
                   tabIndex="0"
                 >
@@ -462,12 +487,38 @@ Array [
               className="locations__item"
             >
               <a
+                className="locations__item-link tabs__item false"
+                href="#"
+                onClick={[Function]}
+              >
+                <span>
+                  Amsterdam
+                </span>
+              </a>
+            </li>
+            <li
+              className="locations__item"
+            >
+              <a
                 className="locations__item-link tabs__item tabs__item--active"
                 href="#"
                 onClick={[Function]}
               >
                 <span>
                   Paris
+                </span>
+              </a>
+            </li>
+            <li
+              className="locations__item"
+            >
+              <a
+                className="locations__item-link tabs__item false"
+                href="#"
+                onClick={[Function]}
+              >
+                <span>
+                  Berlin
                 </span>
               </a>
             </li>
@@ -490,9 +541,8 @@ Array [
             </h2>
             <b
               className="places__found"
-              onClick={[Function]}
             >
-              1
+              2
                places to stay in 
               Paris
             </b>
@@ -523,7 +573,7 @@ Array [
                 </svg>
               </span>
               <ul
-                className="places__options places__options--custom false"
+                className="places__options places__options--custom "
               >
                 <li
                   className="places__option places__option--active"
@@ -533,21 +583,21 @@ Array [
                   Popular
                 </li>
                 <li
-                  className="places__option false"
+                  className="places__option "
                   onClick={[Function]}
                   tabIndex="0"
                 >
                   Price: low to high
                 </li>
                 <li
-                  className="places__option false"
+                  className="places__option "
                   onClick={[Function]}
                   tabIndex="0"
                 >
                   Price: high to low
                 </li>
                 <li
-                  className="places__option false"
+                  className="places__option "
                   onClick={[Function]}
                   tabIndex="0"
                 >
@@ -660,6 +710,105 @@ Array [
                     className="place-card__type"
                   >
                     Apartment
+                  </p>
+                </div>
+              </article>
+              <article
+                className="place-card cities__place-card "
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              >
+                
+                <div
+                  className="place-card__image-wrapper cities__image-wrapper"
+                >
+                  <a
+                    href="#"
+                  >
+                    <img
+                      alt="Place image"
+                      className="place-card__image"
+                      height="200"
+                      src="img/room.jpg"
+                      width="260"
+                    />
+                  </a>
+                </div>
+                <div
+                  className="place-card__info"
+                >
+                  <div
+                    className="place-card__price-wrapper"
+                  >
+                    <div
+                      className="place-card__price"
+                    >
+                      <b
+                        className="place-card__price-value"
+                      >
+                        €
+                        80
+                      </b>
+                      <span
+                        className="place-card__price-text"
+                      >
+                        / night
+                      </span>
+                    </div>
+                    <button
+                      className="place-card__bookmark-button button"
+                      type="button"
+                    >
+                      <svg
+                        className="place-card__bookmark-icon"
+                        height="19"
+                        width="18"
+                      >
+                        <use
+                          xlinkHref="#icon-bookmark"
+                        />
+                      </svg>
+                      <span
+                        className="visually-hidden"
+                      >
+                        To bookmarks
+                      </span>
+                    </button>
+                  </div>
+                  <div
+                    className="place-card__rating rating"
+                  >
+                    <div
+                      className="place-card__stars rating__stars"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "width": "80%",
+                          }
+                        }
+                      />
+                      <span
+                        className="visually-hidden"
+                      >
+                        Rating
+                      </span>
+                    </div>
+                  </div>
+                  <h2
+                    className="place-card__name"
+                  >
+                    <a
+                      href="/offer"
+                      onClick={[Function]}
+                    >
+                      Wood and stone place
+                    </a>
+                  </h2>
+                  <p
+                    className="place-card__type"
+                  >
+                    Hotel
                   </p>
                 </div>
               </article>

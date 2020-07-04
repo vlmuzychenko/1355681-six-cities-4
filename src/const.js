@@ -40,3 +40,5 @@ export const MapIconUrl = {
   DEFAULT: `img/pin.svg`,
   ACTIVE: `img/pin-active.svg`,
 };
+
+export const MAX_CITIES_IN_LIST = 6;

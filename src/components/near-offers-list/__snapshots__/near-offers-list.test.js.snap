@@ -6,8 +6,8 @@ exports[`Should Near Offer List render correctly 1`] = `
 >
   <article
     className="place-card near-places__card "
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    onMouseEnter={null}
+    onMouseLeave={null}
   >
     <div
       className="place-card__mark"
@@ -111,8 +111,8 @@ exports[`Should Near Offer List render correctly 1`] = `
   </article>
   <article
     className="place-card near-places__card "
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    onMouseEnter={null}
+    onMouseLeave={null}
   >
     
     <div

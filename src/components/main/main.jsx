@@ -4,13 +4,18 @@ import CityOffersList from "../city-offers-list/city-offers-list.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import Map from "../map/map.jsx";
 import Sort from "../sort/sort.jsx";
+import withOpenedCondition from "../../hocs/with-opened-condition/with-opened-condition.js";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
+import {getSortedOffers} from "../../utils/common.js";
+
+const SortWrapped = withOpenedCondition(Sort);
 
 const Main = (props) => {
   const {
     currentOffers,
     currentCity,
-    offers,
-    onHeadingClick,
+    cities,
     onOfferTitleClick,
     onCityNameClick,
     onSortTypeClick,
@@ -18,12 +23,6 @@ const Main = (props) => {
     onOfferHover,
     hoveredOffer
   } = props;
-
-  const cities = [];
-  offers.map((item) => cities.push(item.city));
-  const unrepeatedCities = cities.filter((obj, pos, arr) => {
-    return arr.map((mapObj) => mapObj.name).indexOf(obj.name) === pos;
-  });
 
   return (
     <React.Fragment>
@@ -59,7 +58,7 @@ const Main = (props) => {
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <CitiesList
-              cities={unrepeatedCities}
+              cities={cities}
               currentCity={currentCity}
               onCityNameClick={onCityNameClick}
             />
@@ -68,13 +67,13 @@ const Main = (props) => {
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found" onClick={onHeadingClick}>{currentOffers.length} places to stay in {currentCity.name}</b>
-                <Sort
+                <b className="places__found">{currentOffers.length} places to stay in {currentCity.name}</b>
+                <SortWrapped
                   onSortTypeClick={onSortTypeClick}
                   activeSortType={activeSortType}
                 />
                 <CityOffersList
-                  offers={currentOffers}
+                  offers={getSortedOffers(currentOffers, activeSortType)}
                   onOfferTitleClick={onOfferTitleClick}
                   onOfferHover={onOfferHover}
                 />
@@ -124,37 +123,16 @@ Main.propTypes = {
         coords: PropTypes.arrayOf(PropTypes.number).isRequired,
       })
   ),
-  offers: PropTypes.arrayOf(
+  cities: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        previewImage: PropTypes.string.isRequired,
-        images: PropTypes.arrayOf(PropTypes.string).isRequired,
-        description: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        type: PropTypes.string.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        maxAdults: PropTypes.number.isRequired,
-        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-        host: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          super: PropTypes.bool.isRequired,
-          avatarUrl: PropTypes.string.isRequired,
-        }).isRequired,
-        city: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-        }).isRequired,
+        name: PropTypes.string.isRequired,
         coords: PropTypes.arrayOf(PropTypes.number).isRequired,
       }).isRequired
-  ).isRequired,
+  ),
   currentCity: PropTypes.shape({
     name: PropTypes.string.isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   }).isRequired,
-  onHeadingClick: PropTypes.func.isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
   onCityNameClick: PropTypes.func.isRequired,
   onSortTypeClick: PropTypes.func.isRequired,
@@ -186,4 +164,16 @@ Main.propTypes = {
   }),
 };
 
-export default Main;
+const mapStateToProps = (state) => ({
+  activeSortType: state.activeSortType,
+  cities: state.cities,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSortTypeClick(sortType) {
+    dispatch(ActionCreator.changeSortType(sortType));
+  },
+});
+
+export {Main};
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

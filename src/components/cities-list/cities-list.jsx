@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import City from "../city/city.jsx";
 
-const CitiesList = (props) => {
+const CitiesList = React.memo(function CitiesList(props) {
   const {cities, currentCity, onCityNameClick} = props;
 
   return (
@@ -21,7 +21,7 @@ const CitiesList = (props) => {
       </ul>
     </section>
   );
-};
+});
 
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(

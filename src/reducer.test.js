@@ -1,5 +1,5 @@
 import {reducer, ActionCreator, ActionType} from "./reducer.js";
-import {getOffersByCity} from "./utils/common.js";
+import {getOffersByCity, getCitiesList} from "./utils/common.js";
 
 const offersMock = [
   {
@@ -390,12 +390,22 @@ const offersMock = [
   },
 ];
 
+const SortTypeMock = {
+  DEFAULT: `popular`,
+  PRICE_TO_HIGH: `to-high`,
+  PRICE_TO_LOW: `to-low`,
+  TOP_RATED: `top-rated`,
+};
+
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(void 0, {})).toEqual({
       currentCity: offersMock[0].city,
+      cities: getCitiesList(offersMock),
       currentOffers: getOffersByCity(offersMock, offersMock[0].city),
-      offers: offersMock
+      currentOffer: null,
+      offers: offersMock,
+      activeSortType: SortTypeMock.DEFAULT,
     });
   });
 
@@ -439,7 +449,7 @@ describe(`Reducer works correctly`, () => {
       currentOffers: getOffersByCity(offersMock, offersMock[0].city),
       offersMock,
     }, {
-      type: ActionType.CHANGE_OFFERS,
+      type: ActionType.GET_OFFERS,
       payload: offersMock.slice(2, 3),
     })).toEqual({
       currentCity: offersMock[0].city,
@@ -452,7 +462,7 @@ describe(`Reducer works correctly`, () => {
       currentOffers: getOffersByCity(offersMock, offersMock[0].city),
       offersMock,
     }, {
-      type: ActionType.CHANGE_OFFERS,
+      type: ActionType.GET_OFFERS,
       payload: offersMock.slice(2, 3),
     })).toEqual({
       currentCity: offersMock[2].city,
@@ -477,11 +487,11 @@ describe(`Action creators work correctly`, () => {
   });
 
   it(`Action creator for change city returns correct action`, () => {
-    expect(ActionCreator.changeOffers({
+    expect(ActionCreator.getOffers({
       name: `Brussels`,
       coords: [50.85, 4.35]
     })).toEqual({
-      type: ActionType.CHANGE_OFFERS,
+      type: ActionType.GET_OFFERS,
       payload: getOffersByCity(offersMock, {
         name: `Brussels`,
         coords: [50.85, 4.35]
