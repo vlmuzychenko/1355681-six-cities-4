@@ -4,6 +4,7 @@ import CityOffersList from "../city-offers-list/city-offers-list.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import Map from "../map/map.jsx";
 import Sort from "../sort/sort.jsx";
+import NoResults from "../no-results/no-results.jsx";
 import withOpenedCondition from "../../hocs/with-opened-condition/with-opened-condition.js";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
@@ -54,7 +55,7 @@ const Main = (props) => {
           </div>
         </header>
 
-        <main className="page__main page__main--index">
+        <main className={`page__main page__main--index ${!currentOffers.length ? `page__main--index-empty` : ``}`}>
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <CitiesList
@@ -64,29 +65,32 @@ const Main = (props) => {
             />
           </div>
           <div className="cities">
-            <div className="cities__places-container container">
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{currentOffers.length} places to stay in {currentCity.name}</b>
-                <SortWrapped
-                  onSortTypeClick={onSortTypeClick}
-                  activeSortType={activeSortType}
-                />
-                <CityOffersList
-                  offers={getSortedOffers(currentOffers, activeSortType)}
-                  onOfferTitleClick={onOfferTitleClick}
-                  onOfferHover={onOfferHover}
-                />
-
-              </section>
-              <div className="cities__right-section">
-                <section className="cities__map map">
-                  <Map
-                    offers={currentOffers}
-                    currentCity={currentCity}
-                    hoveredOffer={hoveredOffer}
+            <div className={`cities__places-container container ${!currentOffers.length ? `cities__places-container--empty` : ``}`}>
+              {currentOffers.length ?
+                <section className="cities__places places">
+                  <h2 className="visually-hidden">Places</h2>
+                  <b className="places__found">{currentOffers.length} places to stay in {currentCity.name}</b>
+                  <SortWrapped
+                    onSortTypeClick={onSortTypeClick}
+                    activeSortType={activeSortType}
                   />
-                </section>
+                  <CityOffersList
+                    offers={getSortedOffers(currentOffers, activeSortType)}
+                    onOfferTitleClick={onOfferTitleClick}
+                    onOfferHover={onOfferHover}
+                  />
+                </section> : <NoResults/>
+              }
+              <div className="cities__right-section">
+                {currentOffers.length ?
+                  <section className="cities__map map">
+                    <Map
+                      offers={currentOffers}
+                      currentCity={currentCity}
+                      hoveredOffer={hoveredOffer}
+                    />
+                  </section> : ``
+                }
               </div>
             </div>
           </div>
