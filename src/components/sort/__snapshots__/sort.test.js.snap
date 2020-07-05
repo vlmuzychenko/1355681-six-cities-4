@@ -28,7 +28,7 @@ exports[`Should Sort render correctly 1`] = `
     </svg>
   </span>
   <ul
-    className="places__options places__options--custom false"
+    className="places__options places__options--custom "
   >
     <li
       className="places__option places__option--active"
@@ -38,21 +38,21 @@ exports[`Should Sort render correctly 1`] = `
       Popular
     </li>
     <li
-      className="places__option false"
+      className="places__option "
       onClick={[Function]}
       tabIndex="0"
     >
       Price: low to high
     </li>
     <li
-      className="places__option false"
+      className="places__option "
       onClick={[Function]}
       tabIndex="0"
     >
       Price: high to low
     </li>
     <li
-      className="places__option false"
+      className="places__option "
       onClick={[Function]}
       tabIndex="0"
     >

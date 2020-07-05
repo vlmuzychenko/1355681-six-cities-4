@@ -38,3 +38,13 @@ export const getSortedOffers = (offers, sortType) => {
       return offers;
   }
 };
+
+export const getCitiesList = (offers, maxCities) => {
+  const cities = [];
+  offers.map((item) => cities.push(item.city));
+  const unrepeatedCities = cities.filter((obj, pos, arr) => {
+    return arr.map((mapObj) => mapObj.name).indexOf(obj.name) === pos;
+  });
+
+  return unrepeatedCities.slice(0, maxCities);
+};

@@ -14,7 +14,9 @@ it(`Should Sort render correctly`, () => {
     .create(
         <Sort
           onSortTypeClick={() => {}}
+          onSortDropdownClick={() => {}}
           activeSortType={SortTypeMock.DEFAULT}
+          isOpened={false}
         />
     )
     .toJSON();

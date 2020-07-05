@@ -7,7 +7,11 @@ const City = (props) => {
     <li className="locations__item">
       <a className={`locations__item-link tabs__item ${isActive && `tabs__item--active`}`}
         href="#"
-        onClick={() => onCityNameClick(city)}>
+        onClick={() => {
+          if (!isActive) {
+            onCityNameClick(city);
+          }
+        }}>
         <span>{city.name}</span>
       </a>
     </li>

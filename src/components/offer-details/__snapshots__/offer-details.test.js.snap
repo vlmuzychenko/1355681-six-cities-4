@@ -699,8 +699,8 @@ Array [
           >
             <article
               className="place-card near-places__card "
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
+              onMouseEnter={null}
+              onMouseLeave={null}
             >
               
               <div
@@ -798,8 +798,8 @@ Array [
             </article>
             <article
               className="place-card near-places__card "
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
+              onMouseEnter={null}
+              onMouseLeave={null}
             >
               
               <div
@@ -897,8 +897,8 @@ Array [
             </article>
             <article
               className="place-card near-places__card "
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
+              onMouseEnter={null}
+              onMouseLeave={null}
             >
               
               <div

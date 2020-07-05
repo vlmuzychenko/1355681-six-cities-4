@@ -1,7 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+import {Main} from "./main.jsx";
 import {BrowserRouter} from "react-router-dom";
+
+const mockStore = configureStore();
 
 const offersMock = [
   {
@@ -59,6 +63,21 @@ const currentCityMock = {
   coords: [48.865, 2.35],
 };
 
+const citiesMock = [
+  {
+    name: `Amsterdam`,
+    coords: [48.865, 2.35],
+  },
+  {
+    name: `Paris`,
+    coords: [48.865, 2.35],
+  },
+  {
+    name: `Berlin`,
+    coords: [48.865, 2.35],
+  }
+];
+
 const SortTypeMock = {
   DEFAULT: `popular`,
   PRICE_TO_HIGH: `to-high`,
@@ -68,21 +87,32 @@ const SortTypeMock = {
 
 describe(`Main render correctly`, () => {
   it(`Should default Main render correctly`, () => {
+    const store = mockStore({
+      currentCity: offersMock[0].city,
+      cities: citiesMock,
+      currentOffers: offersMock.slice(0, 2),
+      currentOffer: null,
+      offers: offersMock,
+      activeSortType: SortTypeMock.DEFAULT
+    });
     const tree = renderer
       .create(
-          <BrowserRouter>
-            <Main
-              currentOffers={offersMock.slice(0, 1)}
-              currentCity={currentCityMock}
-              offers={offersMock}
-              onHeadingClick={() => {}}
-              onOfferTitleClick={() => {}}
-              onCityNameClick={() => {}}
-              onSortTypeClick={() => {}}
-              activeSortType={SortTypeMock.DEFAULT}
-              onOfferHover={() => {}}
-            />
-          </BrowserRouter>,
+          <Provider store={store}>
+            <BrowserRouter>
+              <Main
+                currentOffers={offersMock.slice(0, 2)}
+                currentCity={currentCityMock}
+                cities={citiesMock}
+                offers={offersMock}
+                onHeadingClick={() => {}}
+                onOfferTitleClick={() => {}}
+                onCityNameClick={() => {}}
+                onSortTypeClick={() => {}}
+                activeSortType={SortTypeMock.DEFAULT}
+                onOfferHover={() => {}}
+              />
+            </BrowserRouter>
+          </Provider>,
           {
             createNodeMock: () => document.createElement(`div`)
           }
@@ -93,22 +123,32 @@ describe(`Main render correctly`, () => {
   });
 
   it(`Should Main with hovered offer render correctly`, () => {
+    const store = mockStore({
+      currentCity: offersMock[0].city,
+      cities: citiesMock,
+      currentOffers: offersMock.slice(0, 2),
+      currentOffer: null,
+      offers: offersMock,
+      activeSortType: SortTypeMock.DEFAULT
+    });
     const tree = renderer
       .create(
-          <BrowserRouter>
-            <Main
-              currentOffers={offersMock.slice(0, 1)}
-              currentCity={currentCityMock}
-              offers={offersMock}
-              onHeadingClick={() => {}}
-              onOfferTitleClick={() => {}}
-              onCityNameClick={() => {}}
-              onSortTypeClick={() => {}}
-              activeSortType={SortTypeMock.DEFAULT}
-              onOfferHover={() => {}}
-              hoveredOffer={offersMock.slice(2, 3)}
-            />
-          </BrowserRouter>,
+          <Provider store={store}>
+            <BrowserRouter>
+              <Main
+                currentOffers={offersMock.slice(0, 1)}
+                currentCity={currentCityMock}
+                cities={citiesMock}
+                onHeadingClick={() => {}}
+                onOfferTitleClick={() => {}}
+                onCityNameClick={() => {}}
+                onSortTypeClick={() => {}}
+                activeSortType={SortTypeMock.DEFAULT}
+                onOfferHover={() => {}}
+                hoveredOffer={offersMock[2]}
+              />
+            </BrowserRouter>
+          </Provider>,
           {
             createNodeMock: () => document.createElement(`div`)
           }

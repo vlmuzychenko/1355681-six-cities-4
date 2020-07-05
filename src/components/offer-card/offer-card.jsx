@@ -13,8 +13,8 @@ const OfferCard = (props) => {
     <article
       className={`place-card ${className || ``}`}
       key={offer.price + offer.rating}
-      onMouseEnter={() => onOfferHover(offer)}
-      onMouseLeave={() => onOfferHover(null)}
+      onMouseEnter={onOfferHover ? () => onOfferHover(offer) : null}
+      onMouseLeave={onOfferHover ? () => onOfferHover(null) : null}
     >
       {premiumMark}
       <div className={`place-card__image-wrapper ${imageWrapperClassName || ``}`}>

@@ -16,11 +16,14 @@ Enzyme.configure({
 
 it(`The state should change when the mouse is on the offer`, () => {
   const onSortTypeClick = jest.fn();
+  const onSortDropdownClick = jest.fn();
 
   const sort = shallow(
       <Sort
         onSortTypeClick={onSortTypeClick}
+        onSortDropdownClick={onSortDropdownClick}
         activeSortType={SortTypeMock.DEFAULT}
+        isOpened={false}
       />
   );
 
