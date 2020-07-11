@@ -5,7 +5,10 @@ import PropTypes from "prop-types";
 import withHoveredOffer from "../../hocs/with-hovered-offer/with-hovered-offer.js";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
+import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
+import {getCurrentOffers, getCurrentCity} from "../../reducer/data/selectors.js";
+import {getCurrentOffer} from "../../reducer/main/selectors.js";
 
 const MainWithHoveredOffer = withHoveredOffer(Main);
 
@@ -93,27 +96,28 @@ App.propTypes = {
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
   currentCity: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-  }).isRequired,
+    name: PropTypes.string,
+    coords: PropTypes.arrayOf(PropTypes.number),
+    zoom: PropTypes.number,
+  }),
   onCityNameClick: PropTypes.func.isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentCity: state.currentCity,
-  currentOffers: state.currentOffers,
-  currentOffer: state.currentOffer,
-  offers: state.offers,
-});
+const mapStateToProps = (state) => {
+  return {
+    currentOffers: getCurrentOffers(state),
+    currentCity: getCurrentCity(state),
+    currentOffer: getCurrentOffer(state),
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onCityNameClick(city) {
-    dispatch(ActionCreator.changeCity(city));
-    dispatch(ActionCreator.getOffers(city));
+    dispatch(DataActionCreator.changeCity(city));
   },
   onOfferTitleClick(offer) {
-    dispatch(ActionCreator.getOffer(offer));
+    dispatch(MainActionCreator.getOffer(offer));
   },
 });
 

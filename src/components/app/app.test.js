@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
 import {Provider} from "react-redux";
 import {App} from "./app.jsx";
 
@@ -24,11 +25,14 @@ const offersMock = [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+      id: 1,
     },
     coords: [52.3909553943508, 4.85309666406198],
+    zoom: 13,
     city: {
       name: `Paris`,
       coords: [48.865, 2.35],
+      zoom: 13,
     },
   },
   {
@@ -48,19 +52,17 @@ const offersMock = [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+      id: 2,
     },
     coords: [52.3909553943508, 4.85309666406198],
+    zoom: 13,
     city: {
       name: `Paris`,
       coords: [48.865, 2.35],
+      zoom: 13,
     },
   }
 ];
-
-const currentCityMock = {
-  name: `Paris`,
-  coords: [48.865, 2.35],
-};
 
 const SortTypeMock = {
   DEFAULT: `popular`,
@@ -69,29 +71,16 @@ const SortTypeMock = {
   TOP_RATED: `top-rated`,
 };
 
-const citiesMock = [
-  {
-    name: `Amsterdam`,
-    coords: [48.865, 2.35],
-  },
-  {
-    name: `Paris`,
-    coords: [48.865, 2.35],
-  },
-  {
-    name: `Berlin`,
-    coords: [48.865, 2.35],
-  }
-];
-
 it(`Render App`, () => {
   const store = mockStore({
-    currentCity: offersMock[0].city,
-    cities: citiesMock,
-    currentOffers: offersMock.slice(0, 2),
-    currentOffer: null,
-    offers: offersMock,
-    activeSortType: SortTypeMock.DEFAULT
+    [NameSpace.DATA]: {
+      currentCity: offersMock[0].city,
+      offers: offersMock,
+    },
+    [NameSpace.MAIN]: {
+      activeSortType: SortTypeMock.DEFAULT,
+      currentOffer: null,
+    }
   });
   const tree = renderer
     .create(
@@ -99,10 +88,8 @@ it(`Render App`, () => {
           <App
             currentOffers={offersMock.slice(0, 1)}
             currentOffer={offersMock[0]}
-            currentCity={currentCityMock}
-            activeSortType={SortTypeMock.DEFAULT}
+            currentCity={offersMock[0].city}
             onCityNameClick={() => {}}
-            onSortTypeClick={() => {}}
             onOfferTitleClick={() => {}}
           />
         </Provider>,

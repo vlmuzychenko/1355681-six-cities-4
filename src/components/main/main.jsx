@@ -7,7 +7,9 @@ import Sort from "../sort/sort.jsx";
 import NoResults from "../no-results/no-results.jsx";
 import withOpenedCondition from "../../hocs/with-opened-condition/with-opened-condition.js";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
+import {getCities} from "../../reducer/data/selectors.js";
+import {getActiveSortType} from "../../reducer/main/selectors.js";
 import {getSortedOffers} from "../../utils/common.js";
 
 const SortWrapped = withOpenedCondition(Sort);
@@ -134,8 +136,9 @@ Main.propTypes = {
       }).isRequired
   ),
   currentCity: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    name: PropTypes.string,
+    coords: PropTypes.arrayOf(PropTypes.number),
+    zoom: PropTypes.number,
   }).isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
   onCityNameClick: PropTypes.func.isRequired,
@@ -169,13 +172,13 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeSortType: state.activeSortType,
-  cities: state.cities,
+  activeSortType: getActiveSortType(state),
+  cities: getCities(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onSortTypeClick(sortType) {
-    dispatch(ActionCreator.changeSortType(sortType));
+    dispatch(MainActionCreator.changeSortType(sortType));
   },
 });
 

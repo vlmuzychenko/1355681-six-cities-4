@@ -31,8 +31,9 @@ CitiesList.propTypes = {
       }).isRequired
   ).isRequired,
   currentCity: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    name: PropTypes.string,
+    coords: PropTypes.arrayOf(PropTypes.number),
+    zoom: PropTypes.number,
   }).isRequired,
   onCityNameClick: PropTypes.func.isRequired,
 };
