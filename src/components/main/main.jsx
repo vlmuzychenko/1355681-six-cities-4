@@ -7,15 +7,19 @@ import Sort from "../sort/sort.jsx";
 import NoResults from "../no-results/no-results.jsx";
 import withOpenedCondition from "../../hocs/with-opened-condition/with-opened-condition.js";
 import {connect} from "react-redux";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
 import {getCities} from "../../reducer/data/selectors.js";
 import {getActiveSortType} from "../../reducer/main/selectors.js";
+import {getAuthorizationInfo} from "../../reducer/user/selectors.js";
 import {getSortedOffers} from "../../utils/common.js";
 
 const SortWrapped = withOpenedCondition(Sort);
 
 const Main = (props) => {
   const {
+    authorizationStatus,
+    authorizationInfo,
     currentOffers,
     currentCity,
     cities,
@@ -26,6 +30,8 @@ const Main = (props) => {
     onOfferHover,
     hoveredOffer
   } = props;
+
+  const userData = authorizationStatus === AuthorizationStatus.AUTH ? <span className="header__user-name user__name">{authorizationInfo.email}</span> : <span className="header__login">Sign in</span>;
 
   return (
     <React.Fragment>
@@ -48,7 +54,7 @@ const Main = (props) => {
                     <a className="header__nav-link header__nav-link--profile" href="#">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                      {userData}
                     </a>
                   </li>
                 </ul>
@@ -103,6 +109,14 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  authorizationInfo: PropTypes.shape({
+    avatarUrl: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    isPro: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
   currentOffers: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -174,6 +188,7 @@ Main.propTypes = {
 const mapStateToProps = (state) => ({
   activeSortType: getActiveSortType(state),
   cities: getCities(state),
+  authorizationInfo: getAuthorizationInfo(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
