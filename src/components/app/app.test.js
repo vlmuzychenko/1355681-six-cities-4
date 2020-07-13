@@ -71,6 +71,11 @@ const SortTypeMock = {
   TOP_RATED: `top-rated`,
 };
 
+const AuthorizationStatusMock = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
 it(`Render App`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
@@ -86,11 +91,13 @@ it(`Render App`, () => {
     .create(
         <Provider store={store}>
           <App
+            authorizationStatus={AuthorizationStatusMock.NO_AUTH}
             currentOffers={offersMock.slice(0, 1)}
             currentOffer={offersMock[0]}
             currentCity={offersMock[0].city}
             onCityNameClick={() => {}}
             onOfferTitleClick={() => {}}
+            login={() => {}}
           />
         </Provider>,
         {

@@ -1,19 +1,25 @@
 import React from "react";
 import Main from "../main/main.jsx";
+import SignIn from "../sign-in/sign-in.jsx";
 import OfferDetails from "../offer-details/offer-details.jsx";
 import PropTypes from "prop-types";
 import withHoveredOffer from "../../hocs/with-hovered-offer/with-hovered-offer.js";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
 import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
 import {getCurrentOffers, getCurrentCity} from "../../reducer/data/selectors.js";
 import {getCurrentOffer} from "../../reducer/main/selectors.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {Operation as UserOperation} from "../../reducer/user/user.js";
 
 const MainWithHoveredOffer = withHoveredOffer(Main);
 
 const App = (props) => {
   const {
+    authorizationStatus,
+    login,
     currentOffers,
     currentCity,
     currentOffer,
@@ -21,22 +27,45 @@ const App = (props) => {
     onOfferTitleClick,
   } = props;
 
+  const _renderMainScreen = () => {
+    if (authorizationStatus === AuthorizationStatus.AUTH) {
+      return (
+        <MainWithHoveredOffer
+          authorizationStatus={authorizationStatus}
+          currentOffers={currentOffers}
+          currentCity={currentCity}
+          onOfferTitleClick={onOfferTitleClick}
+          onCityNameClick={onCityNameClick}
+        />
+      );
+    } else if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+      return (
+        <SignIn
+          onSubmit={login}
+        />
+      );
+    }
+
+    return null;
+  };
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainWithHoveredOffer
-            currentOffers={currentOffers}
-            currentCity={currentCity}
-            onOfferTitleClick={onOfferTitleClick}
-            onCityNameClick={onCityNameClick}
-          />
+          {_renderMainScreen()}
         </Route>
         <Route exact path="/offer">
           <OfferDetails
+            authorizationStatus={authorizationStatus}
             offer={currentOffer}
             currentCity={currentCity}
             onOfferTitleClick={onOfferTitleClick}
+          />
+        </Route>
+        <Route exact path="/dev-login">
+          <SignIn
+            onSubmit={login}
           />
         </Route>
       </Switch>
@@ -45,6 +74,8 @@ const App = (props) => {
 };
 
 App.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  login: PropTypes.func.isRequired,
   currentOffers: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -106,6 +137,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
+    authorizationStatus: getAuthorizationStatus(state),
     currentOffers: getCurrentOffers(state),
     currentCity: getCurrentCity(state),
     currentOffer: getCurrentOffer(state),
@@ -113,6 +145,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
   onCityNameClick(city) {
     dispatch(DataActionCreator.changeCity(city));
   },

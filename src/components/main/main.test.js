@@ -85,6 +85,11 @@ const SortTypeMock = {
   TOP_RATED: `top-rated`,
 };
 
+const AuthorizationStatusMock = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
 describe(`Main render correctly`, () => {
   it(`Should default Main render correctly`, () => {
     const store = mockStore({
@@ -100,6 +105,7 @@ describe(`Main render correctly`, () => {
           <Provider store={store}>
             <BrowserRouter>
               <Main
+                authorizationStatus={AuthorizationStatusMock.NO_AUTH}
                 currentOffers={offersMock.slice(0, 2)}
                 currentCity={currentCityMock}
                 cities={citiesMock}
@@ -136,6 +142,7 @@ describe(`Main render correctly`, () => {
           <Provider store={store}>
             <BrowserRouter>
               <Main
+                authorizationStatus={AuthorizationStatusMock.NO_AUTH}
                 currentOffers={offersMock.slice(0, 1)}
                 currentCity={currentCityMock}
                 cities={citiesMock}

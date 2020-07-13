@@ -33,11 +33,17 @@ const currentCityMock = {
   coords: [48.865, 2.35],
 };
 
+const AuthorizationStatusMock = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
 it(`Should Offer Details render correctly`, () => {
   const tree = renderer
     .create(
         <BrowserRouter>
           <OfferDetails
+            authorizationStatus={AuthorizationStatusMock.NO_AUTH}
             offer={offerMock}
             currentCity={currentCityMock}
             onOfferTitleClick={() => {}}
