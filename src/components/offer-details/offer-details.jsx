@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import NearOffersList from "../near-offers-list/near-offers-list.jsx";
 import Map from "../map/map.jsx";
-import reviews from "../../mocks/reviews.js";
-import nearOffers from "../../mocks/near-offers.js";
+import reviews from "../../models/reviews.js";
+import nearOffers from "../../models/near-offers.js";
 import {getRatingInPercent, getPluralizedString, getItemsById} from "../../utils/common.js";
 import {OfferTypes} from "../../const.js";
 
@@ -226,8 +226,9 @@ OfferDetails.propTypes = {
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
   currentCity: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    name: PropTypes.string,
+    coords: PropTypes.arrayOf(PropTypes.number),
+    zoom: PropTypes.number,
   }).isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
 };
