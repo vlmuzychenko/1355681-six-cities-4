@@ -7,23 +7,18 @@ import Sort from "../sort/sort.jsx";
 import NoResults from "../no-results/no-results.jsx";
 import withOpenedCondition from "../../hocs/with-opened-condition/with-opened-condition.js";
 import {connect} from "react-redux";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
 import {getCities} from "../../reducer/data/selectors.js";
 import {getActiveSortType} from "../../reducer/main/selectors.js";
-import {getAuthorizationInfo} from "../../reducer/user/selectors.js";
 import {getSortedOffers} from "../../utils/common.js";
 
 const SortWrapped = withOpenedCondition(Sort);
 
 const Main = (props) => {
   const {
-    authorizationStatus,
-    authorizationInfo,
     currentOffers,
     currentCity,
     cities,
-    onOfferTitleClick,
     onCityNameClick,
     onSortTypeClick,
     activeSortType,
@@ -31,7 +26,6 @@ const Main = (props) => {
     hoveredOffer
   } = props;
 
-  const userData = authorizationStatus === AuthorizationStatus.AUTH ? <span className="header__user-name user__name">{authorizationInfo.email}</span> : <span className="header__login">Sign in</span>;
 
   return (
     <React.Fragment>
@@ -40,28 +34,8 @@ const Main = (props) => {
       </div>
 
       <div className="page page--gray page--main">
-        <header className="header">
-          <div className="container">
-            <div className="header__wrapper">
-              <div className="header__left">
-                <a className="header__logo-link header__logo-link--active">
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </a>
-              </div>
-              <nav className="header__nav">
-                <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      {userData}
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </header>
+
+        {props.children}
 
         <main className={`page__main page__main--index ${!currentOffers.length ? `page__main--index-empty` : ``}`}>
           <h1 className="visually-hidden">Cities</h1>
@@ -84,7 +58,6 @@ const Main = (props) => {
                   />
                   <CityOffersList
                     offers={getSortedOffers(currentOffers, activeSortType)}
-                    onOfferTitleClick={onOfferTitleClick}
                     onOfferHover={onOfferHover}
                   />
                 </section> : <NoResults/>
@@ -109,14 +82,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  authorizationInfo: PropTypes.shape({
-    avatarUrl: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    isPro: PropTypes.bool.isRequired,
-    name: PropTypes.string.isRequired,
-  }),
+  children: PropTypes.element,
   currentOffers: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -154,7 +120,6 @@ Main.propTypes = {
     coords: PropTypes.arrayOf(PropTypes.number),
     zoom: PropTypes.number,
   }).isRequired,
-  onOfferTitleClick: PropTypes.func.isRequired,
   onCityNameClick: PropTypes.func.isRequired,
   onSortTypeClick: PropTypes.func.isRequired,
   activeSortType: PropTypes.string.isRequired,
@@ -188,7 +153,6 @@ Main.propTypes = {
 const mapStateToProps = (state) => ({
   activeSortType: getActiveSortType(state),
   cities: getCities(state),
-  authorizationInfo: getAuthorizationInfo(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

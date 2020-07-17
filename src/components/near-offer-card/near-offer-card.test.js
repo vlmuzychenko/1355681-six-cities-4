@@ -1,7 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import NearOfferCard from "./near-offer-card.jsx";
+import configureStore from "redux-mock-store";
 import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore();
 
 const offerCardMock = {
   id: 1,
@@ -33,17 +37,20 @@ const typeMock = `near`;
 const classNameMock = `near-places__list`;
 
 it(`Should Near Offer render correctly`, () => {
+  const store = mockStore({});
   const tree = renderer
     .create(
-        <BrowserRouter>
-          <NearOfferCard
-            type={typeMock}
-            className={classNameMock}
-            offer={offerCardMock}
-            onOfferHover={() => {}}
-            onOfferTitleClick={() => {}}
-          />
-        </BrowserRouter>
+        <Provider store={store}>
+          <BrowserRouter>
+            <NearOfferCard
+              type={typeMock}
+              className={classNameMock}
+              offer={offerCardMock}
+              onOfferHover={() => {}}
+              onOfferTitleClick={() => {}}
+            />
+          </BrowserRouter>
+        </Provider>
     )
     .toJSON();
 

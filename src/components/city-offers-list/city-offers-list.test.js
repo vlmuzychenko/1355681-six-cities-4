@@ -1,7 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import CityOffersList from "./city-offers-list.jsx";
+import configureStore from "redux-mock-store";
 import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore();
 
 const offersMock = [
   {
@@ -57,15 +61,18 @@ const offersMock = [
 const classNameMock = `cities__places-list tabs__content`;
 
 it(`Should City Offer List render correctly`, () => {
+  const store = mockStore({});
   const tree = renderer
     .create(
-        <BrowserRouter>
-          <CityOffersList
-            className={classNameMock}
-            offers={offersMock}
-            onOfferTitleClick={() => {}}
-          />
-        </BrowserRouter>
+        <Provider store={store}>
+          <BrowserRouter>
+            <CityOffersList
+              className={classNameMock}
+              offers={offersMock}
+              onOfferTitleClick={() => {}}
+            />
+          </BrowserRouter>
+        </Provider>
     )
     .toJSON();
 

@@ -36,6 +36,37 @@ export const SORTS = [
   },
 ];
 
+export const RatingType = {
+  PERFECT: `perfect`,
+  GOOD: `good`,
+  NOT_BAD: `not bad`,
+  BADLY: `badly`,
+  TERRIBLY: `terribly`,
+};
+
+export const RATINGS = [
+  {
+    type: RatingType.PERFECT,
+    value: `5`,
+  },
+  {
+    type: RatingType.GOOD,
+    value: `4`,
+  },
+  {
+    type: RatingType.NOT_BAD,
+    value: `3`,
+  },
+  {
+    type: RatingType.BADLY,
+    value: `2`,
+  },
+  {
+    type: RatingType.TERRIBLY,
+    value: `1`,
+  },
+];
+
 export const MapIconUrl = {
   DEFAULT: `img/pin.svg`,
   ACTIVE: `img/pin-active.svg`,

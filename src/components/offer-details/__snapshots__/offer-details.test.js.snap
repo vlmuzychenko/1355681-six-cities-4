@@ -45,58 +45,6 @@ Array [
   <div
     className="page"
   >
-    <header
-      className="header"
-    >
-      <div
-        className="container"
-      >
-        <div
-          className="header__wrapper"
-        >
-          <div
-            className="header__left"
-          >
-            <a
-              className="header__logo-link header__logo-link--active"
-            >
-              <img
-                alt="6 cities logo"
-                className="header__logo"
-                height="41"
-                src="img/logo.svg"
-                width="81"
-              />
-            </a>
-          </div>
-          <nav
-            className="header__nav"
-          >
-            <ul
-              className="header__nav-list"
-            >
-              <li
-                className="header__nav-item user"
-              >
-                <a
-                  className="header__nav-link header__nav-link--profile"
-                  href="#"
-                >
-                  <div
-                    className="header__avatar-wrapper user__avatar-wrapper"
-                  />
-                  <span
-                    className="header__user-name user__name"
-                  >
-                    Oliver.conner@gmail.com
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </header>
     <main
       className="page__main page__main--property"
     >
@@ -377,12 +325,12 @@ Array [
               <h2
                 className="reviews__title"
               >
-                Reviews
+                Review
                  · 
                 <span
                   className="reviews__amount"
                 >
-                  6
+                  1
                 </span>
               </h2>
               <ul
@@ -401,7 +349,7 @@ Array [
                         alt="Reviews avatar"
                         className="reviews__avatar user__avatar"
                         height="54"
-                        src="img/avatar-max.jpg"
+                        src="img/1.png"
                         width="54"
                       />
                     </div>
@@ -437,72 +385,13 @@ Array [
                     <p
                       className="reviews__text"
                     >
-                      1 A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                      A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
                     </p>
                     <time
                       className="reviews__time"
-                      dateTime="2019-24-04"
+                      dateTime="2019-08-05"
                     >
-                      April 2019
-                    </time>
-                  </div>
-                </li>
-                <li
-                  className="reviews__item"
-                >
-                  <div
-                    className="reviews__user user"
-                  >
-                    <div
-                      className="reviews__avatar-wrapper user__avatar-wrapper"
-                    >
-                      <img
-                        alt="Reviews avatar"
-                        className="reviews__avatar user__avatar"
-                        height="54"
-                        src="img/avatar-max.jpg"
-                        width="54"
-                      />
-                    </div>
-                    <span
-                      className="reviews__user-name"
-                    >
-                      Max
-                    </span>
-                  </div>
-                  <div
-                    className="reviews__info"
-                  >
-                    <div
-                      className="reviews__rating rating"
-                    >
-                      <div
-                        className="reviews__stars rating__stars"
-                      >
-                        <span
-                          style={
-                            Object {
-                              "width": "80%",
-                            }
-                          }
-                        />
-                        <span
-                          className="visually-hidden"
-                        >
-                          Rating
-                        </span>
-                      </div>
-                    </div>
-                    <p
-                      className="reviews__text"
-                    >
-                      1 A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                    </p>
-                    <time
-                      className="reviews__time"
-                      dateTime="2019-24-04"
-                    >
-                      April 2019
+                      May 2019
                     </time>
                   </div>
                 </li>
@@ -543,7 +432,13 @@ Array [
               onMouseEnter={null}
               onMouseLeave={null}
             >
-              
+              <div
+                className="place-card__mark"
+              >
+                <span>
+                  Premium
+                </span>
+              </div>
               <div
                 className="place-card__image-wrapper near-places__image-wrapper"
               >
@@ -554,7 +449,7 @@ Array [
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/room.jpg"
+                    src="img/apartment-01.jpg"
                     width="260"
                   />
                 </a>
@@ -572,7 +467,7 @@ Array [
                       className="place-card__price-value"
                     >
                       €
-                      80
+                      120
                     </b>
                     <span
                       className="place-card__price-text"
@@ -627,211 +522,13 @@ Array [
                     href="/offer"
                     onClick={[Function]}
                   >
-                    Wood and stone place 1
+                    Beautiful & luxurious apartment at great location
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Private Room
-                </p>
-              </div>
-            </article>
-            <article
-              className="place-card near-places__card "
-              onMouseEnter={null}
-              onMouseLeave={null}
-            >
-              
-              <div
-                className="place-card__image-wrapper near-places__image-wrapper"
-              >
-                <a
-                  href="#"
-                >
-                  <img
-                    alt="Place image"
-                    className="place-card__image"
-                    height="200"
-                    src="img/room.jpg"
-                    width="260"
-                  />
-                </a>
-              </div>
-              <div
-                className="place-card__info"
-              >
-                <div
-                  className="place-card__price-wrapper"
-                >
-                  <div
-                    className="place-card__price"
-                  >
-                    <b
-                      className="place-card__price-value"
-                    >
-                      €
-                      80
-                    </b>
-                    <span
-                      className="place-card__price-text"
-                    >
-                      / night
-                    </span>
-                  </div>
-                  <button
-                    className="place-card__bookmark-button button"
-                    type="button"
-                  >
-                    <svg
-                      className="place-card__bookmark-icon"
-                      height="19"
-                      width="18"
-                    >
-                      <use
-                        xlinkHref="#icon-bookmark"
-                      />
-                    </svg>
-                    <span
-                      className="visually-hidden"
-                    >
-                      To bookmarks
-                    </span>
-                  </button>
-                </div>
-                <div
-                  className="place-card__rating rating"
-                >
-                  <div
-                    className="place-card__stars rating__stars"
-                  >
-                    <span
-                      style={
-                        Object {
-                          "width": "80%",
-                        }
-                      }
-                    />
-                    <span
-                      className="visually-hidden"
-                    >
-                      Rating
-                    </span>
-                  </div>
-                </div>
-                <h2
-                  className="place-card__name"
-                >
-                  <a
-                    href="/offer"
-                    onClick={[Function]}
-                  >
-                    Wood and stone place 11
-                  </a>
-                </h2>
-                <p
-                  className="place-card__type"
-                >
-                  Private Room
-                </p>
-              </div>
-            </article>
-            <article
-              className="place-card near-places__card "
-              onMouseEnter={null}
-              onMouseLeave={null}
-            >
-              
-              <div
-                className="place-card__image-wrapper near-places__image-wrapper"
-              >
-                <a
-                  href="#"
-                >
-                  <img
-                    alt="Place image"
-                    className="place-card__image"
-                    height="200"
-                    src="img/room.jpg"
-                    width="260"
-                  />
-                </a>
-              </div>
-              <div
-                className="place-card__info"
-              >
-                <div
-                  className="place-card__price-wrapper"
-                >
-                  <div
-                    className="place-card__price"
-                  >
-                    <b
-                      className="place-card__price-value"
-                    >
-                      €
-                      80
-                    </b>
-                    <span
-                      className="place-card__price-text"
-                    >
-                      / night
-                    </span>
-                  </div>
-                  <button
-                    className="place-card__bookmark-button button"
-                    type="button"
-                  >
-                    <svg
-                      className="place-card__bookmark-icon"
-                      height="19"
-                      width="18"
-                    >
-                      <use
-                        xlinkHref="#icon-bookmark"
-                      />
-                    </svg>
-                    <span
-                      className="visually-hidden"
-                    >
-                      To bookmarks
-                    </span>
-                  </button>
-                </div>
-                <div
-                  className="place-card__rating rating"
-                >
-                  <div
-                    className="place-card__stars rating__stars"
-                  >
-                    <span
-                      style={
-                        Object {
-                          "width": "80%",
-                        }
-                      }
-                    />
-                    <span
-                      className="visually-hidden"
-                    >
-                      Rating
-                    </span>
-                  </div>
-                </div>
-                <h2
-                  className="place-card__name"
-                >
-                  <a
-                    href="/offer"
-                    onClick={[Function]}
-                  >
-                    Wood and stone place 111
-                  </a>
-                </h2>
-                <p
-                  className="place-card__type"
-                >
-                  Private Room
+                  Apartment
                 </p>
               </div>
             </article>
