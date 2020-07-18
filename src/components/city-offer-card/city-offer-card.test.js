@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import CityOfferCard from "./city-offer-card.jsx";
 import configureStore from "redux-mock-store";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 import {Provider} from "react-redux";
 
 const mockStore = configureStore();
@@ -41,7 +41,7 @@ it(`Should City Offer render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <BrowserRouter>
+          <Router>
             <CityOfferCard
               type={typeMock}
               className={classNameMock}
@@ -49,7 +49,7 @@ it(`Should City Offer render correctly`, () => {
               onOfferHover={() => {}}
               onOfferTitleClick={() => {}}
             />
-          </BrowserRouter>
+          </Router>
         </Provider>
     )
     .toJSON();

@@ -4,13 +4,16 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {getRatingInPercent} from "../../utils/common.js";
 import {OfferTypes} from "../../const.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
 import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews.js";
 import {Operation as NearbyOperation} from "../../reducer/nearby/nearby.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {AppRoute} from "../../const.js";
 
 const OfferCard = (props) => {
-  const {offer, onOfferTitleClick, onOfferHover, className, imageWrapperClassName} = props;
-  const {title, price, previewImage, type, rating, isPremium} = offer;
+  const {authorizationStatus, offer, onOfferTitleClick, onOfferHover, className, imageWrapperClassName} = props;
+  const {title, price, previewImage, type, rating, isPremium, isFavorite} = offer;
   const premiumMark = isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ``;
 
   return (
@@ -32,12 +35,22 @@ const OfferCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          {authorizationStatus === AuthorizationStatus.NO_AUTH ?
+            <Link to={AppRoute.LOGIN} className="place-card__bookmark-button button">
+              <svg className="place-card__bookmark-icon" width="18" height="19">
+                <use xlinkHref="#icon-bookmark"></use>
+              </svg>
+            </Link>
+            :
+            <button
+              className={`place-card__bookmark-button button ${isFavorite ? `place-card__bookmark-button--active` : null}`}
+              type="button">
+              <svg className="place-card__bookmark-icon" width="18" height="19">
+                <use xlinkHref="#icon-bookmark"></use>
+              </svg>
+              <span className="visually-hidden">To bookmarks</span>
+            </button>
+          }
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -55,6 +68,7 @@ const OfferCard = (props) => {
 };
 
 OfferCard.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -64,6 +78,7 @@ OfferCard.propTypes = {
     description: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
     maxAdults: PropTypes.number.isRequired,
@@ -85,6 +100,12 @@ OfferCard.propTypes = {
   imageWrapperClassName: PropTypes.string,
 };
 
+const mapStateToProps = (state) => {
+  return {
+    authorizationStatus: getAuthorizationStatus(state),
+  };
+};
+
 const mapDispatchToProps = (dispatch) => ({
   onOfferTitleClick(offer) {
     dispatch(MainActionCreator.getOffer(offer));
@@ -94,4 +115,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {OfferCard};
-export default connect(null, mapDispatchToProps)(OfferCard);
+export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);

@@ -73,3 +73,9 @@ export const MapIconUrl = {
 };
 
 export const MAX_CITIES_IN_LIST = 6;
+
+export const AppRoute = {
+  LOGIN: `/login`,
+  ROOT: `/`,
+  FAVORITES: `/favorites`,
+};

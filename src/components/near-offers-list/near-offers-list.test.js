@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import NearOffersList from "./near-offers-list.jsx";
 import configureStore from "redux-mock-store";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 import {Provider} from "react-redux";
 
 const mockStore = configureStore();
@@ -65,13 +65,13 @@ it(`Should Near Offer List render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <BrowserRouter>
+          <Router>
             <NearOffersList
               className={classNameMock}
               offers={offersMock}
               onOfferTitleClick={() => {}}
             />
-          </BrowserRouter>
+          </Router>
         </Provider>
     )
     .toJSON();

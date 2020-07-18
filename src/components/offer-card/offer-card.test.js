@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {OfferCard} from "./offer-card.jsx";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 
 const offerCardMock = {
   id: 1,
@@ -34,13 +34,13 @@ const imageWrapperClassNameMock = `cities__image-wrapper`;
 it(`Should Offer render correctly`, () => {
   const tree = renderer
     .create(
-        <BrowserRouter>
+        <Router>
           <OfferCard
             offer={offerCardMock}
             onOfferHover={() => {}}
             onOfferTitleClick={() => {}}
           />
-        </BrowserRouter>
+        </Router>
     )
     .toJSON();
 
@@ -50,7 +50,7 @@ it(`Should Offer render correctly`, () => {
 it(`Should Offer with class names render correctly`, () => {
   const tree = renderer
     .create(
-        <BrowserRouter>
+        <Router>
           <OfferCard
             className={classNameMock}
             imageWrapperClassName={imageWrapperClassNameMock}
@@ -58,7 +58,7 @@ it(`Should Offer with class names render correctly`, () => {
             onOfferHover={() => {}}
             onOfferTitleClick={() => {}}
           />
-        </BrowserRouter>
+        </Router>
     )
     .toJSON();
 
