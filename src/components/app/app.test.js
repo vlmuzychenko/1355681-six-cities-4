@@ -5,7 +5,7 @@ import NameSpace from "../../reducer/name-space.js";
 import {Provider} from "react-redux";
 import {App} from "./app.jsx";
 
-const mockStore = configureStore();
+const mockStore = configureStore([]);
 
 const offersMock = [
   {
@@ -20,6 +20,7 @@ const offersMock = [
     type: `apartment`,
     bedrooms: 4,
     maxAdults: 4,
+    isFavorite: false,
     goods: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitche`, `Dishwasher`, `Cabel TV`, `Fridge`],
     host: {
       name: `Angelina`,
@@ -47,6 +48,7 @@ const offersMock = [
     type: `hotel`,
     bedrooms: 4,
     maxAdults: 4,
+    isFavorite: false,
     goods: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitche`, `Dishwasher`, `Cabel TV`, `Fridge`],
     host: {
       name: `Angelina`,
@@ -76,27 +78,40 @@ const AuthorizationStatusMock = {
   NO_AUTH: `NO_AUTH`,
 };
 
+const authorizationInfoMock = {
+  avatarUrl: `img/1.png`,
+  email: `Oliver.conner@gmail.com`,
+  id: 1,
+  isPro: false,
+  name: `Oliver.conner`
+};
+
 it(`Render App`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       currentCity: offersMock[0].city,
       offers: offersMock,
+      currentOffer: null,
     },
     [NameSpace.MAIN]: {
       activeSortType: SortTypeMock.DEFAULT,
-      currentOffer: null,
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatusMock.AUTH,
+      authorizationInfo: authorizationInfoMock,
     }
   });
+
   const tree = renderer
     .create(
         <Provider store={store}>
           <App
-            authorizationStatus={AuthorizationStatusMock.NO_AUTH}
+            authorizationStatus={AuthorizationStatusMock.AUTH}
+            authorizationInfo={authorizationInfoMock}
             currentOffers={offersMock.slice(0, 1)}
             currentOffer={offersMock[0]}
             currentCity={offersMock[0].city}
             onCityNameClick={() => {}}
-            onOfferTitleClick={() => {}}
             login={() => {}}
           />
         </Provider>,

@@ -1,12 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import OfferDetails from "./offer-details.jsx";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
-import {Router} from "react-router-dom";
+import {OfferDetails} from "./offer-details.jsx";
+import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
-const mockStore = configureStore();
+const mockStore = configureStore([]);
 
 const offerMock = {
   id: 1,
@@ -20,6 +20,7 @@ const offerMock = {
   type: `apartment`,
   bedrooms: 4,
   maxAdults: 4,
+  isFavorite: false,
   goods: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitche`, `Dishwasher`, `Cabel TV`, `Fridge`],
   host: {
     name: `Angelina`,
@@ -33,7 +34,7 @@ const offerMock = {
   coords: [52.3909553943508, 4.85309666406198],
 };
 
-const reviewsMosk = [
+const reviewsMock = [
   {
     comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
     date: `2019-05-08T14:13:56.569Z`,
@@ -48,11 +49,6 @@ const reviewsMosk = [
   }
 ];
 
-const currentCityMock = {
-  name: `Paris`,
-  coords: [48.865, 2.35],
-};
-
 const AuthorizationStatusMock = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
@@ -61,30 +57,38 @@ const AuthorizationStatusMock = {
 it(`Should Offer Details render correctly`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
-      currentCity: offerMock.city,
-    },
-    [NameSpace.MAIN]: {
       currentOffer: offerMock,
     },
     [NameSpace.REVIEWS]: {
-      currentReviews: reviewsMosk,
+      currentReviews: reviewsMock,
     },
     [NameSpace.NEARBY]: {
       nearOffers: [offerMock],
     },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatusMock.NO_AUTH,
+      authorizationInfo: null,
+    },
   });
+
+  const onSubmit = jest.fn();
+  const getOfferData = jest.fn();
+
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <Router>
+        <BrowserRouter>
+          <Provider store={store}>
             <OfferDetails
+              id={`1`}
               authorizationStatus={AuthorizationStatusMock.NO_AUTH}
               offer={offerMock}
-              currentCity={currentCityMock}
-              onOfferTitleClick={() => {}}
+              nearOffers={[offerMock]}
+              reviews={reviewsMock}
+              onSubmit={onSubmit}
+              getOfferData={getOfferData}
             />
-          </Router>
-        </Provider>,
+          </Provider>
+        </BrowserRouter>,
         {
           createNodeMock: () => document.createElement(`div`)
         }

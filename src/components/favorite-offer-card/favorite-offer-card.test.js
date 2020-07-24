@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import CityOfferCard from "./city-offer-card.jsx";
+import FavoriteOfferCard from "./favorite-offer-card.jsx";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
 import {BrowserRouter} from "react-router-dom";
@@ -44,9 +44,10 @@ const PageTypeMock = {
   NEAR: `near`,
 };
 
-const classNameMock = `cities__place-card`;
+const classNameMock = `favorites__card`;
+const imageWrapperClassNameMock = `favorites__image-wrapper`;
 
-it(`Should City Offer render correctly`, () => {
+it(`Should Favorite Offer render correctly`, () => {
   const store = mockStore({
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatusMock.NO_AUTH,
@@ -58,9 +59,10 @@ it(`Should City Offer render correctly`, () => {
     .create(
         <BrowserRouter>
           <Provider store={store}>
-            <CityOfferCard
+            <FavoriteOfferCard
               type={PageTypeMock.CITY}
               className={classNameMock}
+              imageWrapperClassName={imageWrapperClassNameMock}
               offer={offerCardMock}
               onOfferHover={() => {}}
             />

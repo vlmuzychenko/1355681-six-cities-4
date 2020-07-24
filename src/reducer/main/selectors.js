@@ -1,14 +1,11 @@
-import {createSelector} from "reselect";
 import NameSpace from "../name-space.js";
 
-export const getOffers = (state) => {
-  return state[NameSpace.MAIN].offers;
-};
+const NAME_SPACE = NameSpace.MAIN;
 
-export const getCurrentOffer = (state) => {
-  return state[NameSpace.MAIN].currentOffer;
+export const getOffers = (state) => {
+  return state[NAME_SPACE].offers;
 };
 
 export const getActiveSortType = (state) => {
-  return state[NameSpace.MAIN].activeSortType;
+  return state[NAME_SPACE].activeSortType;
 };

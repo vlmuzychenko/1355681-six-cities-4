@@ -1,19 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import SaveButton from "../save-button/save-button.jsx";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {getRatingInPercent} from "../../utils/common.js";
 import {OfferTypes} from "../../const.js";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
-import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews.js";
-import {Operation as NearbyOperation} from "../../reducer/nearby/nearby.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
-import {AppRoute} from "../../const.js";
 
 const OfferCard = (props) => {
-  const {authorizationStatus, offer, onOfferTitleClick, onOfferHover, className, imageWrapperClassName} = props;
-  const {title, price, previewImage, type, rating, isPremium, isFavorite} = offer;
+  const {authorizationStatus, offer, onOfferHover, className, imageWrapperClassName} = props;
+  const {id, title, price, previewImage, type, rating, isPremium, isFavorite} = offer;
   const premiumMark = isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ``;
 
   return (
@@ -35,22 +31,11 @@ const OfferCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          {authorizationStatus === AuthorizationStatus.NO_AUTH ?
-            <Link to={AppRoute.LOGIN} className="place-card__bookmark-button button">
-              <svg className="place-card__bookmark-icon" width="18" height="19">
-                <use xlinkHref="#icon-bookmark"></use>
-              </svg>
-            </Link>
-            :
-            <button
-              className={`place-card__bookmark-button button ${isFavorite ? `place-card__bookmark-button--active` : null}`}
-              type="button">
-              <svg className="place-card__bookmark-icon" width="18" height="19">
-                <use xlinkHref="#icon-bookmark"></use>
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button>
-          }
+          <SaveButton
+            authorizationStatus={authorizationStatus}
+            isFavorite={isFavorite}
+            offerId={id}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -59,7 +44,7 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to='/offer' onClick={() => onOfferTitleClick(offer)}>{title}</Link>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{OfferTypes.get(type)}</p>
       </div>
@@ -95,24 +80,13 @@ OfferCard.propTypes = {
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   }).isRequired,
   onOfferHover: PropTypes.func,
-  onOfferTitleClick: PropTypes.func.isRequired,
   className: PropTypes.string,
   imageWrapperClassName: PropTypes.string,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    authorizationStatus: getAuthorizationStatus(state),
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  onOfferTitleClick(offer) {
-    dispatch(MainActionCreator.getOffer(offer));
-    dispatch(ReviewsOperation.getReviews(offer.id));
-    dispatch(NearbyOperation.getNearOffers(offer.id));
-  },
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 export {OfferCard};
-export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);
+export default connect(mapStateToProps, null)(OfferCard);

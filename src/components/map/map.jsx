@@ -8,20 +8,21 @@ class Map extends PureComponent {
     super(props);
 
     this._map = null;
-    this._markers = [];
+    this._markers = leaflet.layerGroup();
     this._mapContainer = React.createRef();
   }
 
   componentDidMount() {
-    const {offers, currentOffer, currentCity} = this.props;
+    const {offers, hoveredOffer, currentOffer, currentCity} = this.props;
     const city = currentCity.coords;
 
     this._createMap(city);
     this._setMapView(city);
     this._setMapLayers();
-    this._renderMarkers(offers);
     if (currentOffer) {
-      this._renderMarker(currentOffer, this._getIcon(MapIconUrl.ACTIVE));
+      this._renderMarkers([currentOffer, ...offers], hoveredOffer, currentOffer);
+    } else {
+      this._renderMarkers(offers);
     }
   }
 
@@ -30,12 +31,16 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    const {offers, currentCity, hoveredOffer} = this.props;
+    const {offers, currentCity, hoveredOffer, currentOffer} = this.props;
     const city = currentCity.coords;
 
     this._removeMarkers();
     this._setMapView(city);
-    this._renderMarkers(offers, hoveredOffer);
+    if (currentOffer) {
+      this._renderMarkers([currentOffer, ...offers], hoveredOffer, currentOffer);
+    } else {
+      this._renderMarkers(offers, hoveredOffer);
+    }
   }
 
   render() {
@@ -65,28 +70,27 @@ class Map extends PureComponent {
       .addTo(this._map);
   }
 
-  _renderMarkers(offers, hoveredOffer, icon = this._getIcon(MapIconUrl.DEFAULT)) {
+  _renderMarkers(offers, hoveredOffer, currentOffer, icon = this._getIcon(MapIconUrl.DEFAULT)) {
     offers.map((offer) => {
-      if (hoveredOffer && offer.id === hoveredOffer.id) {
+      if (currentOffer && offer.id === currentOffer.id) {
+        this._renderMarker(offer, this._getIcon(MapIconUrl.ACTIVE));
+      } else if (hoveredOffer && offer.id === hoveredOffer.id) {
         this._renderMarker(offer, this._getIcon(MapIconUrl.ACTIVE));
       } else {
         this._renderMarker(offer, icon);
       }
+      this._markers.addTo(this._map);
     });
   }
 
   _removeMarkers() {
     if (this._map !== null) {
-      this._markers.forEach((marker) => {
-        this._map.removeLayer(marker);
-      });
+      this._markers.clearLayers();
     }
   }
 
   _renderMarker(offer, icon) {
-    leaflet
-        .marker(offer.coords, {icon})
-        .addTo(this._map);
+    this._markers.addLayer(leaflet.marker(offer.coords, {icon}));
   }
 
   _getIcon(iconUrl) {

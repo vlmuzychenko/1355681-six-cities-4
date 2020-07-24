@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should Offer render correctly 1`] = `
+exports[`Should Favorite Offer render correctly 1`] = `
 <article
-  className="place-card "
+  className="place-card favorites__card favorites__card"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
@@ -14,7 +14,7 @@ exports[`Should Offer render correctly 1`] = `
     </span>
   </div>
   <div
-    className="place-card__image-wrapper "
+    className="place-card__image-wrapper favorites__image-wrapper"
   >
     <a
       href="#"
