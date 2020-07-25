@@ -205,4 +205,3 @@ describe(`Operation work correctly`, () => {
       });
   });
 });
-

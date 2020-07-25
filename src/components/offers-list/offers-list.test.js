@@ -1,7 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import OffersList from "./offers-list.jsx";
+import configureStore from "redux-mock-store";
 import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore();
 
 const offersMock = [
   {
@@ -55,15 +59,18 @@ const offersMock = [
 ];
 
 it(`Should Offer List render correctly`, () => {
+  const store = mockStore({});
   const tree = renderer
     .create(
-        <BrowserRouter>
-          <OffersList
-            offers={offersMock}
-            onOfferTitleClick={() => {}}
-            onOfferHover={() => {}}
-          />
-        </BrowserRouter>
+        <Provider store={store}>
+          <BrowserRouter>
+            <OffersList
+              offers={offersMock}
+              onOfferTitleClick={() => {}}
+              onOfferHover={() => {}}
+            />
+          </BrowserRouter>
+        </Provider>
     )
     .toJSON();
 

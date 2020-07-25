@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import OfferCard from "./offer-card.jsx";
+import {OfferCard} from "./offer-card.jsx";
 import {BrowserRouter} from "react-router-dom";
 
 const offerCardMock = {

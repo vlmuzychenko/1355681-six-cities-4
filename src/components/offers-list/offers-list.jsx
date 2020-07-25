@@ -10,7 +10,7 @@ class OffersList extends PureComponent {
     super(props);
   }
 
-  _getOfferCardByType(offer, type, onOfferTitleClick, onOfferHover) {
+  _getOfferCardByType(offer, type, onOfferHover) {
     switch (type) {
       case PlaceCardTypes.CITY:
         return (
@@ -18,7 +18,6 @@ class OffersList extends PureComponent {
             key={offer.price + offer.title}
             offer={offer}
             onOfferHover={onOfferHover}
-            onOfferTitleClick={onOfferTitleClick}
           />
         );
       case PlaceCardTypes.NEAR:
@@ -26,7 +25,6 @@ class OffersList extends PureComponent {
           <NearOfferCard
             key={offer.price + offer.title}
             offer={offer}
-            onOfferTitleClick={onOfferTitleClick}
           />
         );
       default:
@@ -35,19 +33,18 @@ class OffersList extends PureComponent {
             key={offer.price + offer.title}
             offer={offer}
             onOfferHover={onOfferHover}
-            onOfferTitleClick={onOfferTitleClick}
           />
         );
     }
   }
 
   render() {
-    const {offers, onOfferTitleClick, onOfferHover, type, className} = this.props;
+    const {offers, onOfferHover, type, className} = this.props;
 
     return (
       <div className={`places__list ${className || ``}`}>
         {offers.map((offer) => {
-          return this._getOfferCardByType(offer, type, onOfferTitleClick, onOfferHover);
+          return this._getOfferCardByType(offer, type, onOfferHover);
         })}
       </div>
     );
@@ -81,7 +78,6 @@ OffersList.propTypes = {
         coords: PropTypes.arrayOf(PropTypes.number).isRequired,
       })
   ).isRequired,
-  onOfferTitleClick: PropTypes.func.isRequired,
   onOfferHover: PropTypes.func,
   type: PropTypes.string,
   className: PropTypes.string

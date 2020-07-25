@@ -1,6 +1,5 @@
 import {reducer, ActionCreator, ActionType} from "./main.js";
 
-
 const SortTypeMock = {
   DEFAULT: `popular`,
   PRICE_TO_HIGH: `to-high`,
@@ -151,4 +150,3 @@ describe(`Action creators work correctly`, () => {
     });
   });
 });
-

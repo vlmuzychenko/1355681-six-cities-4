@@ -30,27 +30,27 @@ describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(void 0, {})).toEqual({
       authorizationStatus: AuthorizationStatusMock.NO_AUTH,
-      authorizationInfo: {},
+      authorizationInfo: null,
     });
   });
 
   it(`Reducer should change authorization status by a given value`, () => {
     expect(reducer({
       authorizationStatus: AuthorizationStatusMock.NO_AUTH,
-      authorizationInfo: {},
+      authorizationInfo: null,
     }, {
       type: ActionType.REQUIRED_AUTHORIZATION,
       payload: AuthorizationStatusMock.AUTH,
     })).toEqual({
       authorizationStatus: AuthorizationStatusMock.AUTH,
-      authorizationInfo: {},
+      authorizationInfo: null,
     });
   });
 
   it(`Reducer should change authorization info by a given value`, () => {
     expect(reducer({
       authorizationStatus: AuthorizationStatusMock.NO_AUTH,
-      authorizationInfo: {},
+      authorizationInfo: null,
     }, {
       type: ActionType.GET_AUTHORIZATION_INFO,
       payload: authorizationInfoModel(rawAuthorizationInfo),

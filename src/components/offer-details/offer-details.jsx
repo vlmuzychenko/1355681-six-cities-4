@@ -1,20 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
+import ReviewForm from "../review-form/review-form.jsx";
 import NearOffersList from "../near-offers-list/near-offers-list.jsx";
 import Map from "../map/map.jsx";
-import reviews from "../../models/reviews.js";
-import nearOffers from "../../models/near-offers.js";
-import {getRatingInPercent, getPluralizedString, getItemsById} from "../../utils/common.js";
+import withHandleForm from "../../hocs/with-handle-form/with-handle-form.js";
+import {getRatingInPercent, getPluralizedString} from "../../utils/common.js";
+import {connect} from "react-redux";
+import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {getCurrentCity} from "../../reducer/data/selectors.js";
+import {getCurrentOffer} from "../../reducer/main/selectors.js";
+import {getCurrentReviews} from "../../reducer/reviews/selectors.js";
+import {getNearOffers} from "../../reducer/nearby/selectors.js";
 import {OfferTypes} from "../../const.js";
 
+const ReviewFormWithHandler = withHandleForm(ReviewForm);
 
 const OfferDetails = (props) => {
-  const {authorizationStatus, offer, currentCity, onOfferTitleClick} = props;
-  const {id, title, price, images, description, rating, isPremium, type, bedrooms, maxAdults, goods, host} = offer;
-  const filtredReviews = getItemsById(reviews, id);
-  const filtredNearOffers = getItemsById(nearOffers, id);
+  const {authorizationStatus, currentOffer, currentCity, currentReviews, nearOffers, onSubmit} = props;
+  const {id, title, price, images, description, rating, isPremium, type, bedrooms, maxAdults, goods, host} = currentOffer;
   const premiumMark = isPremium ? <div className="property__mark"><span>Premium</span></div> : ``;
 
   return (
@@ -24,28 +29,7 @@ const OfferDetails = (props) => {
       </div>
 
       <div className="page">
-        <header className="header">
-          <div className="container">
-            <div className="header__wrapper">
-              <div className="header__left">
-                <a className="header__logo-link header__logo-link--active">
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-                </a>
-              </div>
-              <nav className="header__nav">
-                <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </header>
+        {props.children}
 
         <main className="page__main page__main--property">
           <section className="property">
@@ -125,65 +109,23 @@ const OfferDetails = (props) => {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <h2 className="reviews__title">{getPluralizedString(reviews.length, `Review`)} &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                  <h2 className="reviews__title">{getPluralizedString(currentReviews.length, `Review`)} &middot; <span className="reviews__amount">{currentReviews.length}</span></h2>
                   <ReviewsList
-                    reviews={filtredReviews}
+                    reviews={currentReviews}
                   />
                   {authorizationStatus === AuthorizationStatus.AUTH ?
-                    <form className="reviews__form form" action="#" method="post">
-                      <label className="reviews__label form__label" htmlFor="review">Your review</label>
-                      <div className="reviews__rating-form form__rating">
-                        <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
-                        <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-                          <svg className="form__star-image" width="37" height="33">
-                            <use xlinkHref="#icon-star"></use>
-                          </svg>
-                        </label>
-
-                        <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" />
-                        <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-                          <svg className="form__star-image" width="37" height="33">
-                            <use xlinkHref="#icon-star"></use>
-                          </svg>
-                        </label>
-
-                        <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
-                        <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-                          <svg className="form__star-image" width="37" height="33">
-                            <use xlinkHref="#icon-star"></use>
-                          </svg>
-                        </label>
-
-                        <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
-                        <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-                          <svg className="form__star-image" width="37" height="33">
-                            <use xlinkHref="#icon-star"></use>
-                          </svg>
-                        </label>
-
-                        <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
-                        <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-                          <svg className="form__star-image" width="37" height="33">
-                            <use xlinkHref="#icon-star"></use>
-                          </svg>
-                        </label>
-                      </div>
-                      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
-                      <div className="reviews__button-wrapper">
-                        <p className="reviews__help">
-                          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
-                        </p>
-                        <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
-                      </div>
-                    </form> : ``}
+                    <ReviewFormWithHandler
+                      offerId={id}
+                      onSubmit={onSubmit} />
+                    : ``}
                 </section>
               </div>
             </div>
             <section className="property__map map">
               <Map
-                currentOffer={offer}
+                currentOffer={currentOffer}
                 currentCity={currentCity}
-                offers={filtredNearOffers}
+                offers={nearOffers}
               />
             </section>
           </section>
@@ -191,8 +133,7 @@ const OfferDetails = (props) => {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <NearOffersList
-                offers={filtredNearOffers}
-                onOfferTitleClick={onOfferTitleClick}
+                offers={nearOffers}
               />
             </section>
           </div>
@@ -203,8 +144,9 @@ const OfferDetails = (props) => {
 };
 
 OfferDetails.propTypes = {
+  children: PropTypes.element,
   authorizationStatus: PropTypes.string.isRequired,
-  offer: PropTypes.shape({
+  currentOffer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -228,12 +170,53 @@ OfferDetails.propTypes = {
     }).isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
+  nearOffers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+    host: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      super: PropTypes.bool.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    }).isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }).isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+  })),
   currentCity: PropTypes.shape({
     name: PropTypes.string,
     coords: PropTypes.arrayOf(PropTypes.number),
     zoom: PropTypes.number,
   }).isRequired,
-  onOfferTitleClick: PropTypes.func.isRequired,
+  currentReviews: PropTypes.any,
+  onSubmit: PropTypes.func,
 };
 
-export default OfferDetails;
+const mapStateToProps = (state) => {
+  return {
+    currentOffer: getCurrentOffer(state),
+    currentReviews: getCurrentReviews(state),
+    currentCity: getCurrentCity(state),
+    nearOffers: getNearOffers(state),
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(offerId, reviewInfo, resetForm) {
+    dispatch(ReviewsOperation.sendReview(offerId, reviewInfo, resetForm));
+  }
+});
+
+export {OfferDetails};
+export default connect(mapStateToProps, mapDispatchToProps)(OfferDetails);

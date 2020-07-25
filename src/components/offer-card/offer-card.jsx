@@ -1,8 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {getRatingInPercent} from "../../utils/common.js";
 import {OfferTypes} from "../../const.js";
+import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
+import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews.js";
+import {Operation as NearbyOperation} from "../../reducer/nearby/nearby.js";
 
 const OfferCard = (props) => {
   const {offer, onOfferTitleClick, onOfferHover, className, imageWrapperClassName} = props;
@@ -81,4 +85,13 @@ OfferCard.propTypes = {
   imageWrapperClassName: PropTypes.string,
 };
 
-export default OfferCard;
+const mapDispatchToProps = (dispatch) => ({
+  onOfferTitleClick(offer) {
+    dispatch(MainActionCreator.getOffer(offer));
+    dispatch(ReviewsOperation.getReviews(offer.id));
+    dispatch(NearbyOperation.getNearOffers(offer.id));
+  },
+});
+
+export {OfferCard};
+export default connect(null, mapDispatchToProps)(OfferCard);
