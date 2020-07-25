@@ -1,17 +1,18 @@
 import React from "react";
 import Main from "../main/main.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
-import OfferDetails from "../offer-details/offer-details.jsx";
+// import OfferDetails from "../offer-details/offer-details.jsx";
 import Header from "../header/header.jsx";
 import PropTypes from "prop-types";
 import withHoveredOffer from "../../hocs/with-hovered-offer/with-hovered-offer.js";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Switch, Route, Router} from "react-router-dom";
 import {connect} from "react-redux";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
 import {getCurrentOffers, getCurrentCity} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus, getAuthorizationInfo} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import history from "../../history.js";
+import {AppRoute} from "../../const.js";
 
 const MainWithHoveredOffer = withHoveredOffer(Main);
 
@@ -25,57 +26,92 @@ const App = (props) => {
     onCityNameClick,
   } = props;
 
-  const _renderMainScreen = () => {
-    if (authorizationStatus === AuthorizationStatus.AUTH) {
-      return (
-        <MainWithHoveredOffer
-          authorizationStatus={authorizationStatus}
-          currentOffers={currentOffers}
-          currentCity={currentCity}
-          onCityNameClick={onCityNameClick}
-        >
-          <Header
-            authorizationStatus={authorizationStatus}
-            authorizationInfo={authorizationInfo} />
-        </MainWithHoveredOffer>
-      );
-    } else if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
-      return (
-        <SignIn
-          onSubmit={login}
-        >
-          <Header
-            authorizationStatus={authorizationStatus}
-            authorizationInfo={authorizationInfo} />
-        </SignIn>
-      );
-    }
+  // const _renderMainScreen = () => {
+  //   if (authorizationStatus === AuthorizationStatus.AUTH) {
+  //     return (
+  //       <MainWithHoveredOffer
+  //         authorizationStatus={authorizationStatus}
+  //         currentOffers={currentOffers}
+  //         currentCity={currentCity}
+  //         onCityNameClick={onCityNameClick}
+  //       >
+  //         <Header
+  //           authorizationStatus={authorizationStatus}
+  //           authorizationInfo={authorizationInfo} />
+  //       </MainWithHoveredOffer>
+  //     );
+  //   } else if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+  //     return (
+  //       <SignIn
+  //         onSubmit={login}
+  //       >
+  //         <Header
+  //           authorizationStatus={authorizationStatus}
+  //           authorizationInfo={authorizationInfo} />
+  //       </SignIn>
+  //     );
+  //   }
 
-    return null;
-  };
+  //   return null;
+  // };
 
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>
-        <Route exact path="/">
-          {_renderMainScreen()}
-        </Route>
-        <Route exact path="/offer">
-          <OfferDetails
-            authorizationStatus={authorizationStatus}
-          >
-            <Header
-              authorizationStatus={authorizationStatus}
-              authorizationInfo={authorizationInfo} />
-          </OfferDetails>
-        </Route>
-        <Route exact path="/dev-login">
-          <SignIn
-            onSubmit={login}
-          />
-        </Route>
+        <Route
+          path={AppRoute.ROOT}
+          exact
+          render={() => {
+            return (
+              <MainWithHoveredOffer
+                authorizationStatus={authorizationStatus}
+                currentOffers={currentOffers}
+                currentCity={currentCity}
+                onCityNameClick={onCityNameClick}
+              >
+                <Header
+                  authorizationStatus={authorizationStatus}
+                  authorizationInfo={authorizationInfo} />
+              </MainWithHoveredOffer>
+            );
+          }}
+        />
+        {/* <Route
+          path="/offer"
+          exact
+          render={() => {
+            return (
+              <OfferDetails
+                authorizationStatus={authorizationStatus}
+              >
+                <Header
+                  authorizationStatus={authorizationStatus}
+                  authorizationInfo={authorizationInfo} />
+              </OfferDetails>
+            );
+          }}
+        /> */}
+        <Route
+          path={AppRoute.LOGIN}
+          exact
+          render={() => {
+            return (
+              <SignIn
+                onSubmit={login}
+              >
+                <Header
+                  authorizationStatus={authorizationStatus}
+                  authorizationInfo={authorizationInfo} />
+              </SignIn>
+            );
+          }}
+        />
+        <Route
+          path={AppRoute.FAVORITES}
+          exact
+        />
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 };
 

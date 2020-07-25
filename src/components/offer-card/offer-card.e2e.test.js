@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme, {shallow, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {OfferCard} from "./offer-card";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 
 const offerCardMock = {
   id: 1,
@@ -72,13 +72,13 @@ it(`Shoud offer title be pressed`, () => {
   const onOfferTitleClick = jest.fn();
 
   const offerCard = mount(
-      <BrowserRouter>
+      <Router>
         <OfferCard
           offer={offerCardMock}
           onOfferHover={onOfferHover}
           onOfferTitleClick={onOfferTitleClick}
         />
-      </BrowserRouter>
+      </Router>
   );
 
   const link = offerCard.find(`.place-card__name a`);

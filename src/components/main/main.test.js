@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {Main} from "./main.jsx";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 
 const mockStore = configureStore();
 
@@ -103,7 +103,7 @@ describe(`Main render correctly`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <BrowserRouter>
+            <Router>
               <Main
                 authorizationStatus={AuthorizationStatusMock.NO_AUTH}
                 currentOffers={offersMock.slice(0, 2)}
@@ -117,7 +117,7 @@ describe(`Main render correctly`, () => {
                 activeSortType={SortTypeMock.DEFAULT}
                 onOfferHover={() => {}}
               />
-            </BrowserRouter>
+            </Router>
           </Provider>,
           {
             createNodeMock: () => document.createElement(`div`)
@@ -140,7 +140,7 @@ describe(`Main render correctly`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <BrowserRouter>
+            <Router>
               <Main
                 authorizationStatus={AuthorizationStatusMock.NO_AUTH}
                 currentOffers={offersMock.slice(0, 1)}
@@ -154,7 +154,7 @@ describe(`Main render correctly`, () => {
                 onOfferHover={() => {}}
                 hoveredOffer={offersMock[2]}
               />
-            </BrowserRouter>
+            </Router>
           </Provider>,
           {
             createNodeMock: () => document.createElement(`div`)

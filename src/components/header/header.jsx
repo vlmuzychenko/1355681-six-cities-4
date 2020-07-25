@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {AppRoute} from "../../const.js";
 
 const Header = (props) => {
   const {authorizationStatus, authorizationInfo} = props;
-
-  const userData = authorizationStatus === AuthorizationStatus.AUTH && authorizationInfo ? <span className="header__user-name user__name">{authorizationInfo.email}</span> : <span className="header__login">Sign in</span>;
-  const userAvatar = authorizationStatus === AuthorizationStatus.AUTH && authorizationInfo ? <img src={`https://htmlacademy-react-3.appspot.com/six-cities${authorizationInfo.avatarUrl}`} alt="User avatar"/> : null;
 
   return (
     <header className="header">
@@ -20,12 +19,19 @@ const Header = (props) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                    {userAvatar}
-                  </div>
-                  {userData}
-                </a>
+                {authorizationStatus === AuthorizationStatus.AUTH && authorizationInfo ?
+                  <Link to={AppRoute.FAVORITES} className="header__nav-link header__nav-link--profile" href="#">
+                    <div className="header__avatar-wrapper user__avatar-wrapper">
+                      <img src={`https://htmlacademy-react-3.appspot.com/six-cities${authorizationInfo.avatarUrl}`} alt="User avatar"/>
+                    </div>
+                    <span className="header__user-name user__name">{authorizationInfo.email}</span>
+                  </Link>
+                  :
+                  <Link to={AppRoute.LOGIN} className="header__nav-link header__nav-link--profile" href="#">
+                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                    <span className="header__login">Sign in</span>
+                  </Link>
+                }
               </li>
             </ul>
           </nav>

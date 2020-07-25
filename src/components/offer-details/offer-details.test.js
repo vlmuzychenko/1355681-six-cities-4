@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import OfferDetails from "./offer-details.jsx";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 import {Provider} from "react-redux";
 
 const mockStore = configureStore();
@@ -76,14 +76,14 @@ it(`Should Offer Details render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <BrowserRouter>
+          <Router>
             <OfferDetails
               authorizationStatus={AuthorizationStatusMock.NO_AUTH}
               offer={offerMock}
               currentCity={currentCityMock}
               onOfferTitleClick={() => {}}
             />
-          </BrowserRouter>
+          </Router>
         </Provider>,
         {
           createNodeMock: () => document.createElement(`div`)
