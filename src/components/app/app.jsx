@@ -1,11 +1,13 @@
-import React from "react";
+import React, {Fragment} from "react";
 import Main from "../main/main.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
-// import OfferDetails from "../offer-details/offer-details.jsx";
+import OfferDetails from "../offer-details/offer-details.jsx";
 import Header from "../header/header.jsx";
 import PropTypes from "prop-types";
 import withHoveredOffer from "../../hocs/with-hovered-offer/with-hovered-offer.js";
-import {Switch, Route, Router} from "react-router-dom";
+import PrivateRoute from "../private-route/private-route.jsx";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {Switch, Route, Router, Redirect, Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
 import {getCurrentOffers, getCurrentCity} from "../../reducer/data/selectors.js";
@@ -13,6 +15,7 @@ import {getAuthorizationStatus, getAuthorizationInfo} from "../../reducer/user/s
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import history from "../../history.js";
 import {AppRoute} from "../../const.js";
+import Favorites from "../favorites/favorites.jsx";
 
 const MainWithHoveredOffer = withHoveredOffer(Main);
 
@@ -25,35 +28,6 @@ const App = (props) => {
     currentCity,
     onCityNameClick,
   } = props;
-
-  // const _renderMainScreen = () => {
-  //   if (authorizationStatus === AuthorizationStatus.AUTH) {
-  //     return (
-  //       <MainWithHoveredOffer
-  //         authorizationStatus={authorizationStatus}
-  //         currentOffers={currentOffers}
-  //         currentCity={currentCity}
-  //         onCityNameClick={onCityNameClick}
-  //       >
-  //         <Header
-  //           authorizationStatus={authorizationStatus}
-  //           authorizationInfo={authorizationInfo} />
-  //       </MainWithHoveredOffer>
-  //     );
-  //   } else if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
-  //     return (
-  //       <SignIn
-  //         onSubmit={login}
-  //       >
-  //         <Header
-  //           authorizationStatus={authorizationStatus}
-  //           authorizationInfo={authorizationInfo} />
-  //       </SignIn>
-  //     );
-  //   }
-
-  //   return null;
-  // };
 
   return (
     <Router history={history}>
@@ -76,13 +50,14 @@ const App = (props) => {
             );
           }}
         />
-        {/* <Route
-          path="/offer"
+        <Route
+          path={AppRoute.OFFER}
           exact
-          render={() => {
+          render={({match}) => {
             return (
               <OfferDetails
                 authorizationStatus={authorizationStatus}
+                id={match.params.id}
               >
                 <Header
                   authorizationStatus={authorizationStatus}
@@ -90,25 +65,46 @@ const App = (props) => {
               </OfferDetails>
             );
           }}
-        /> */}
+        />
         <Route
           path={AppRoute.LOGIN}
           exact
           render={() => {
             return (
-              <SignIn
-                onSubmit={login}
-              >
+              authorizationStatus === AuthorizationStatus.AUTH
+                ? <Redirect to={AppRoute.ROOT} />
+                : <SignIn onSubmit={login}>
+                  <Header
+                    authorizationStatus={authorizationStatus}
+                    authorizationInfo={authorizationInfo} />
+                </SignIn>
+            );
+          }}
+        />
+        <PrivateRoute
+          path={AppRoute.FAVORITES}
+          exact
+          render={() => {
+            return (
+              <Favorites>
                 <Header
                   authorizationStatus={authorizationStatus}
                   authorizationInfo={authorizationInfo} />
-              </SignIn>
+              </Favorites>
             );
           }}
         />
         <Route
-          path={AppRoute.FAVORITES}
-          exact
+          render={() => (
+            <Fragment>
+              <h1>
+                404.
+                <br />
+                <small>Page not found</small>
+              </h1>
+              <Link to={AppRoute.ROOT}>Go to main page</Link>
+            </Fragment>
+          )}
         />
       </Switch>
     </Router>
@@ -159,18 +155,16 @@ App.propTypes = {
   onCityNameClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    authorizationStatus: getAuthorizationStatus(state),
-    authorizationInfo: getAuthorizationInfo(state),
-    currentOffers: getCurrentOffers(state),
-    currentCity: getCurrentCity(state),
-  };
-};
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  authorizationInfo: getAuthorizationInfo(state),
+  currentOffers: getCurrentOffers(state),
+  currentCity: getCurrentCity(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   login(authData) {
-    dispatch(UserOperation.login(authData));
+    dispatch(UserOperation.login(authData, history));
   },
   onCityNameClick(city) {
     dispatch(DataActionCreator.changeCity(city));

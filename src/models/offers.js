@@ -1,4 +1,4 @@
-const offerModel = (offer) => {
+export const offerModel = (offer) => {
   const {
     bedrooms,
     city,

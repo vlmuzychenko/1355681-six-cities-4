@@ -1,7 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import configureStore from "redux-mock-store";
 import {OfferCard} from "./offer-card.jsx";
-import {Router} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore([]);
 
 const offerCardMock = {
   id: 1,
@@ -15,6 +19,7 @@ const offerCardMock = {
   type: `apartment`,
   bedrooms: 4,
   maxAdults: 4,
+  isFavorite: false,
   goods: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitche`, `Dishwasher`, `Cabel TV`, `Fridge`],
   host: {
     name: `Angelina`,
@@ -28,37 +33,25 @@ const offerCardMock = {
   coords: [52.3909553943508, 4.85309666406198],
 };
 
-const classNameMock = `cities__place-card `;
-const imageWrapperClassNameMock = `cities__image-wrapper`;
+const AuthorizationStatusMock = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
 
 it(`Should Offer render correctly`, () => {
+  const store = mockStore({});
+
   const tree = renderer
     .create(
-        <Router>
-          <OfferCard
-            offer={offerCardMock}
-            onOfferHover={() => {}}
-            onOfferTitleClick={() => {}}
-          />
-        </Router>
-    )
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it(`Should Offer with class names render correctly`, () => {
-  const tree = renderer
-    .create(
-        <Router>
-          <OfferCard
-            className={classNameMock}
-            imageWrapperClassName={imageWrapperClassNameMock}
-            offer={offerCardMock}
-            onOfferHover={() => {}}
-            onOfferTitleClick={() => {}}
-          />
-        </Router>
+        <BrowserRouter>
+          <Provider store={store}>
+            <OfferCard
+              authorizationStatus={AuthorizationStatusMock.NO_AUTH}
+              offer={offerCardMock}
+              onOfferHover={() => {}}
+            />
+          </Provider>
+        </BrowserRouter>
     )
     .toJSON();
 

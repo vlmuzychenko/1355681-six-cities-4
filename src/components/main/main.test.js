@@ -1,11 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
 import {Provider} from "react-redux";
 import {Main} from "./main.jsx";
-import {Router} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 
-const mockStore = configureStore();
+const mockStore = configureStore([]);
 
 const offersMock = [
   {
@@ -20,6 +21,7 @@ const offersMock = [
     type: `apartment`,
     bedrooms: 4,
     maxAdults: 4,
+    isFavorite: false,
     goods: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitche`, `Dishwasher`, `Cabel TV`, `Fridge`],
     host: {
       name: `Angelina`,
@@ -44,6 +46,7 @@ const offersMock = [
     type: `hotel`,
     bedrooms: 4,
     maxAdults: 4,
+    isFavorite: false,
     goods: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitche`, `Dishwasher`, `Cabel TV`, `Fridge`],
     host: {
       name: `Angelina`,
@@ -93,32 +96,36 @@ const AuthorizationStatusMock = {
 describe(`Main render correctly`, () => {
   it(`Should default Main render correctly`, () => {
     const store = mockStore({
-      currentCity: offersMock[0].city,
-      cities: citiesMock,
-      currentOffers: offersMock.slice(0, 2),
-      currentOffer: null,
-      offers: offersMock,
-      activeSortType: SortTypeMock.DEFAULT
+      [NameSpace.DATA]: {
+        currentCity: offersMock[0].city,
+        offers: offersMock,
+        currentOffer: null,
+      },
+      [NameSpace.MAIN]: {
+        activeSortType: SortTypeMock.DEFAULT,
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatusMock.NO_AUTH,
+        authorizationInfo: null,
+      },
     });
     const tree = renderer
       .create(
-          <Provider store={store}>
-            <Router>
+          <BrowserRouter>
+            <Provider store={store}>
               <Main
                 authorizationStatus={AuthorizationStatusMock.NO_AUTH}
                 currentOffers={offersMock.slice(0, 2)}
                 currentCity={currentCityMock}
                 cities={citiesMock}
-                offers={offersMock}
-                onHeadingClick={() => {}}
-                onOfferTitleClick={() => {}}
                 onCityNameClick={() => {}}
                 onSortTypeClick={() => {}}
                 activeSortType={SortTypeMock.DEFAULT}
                 onOfferHover={() => {}}
+                hoveredOffer={null}
               />
-            </Router>
-          </Provider>,
+            </Provider>
+          </BrowserRouter>,
           {
             createNodeMock: () => document.createElement(`div`)
           }
@@ -130,32 +137,36 @@ describe(`Main render correctly`, () => {
 
   it(`Should Main with hovered offer render correctly`, () => {
     const store = mockStore({
-      currentCity: offersMock[0].city,
-      cities: citiesMock,
-      currentOffers: offersMock.slice(0, 2),
-      currentOffer: null,
-      offers: offersMock,
-      activeSortType: SortTypeMock.DEFAULT
+      [NameSpace.DATA]: {
+        currentCity: offersMock[0].city,
+        offers: offersMock,
+        currentOffer: null,
+      },
+      [NameSpace.MAIN]: {
+        activeSortType: SortTypeMock.DEFAULT,
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatusMock.NO_AUTH,
+        authorizationInfo: null,
+      },
     });
     const tree = renderer
       .create(
-          <Provider store={store}>
-            <Router>
+          <BrowserRouter>
+            <Provider store={store}>
               <Main
                 authorizationStatus={AuthorizationStatusMock.NO_AUTH}
                 currentOffers={offersMock.slice(0, 1)}
                 currentCity={currentCityMock}
                 cities={citiesMock}
-                onHeadingClick={() => {}}
-                onOfferTitleClick={() => {}}
                 onCityNameClick={() => {}}
                 onSortTypeClick={() => {}}
                 activeSortType={SortTypeMock.DEFAULT}
                 onOfferHover={() => {}}
                 hoveredOffer={offersMock[2]}
               />
-            </Router>
-          </Provider>,
+            </Provider>
+          </BrowserRouter>,
           {
             createNodeMock: () => document.createElement(`div`)
           }

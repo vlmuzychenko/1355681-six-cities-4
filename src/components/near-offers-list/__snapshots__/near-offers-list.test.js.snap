@@ -52,8 +52,10 @@ exports[`Should Near Offer List render correctly 1`] = `
             / night
           </span>
         </div>
-        <button
-          className="place-card__bookmark-button button"
+        <a
+          className="place-card__bookmark-button  button"
+          href="/login"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -68,9 +70,10 @@ exports[`Should Near Offer List render correctly 1`] = `
           <span
             className="visually-hidden"
           >
-            To bookmarks
+            To
+             bookmarks
           </span>
-        </button>
+        </a>
       </div>
       <div
         className="place-card__rating rating"
@@ -96,7 +99,7 @@ exports[`Should Near Offer List render correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="/offer"
+          href="/offer/1"
           onClick={[Function]}
         >
           Beautiful & luxurious apartment at great location
@@ -151,8 +154,10 @@ exports[`Should Near Offer List render correctly 1`] = `
             / night
           </span>
         </div>
-        <button
-          className="place-card__bookmark-button button"
+        <a
+          className="place-card__bookmark-button  button"
+          href="/login"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -167,9 +172,10 @@ exports[`Should Near Offer List render correctly 1`] = `
           <span
             className="visually-hidden"
           >
-            To bookmarks
+            To
+             bookmarks
           </span>
-        </button>
+        </a>
       </div>
       <div
         className="place-card__rating rating"
@@ -195,7 +201,7 @@ exports[`Should Near Offer List render correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="/offer"
+          href="/offer/2"
           onClick={[Function]}
         >
           Wood and stone place

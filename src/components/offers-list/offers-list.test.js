@@ -2,10 +2,11 @@ import React from "react";
 import renderer from "react-test-renderer";
 import OffersList from "./offers-list.jsx";
 import configureStore from "redux-mock-store";
-import {Router} from "react-router-dom";
+import NameSpace from "../../reducer/name-space.js";
+import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
-const mockStore = configureStore();
+const mockStore = configureStore([]);
 
 const offersMock = [
   {
@@ -20,6 +21,7 @@ const offersMock = [
     type: `apartment`,
     bedrooms: 4,
     maxAdults: 4,
+    isFavorite: false,
     goods: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitche`, `Dishwasher`, `Cabel TV`, `Fridge`],
     host: {
       name: `Angelina`,
@@ -44,6 +46,7 @@ const offersMock = [
     type: `hotel`,
     bedrooms: 4,
     maxAdults: 4,
+    isFavorite: false,
     goods: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitche`, `Dishwasher`, `Cabel TV`, `Fridge`],
     host: {
       name: `Angelina`,
@@ -58,19 +61,28 @@ const offersMock = [
   }
 ];
 
+const AuthorizationStatusMock = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
 it(`Should Offer List render correctly`, () => {
-  const store = mockStore({});
+  const store = mockStore({
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatusMock.NO_AUTH,
+      authorizationInfo: null,
+    }
+  });
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <Router>
+        <BrowserRouter>
+          <Provider store={store}>
             <OffersList
               offers={offersMock}
-              onOfferTitleClick={() => {}}
               onOfferHover={() => {}}
             />
-          </Router>
-        </Provider>
+          </Provider>
+        </BrowserRouter>
     )
     .toJSON();
 

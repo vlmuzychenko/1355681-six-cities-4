@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import CityOffersList from "./city-offers-list.jsx";
+import FavoritesOffersList from "./favorites-offers-list.jsx";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
 import {BrowserRouter} from "react-router-dom";
@@ -71,9 +71,9 @@ const PageTypeMock = {
   NEAR: `near`,
 };
 
-const classNameMock = `cities__places-list tabs__content`;
+const classNameMock = `favorites__list`;
 
-it(`Should City Offer List render correctly`, () => {
+it(`Should Favorite Offer List render correctly`, () => {
   const store = mockStore({
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatusMock.NO_AUTH,
@@ -81,17 +81,14 @@ it(`Should City Offer List render correctly`, () => {
     }
   });
 
-  const onOfferHover = jest.fn();
-
   const tree = renderer
     .create(
         <BrowserRouter>
           <Provider store={store}>
-            <CityOffersList
+            <FavoritesOffersList
               className={classNameMock}
               offers={offersMock}
-              onOfferHover={onOfferHover}
-              type={PageTypeMock.CITY}
+              type={PageTypeMock.NEAR}
             />
           </Provider>
         </BrowserRouter>

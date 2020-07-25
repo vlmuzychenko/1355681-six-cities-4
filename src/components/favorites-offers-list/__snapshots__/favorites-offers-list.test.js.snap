@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should City Offer List render correctly 1`] = `
+exports[`Should Favorite Offer List render correctly 1`] = `
 <div
-  className="places__list cities__places-list tabs__content cities__places-list tabs__content"
+  className="places__list favorites__list favorites__list"
 >
   <article
-    className="place-card cities__place-card "
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    className="place-card near-places__card "
+    onMouseEnter={null}
+    onMouseLeave={null}
   >
     <div
       className="place-card__mark"
@@ -17,7 +17,7 @@ exports[`Should City Offer List render correctly 1`] = `
       </span>
     </div>
     <div
-      className="place-card__image-wrapper cities__image-wrapper"
+      className="place-card__image-wrapper near-places__image-wrapper"
     >
       <a
         href="#"
@@ -113,13 +113,13 @@ exports[`Should City Offer List render correctly 1`] = `
     </div>
   </article>
   <article
-    className="place-card cities__place-card "
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    className="place-card near-places__card "
+    onMouseEnter={null}
+    onMouseLeave={null}
   >
     
     <div
-      className="place-card__image-wrapper cities__image-wrapper"
+      className="place-card__image-wrapper near-places__image-wrapper"
     >
       <a
         href="#"

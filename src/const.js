@@ -8,6 +8,7 @@ export const OfferTypes = new Map([
 export const PlaceCardTypes = {
   CITY: `city`,
   NEAR: `near`,
+  FAVORITE: `favorites`,
 };
 
 export const SortType = {
@@ -68,8 +69,8 @@ export const RATINGS = [
 ];
 
 export const MapIconUrl = {
-  DEFAULT: `img/pin.svg`,
-  ACTIVE: `img/pin-active.svg`,
+  DEFAULT: `/img/pin.svg`,
+  ACTIVE: `/img/pin-active.svg`,
 };
 
 export const MAX_CITIES_IN_LIST = 6;
@@ -77,5 +78,6 @@ export const MAX_CITIES_IN_LIST = 6;
 export const AppRoute = {
   LOGIN: `/login`,
   ROOT: `/`,
+  OFFER: `/offer/:id`,
   FAVORITES: `/favorites`,
 };

@@ -1,4 +1,5 @@
 import {authorizationInfoModel} from "../../models/authorization-info.js";
+import {AppRoute} from "../../const.js";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -42,7 +43,7 @@ const Operation = {
       });
   },
 
-  login: (authData) => (dispatch, getState, api) => {
+  login: (authData, history) => (dispatch, getState, api) => {
     return api.post(`/login`, {
       email: authData.login,
       password: authData.password,
@@ -50,6 +51,7 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.getAuthorizationInfo(authorizationInfoModel(response.data)));
+        history.push(AppRoute.ROOT);
       })
       .catch((err) => {
         throw err;

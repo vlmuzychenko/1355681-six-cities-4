@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Header from "./header.jsx";
+import {Router} from "react-router-dom";
+import {createMemoryHistory} from "history";
+
+const history = createMemoryHistory(`/`);
 
 const authorizationStatusMock = `AUTH`;
 
@@ -15,10 +19,12 @@ const authorizationInfoMock = {
 it(`Should Header render correctly`, () => {
   const tree = renderer
     .create(
-        <Header
-          authorizationStatus={authorizationStatusMock}
-          authorizationInfo={authorizationInfoMock}
-        />
+        <Router history={history}>
+          <Header
+            authorizationStatus={authorizationStatusMock}
+            authorizationInfo={authorizationInfoMock}
+          />
+        </Router>
     )
     .toJSON();
 

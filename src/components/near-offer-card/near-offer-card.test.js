@@ -2,10 +2,11 @@ import React from "react";
 import renderer from "react-test-renderer";
 import NearOfferCard from "./near-offer-card.jsx";
 import configureStore from "redux-mock-store";
-import {Router} from "react-router-dom";
+import NameSpace from "../../reducer/name-space.js";
+import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
-const mockStore = configureStore();
+const mockStore = configureStore([]);
 
 const offerCardMock = {
   id: 1,
@@ -19,6 +20,7 @@ const offerCardMock = {
   type: `apartment`,
   bedrooms: 4,
   maxAdults: 4,
+  isFavorite: false,
   goods: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitche`, `Dishwasher`, `Cabel TV`, `Fridge`],
   host: {
     name: `Angelina`,
@@ -32,25 +34,37 @@ const offerCardMock = {
   coords: [52.3909553943508, 4.85309666406198],
 };
 
-const typeMock = `near`;
+const AuthorizationStatusMock = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
+const PageTypeMock = {
+  CITY: `city`,
+  NEAR: `near`,
+};
 
 const classNameMock = `near-places__list`;
 
 it(`Should Near Offer render correctly`, () => {
-  const store = mockStore({});
+  const store = mockStore({
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatusMock.NO_AUTH,
+      authorizationInfo: null,
+    }
+  });
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <Router>
+        <BrowserRouter>
+          <Provider store={store}>
             <NearOfferCard
-              type={typeMock}
+              type={PageTypeMock.NEAR}
               className={classNameMock}
               offer={offerCardMock}
               onOfferHover={() => {}}
-              onOfferTitleClick={() => {}}
             />
-          </Router>
-        </Provider>
+          </Provider>
+        </BrowserRouter>
     )
     .toJSON();
 
