@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import CityOfferCard from "../city-offer-card/city-offer-card.jsx";
 import NearOfferCard from "../near-offer-card/near-offer-card.jsx";
@@ -6,58 +6,52 @@ import FavoriteOfferCard from "../favorite-offer-card/favorite-offer-card.jsx";
 import OfferCard from "../offer-card/offer-card.jsx";
 import {PlaceCardTypes} from "../../const.js";
 
-class OffersList extends PureComponent {
-  constructor(props) {
-    super(props);
+const _getOfferCardByType = (offer, type, onOfferHover) => {
+  switch (type) {
+    case PlaceCardTypes.CITY:
+      return (
+        <CityOfferCard
+          key={offer.price + offer.title}
+          offer={offer}
+          onOfferHover={onOfferHover}
+        />
+      );
+    case PlaceCardTypes.NEAR:
+      return (
+        <NearOfferCard
+          key={offer.price + offer.title}
+          offer={offer}
+        />
+      );
+    case PlaceCardTypes.FAVORITE:
+      return (
+        <FavoriteOfferCard
+          key={offer.price + offer.title}
+          offer={offer}
+        />
+      );
+    default:
+      return (
+        <OfferCard
+          key={offer.price + offer.title}
+          offer={offer}
+          onOfferHover={onOfferHover}
+        />
+      );
   }
+};
 
-  _getOfferCardByType(offer, type, onOfferHover) {
-    switch (type) {
-      case PlaceCardTypes.CITY:
-        return (
-          <CityOfferCard
-            key={offer.price + offer.title}
-            offer={offer}
-            onOfferHover={onOfferHover}
-          />
-        );
-      case PlaceCardTypes.NEAR:
-        return (
-          <NearOfferCard
-            key={offer.price + offer.title}
-            offer={offer}
-          />
-        );
-      case PlaceCardTypes.FAVORITE:
-        return (
-          <FavoriteOfferCard
-            key={offer.price + offer.title}
-            offer={offer}
-          />
-        );
-      default:
-        return (
-          <OfferCard
-            key={offer.price + offer.title}
-            offer={offer}
-            onOfferHover={onOfferHover}
-          />
-        );
-    }
-  }
+const OffersList = (props) => {
+  const {offers, onOfferHover, type, className} = props;
 
-  render() {
-    const {offers, onOfferHover, type, className} = this.props;
-
-    return (
-      <div className={`places__list ${className || ``}`}>
-        {offers.map((offer) => {
-          return this._getOfferCardByType(offer, type, onOfferHover);
-        })}
-      </div>
-    );
-  }
-}
+  return (
+    <div className={`places__list ${className || ``}`}>
+      {offers.map((offer) => {
+        return _getOfferCardByType(offer, type, onOfferHover);
+      })}
+    </div>
+  );
+};
 
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(

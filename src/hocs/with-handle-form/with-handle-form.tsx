@@ -14,7 +14,7 @@ const withHandleForm = (Component) => {
       this._handleCommentChange = this._handleCommentChange.bind(this);
       this._handleRatingChange = this._handleRatingChange.bind(this);
       this._handleFormReset = this._handleFormReset.bind(this);
-      this._handleSubmit = this._handleSubmit.bind(this);
+      this._handleReviewFormSubmit = this._handleReviewFormSubmit.bind(this);
 
       this.state = {
         comment: ``,
@@ -70,7 +70,7 @@ const withHandleForm = (Component) => {
       }
     }
 
-    _handleSubmit(evt) {
+    _handleReviewFormSubmit(evt) {
       const {offerId, onSubmit} = this.props;
       evt.preventDefault();
 
@@ -95,7 +95,7 @@ const withHandleForm = (Component) => {
           showError={this.state.showError}
           handleCommentChange={this._handleCommentChange}
           handleRatingChange={this._handleRatingChange}
-          handleSubmit={this._handleSubmit}
+          handleReviewFormSubmit={this._handleReviewFormSubmit}
         />
       );
     }

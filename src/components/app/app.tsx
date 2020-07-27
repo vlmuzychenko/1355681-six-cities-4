@@ -35,64 +35,56 @@ const App = (props) => {
         <Route
           path={AppRoute.ROOT}
           exact
-          render={() => {
-            return (
-              <MainWithHoveredOffer
+          render={() => (
+            <MainWithHoveredOffer
+              authorizationStatus={authorizationStatus}
+              currentOffers={currentOffers}
+              currentCity={currentCity}
+              onCityNameClick={onCityNameClick}
+            >
+              <Header
                 authorizationStatus={authorizationStatus}
-                currentOffers={currentOffers}
-                currentCity={currentCity}
-                onCityNameClick={onCityNameClick}
-              >
-                <Header
-                  authorizationStatus={authorizationStatus}
-                  authorizationInfo={authorizationInfo} />
-              </MainWithHoveredOffer>
-            );
-          }}
+                authorizationInfo={authorizationInfo} />
+            </MainWithHoveredOffer>
+          )}
         />
         <Route
           path={AppRoute.OFFER}
           exact
-          render={({match}) => {
-            return (
-              <OfferDetails
+          render={({match}) => (
+            <OfferDetails
+              authorizationStatus={authorizationStatus}
+              id={match.params.id}
+            >
+              <Header
                 authorizationStatus={authorizationStatus}
-                id={match.params.id}
-              >
-                <Header
-                  authorizationStatus={authorizationStatus}
-                  authorizationInfo={authorizationInfo} />
-              </OfferDetails>
-            );
-          }}
+                authorizationInfo={authorizationInfo} />
+            </OfferDetails>
+          )}
         />
         <Route
           path={AppRoute.LOGIN}
           exact
-          render={() => {
-            return (
-              authorizationStatus === AuthorizationStatus.AUTH
-                ? <Redirect to={AppRoute.ROOT} />
-                : <SignIn onSubmit={login}>
-                  <Header
-                    authorizationStatus={authorizationStatus}
-                    authorizationInfo={authorizationInfo} />
-                </SignIn>
-            );
-          }}
+          render={() => (
+            authorizationStatus === AuthorizationStatus.AUTH
+              ? <Redirect to={AppRoute.ROOT} />
+              : <SignIn onSubmit={login}>
+                <Header
+                  authorizationStatus={authorizationStatus}
+                  authorizationInfo={authorizationInfo} />
+              </SignIn>
+          )}
         />
         <PrivateRoute
           path={AppRoute.FAVORITES}
           exact
-          render={() => {
-            return (
-              <Favorites>
-                <Header
-                  authorizationStatus={authorizationStatus}
-                  authorizationInfo={authorizationInfo} />
-              </Favorites>
-            );
-          }}
+          render={() => (
+            <Favorites>
+              <Header
+                authorizationStatus={authorizationStatus}
+                authorizationInfo={authorizationInfo} />
+            </Favorites>
+          )}
         />
         <Route
           render={() => (

@@ -13,7 +13,7 @@ it(`Should Reviews List render correctly`, () => {
           showError={false}
           handleCommentChange={() => {}}
           handleRatingChange={() => {}}
-          handleSubmit={() => {}}
+          handleReviewFormSubmit={() => {}}
         />
     )
     .toJSON();

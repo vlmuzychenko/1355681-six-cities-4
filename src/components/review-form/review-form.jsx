@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import {RATINGS} from "../../const.js";
 
 const ReviewForm = (props) => {
-  const {comment, rating, formDisabled, buttonDisabled, showError, handleCommentChange, handleRatingChange, handleSubmit} = props;
+  const {comment, rating, formDisabled, buttonDisabled, showError, handleCommentChange, handleRatingChange, handleReviewFormSubmit} = props;
 
   return (
     <form
       className={`reviews__form form`}
       action="#"
       method="post"
-      onSubmit={handleSubmit}
+      onSubmit={handleReviewFormSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
@@ -74,7 +74,7 @@ ReviewForm.propTypes = {
   showError: PropTypes.bool.isRequired,
   handleCommentChange: PropTypes.func.isRequired,
   handleRatingChange: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  handleReviewFormSubmit: PropTypes.func.isRequired,
 };
 
 export default ReviewForm;

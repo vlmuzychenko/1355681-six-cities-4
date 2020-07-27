@@ -218,9 +218,19 @@ OfferDetails.propTypes = {
     }).isRequired,
     coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   })),
-  currentReviews: PropTypes.any,
+  currentReviews: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      isPro: PropTypes.bool.isRequired,
+    }),
+    rating: PropTypes.number.isRequired,
+    comment: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  })),
   onSubmit: PropTypes.func,
-  // setCurrentOffer: PropTypes.func,
   getOfferData: PropTypes.func,
 };
 

@@ -8,10 +8,10 @@ class SignIn extends PureComponent {
     this.loginRef = createRef();
     this.passwordRef = createRef();
 
-    this._handleSubmit = this._handleSubmit.bind(this);
+    this._handleLoginFormSubmit = this._handleLoginFormSubmit.bind(this);
   }
 
-  _handleSubmit(evt) {
+  _handleLoginFormSubmit(evt) {
     const {onSubmit} = this.props;
     evt.preventDefault();
 
@@ -54,7 +54,7 @@ class SignIn extends PureComponent {
               <form
                 className="login__form form"
                 action="#" method="post"
-                onSubmit={this._handleSubmit}
+                onSubmit={this._handleLoginFormSubmit}
               >
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
