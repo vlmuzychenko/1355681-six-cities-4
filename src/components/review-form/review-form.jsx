@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {RATINGS} from "../../const.js";
+import {RATINGS} from "../../const";
 
 const ReviewForm = (props) => {
   const {comment, rating, formDisabled, buttonDisabled, showError, handleCommentChange, handleRatingChange, handleReviewFormSubmit} = props;

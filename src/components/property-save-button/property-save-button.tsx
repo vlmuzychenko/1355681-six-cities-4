@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SaveButton from "../save-button/save-button.jsx";
+import SaveButton from "../save-button/save-button";
 
 const PropertySaveButton = (props) => {
   const cardClassName = `property__bookmark-button${ props.className || ``}`;

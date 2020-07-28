@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {AppRoute} from "../../const.js";
+import {AuthorizationStatus} from "../../reducer/user/user";
+import {AppRoute} from "../../const";
 
 const Header = (props) => {
   const {authorizationStatus, authorizationInfo} = props;

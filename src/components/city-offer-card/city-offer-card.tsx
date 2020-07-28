@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import OfferCard from "../offer-card/offer-card.jsx";
+import OfferCard from "../offer-card/offer-card";
 
 const CityOfferCard = (props) => {
   const className = `cities__place-card ${props.className || ``}`;

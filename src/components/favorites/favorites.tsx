@@ -1,12 +1,12 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import FavoritesOffersList from "../favorites-offers-list/favorites-offers-list.jsx";
+import FavoritesOffersList from "../favorites-offers-list/favorites-offers-list";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {getFavorites} from "../../reducer/data/selectors.js";
-import {Operation as DataOperation} from "../../reducer/data/data.js";
-import {AppRoute, MAX_CITIES_IN_LIST} from "../../const.js";
-import {getCitiesList} from "../../utils/common.js";
+import {getFavorites} from "../../reducer/data/selectors";
+import {Operation as DataOperation} from "../../reducer/data/data";
+import {AppRoute, MAX_CITIES_IN_LIST} from "../../const";
+import {getCitiesList} from "../../utils/common";
 
 class Favorites extends PureComponent {
   constructor(props) {

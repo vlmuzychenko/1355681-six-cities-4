@@ -1,6 +1,6 @@
-import {extend, getCitiesList} from "../../utils/common.js";
-import {MAX_CITIES_IN_LIST} from "../../const.js";
-import {offerModel, offersModel} from "../../models/offers.js";
+import {extend, getCitiesList} from "../../utils/common";
+import {MAX_CITIES_IN_LIST} from "../../const";
+import {offerModel, offersModel} from "../../models/offers";
 
 const initialState = {
   offers: [],

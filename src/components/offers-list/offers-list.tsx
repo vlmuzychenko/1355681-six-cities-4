@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CityOfferCard from "../city-offer-card/city-offer-card.jsx";
-import NearOfferCard from "../near-offer-card/near-offer-card.jsx";
-import FavoriteOfferCard from "../favorite-offer-card/favorite-offer-card.jsx";
-import OfferCard from "../offer-card/offer-card.jsx";
-import {PlaceCardTypes} from "../../const.js";
+import CityOfferCard from "../city-offer-card/city-offer-card";
+import NearOfferCard from "../near-offer-card/near-offer-card";
+import FavoriteOfferCard from "../favorite-offer-card/favorite-offer-card";
+import OfferCard from "../offer-card/offer-card";
+import {PlaceCardTypes} from "../../const";
 
 const _getOfferCardByType = (offer, type, onOfferHover) => {
   switch (type) {

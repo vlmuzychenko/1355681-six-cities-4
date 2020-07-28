@@ -1,5 +1,5 @@
-import {SortType} from "../../const.js";
-import {extend} from "../../utils/common.js";
+import {SortType} from "../../const";
+import {extend} from "../../utils/common";
 
 const initialState = {
   activeSortType: SortType.DEFAULT,

@@ -1,21 +1,21 @@
 import React, {Fragment} from "react";
-import Main from "../main/main.jsx";
-import SignIn from "../sign-in/sign-in.jsx";
-import OfferDetails from "../offer-details/offer-details.jsx";
-import Header from "../header/header.jsx";
+import Main from "../main/main";
+import SignIn from "../sign-in/sign-in";
+import OfferDetails from "../offer-details/offer-details";
+import Header from "../header/header";
 import PropTypes from "prop-types";
-import withHoveredOffer from "../../hocs/with-hovered-offer/with-hovered-offer.js";
-import PrivateRoute from "../private-route/private-route.jsx";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
+import withHoveredOffer from "../../hocs/with-hovered-offer/with-hovered-offer";
+import PrivateRoute from "../private-route/private-route";
+import {AuthorizationStatus} from "../../reducer/user/user";
 import {Switch, Route, Router, Redirect, Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
-import {getCurrentOffers, getCurrentCity} from "../../reducer/data/selectors.js";
-import {getAuthorizationStatus, getAuthorizationInfo} from "../../reducer/user/selectors.js";
-import {Operation as UserOperation} from "../../reducer/user/user.js";
-import history from "../../history.js";
-import {AppRoute} from "../../const.js";
-import Favorites from "../favorites/favorites.jsx";
+import {ActionCreator as DataActionCreator} from "../../reducer/data/data";
+import {getCurrentOffers, getCurrentCity} from "../../reducer/data/selectors";
+import {getAuthorizationStatus, getAuthorizationInfo} from "../../reducer/user/selectors";
+import {Operation as UserOperation} from "../../reducer/user/user";
+import history from "../../history";
+import {AppRoute} from "../../const";
+import Favorites from "../favorites/favorites";
 
 const MainWithHoveredOffer = withHoveredOffer(Main);
 

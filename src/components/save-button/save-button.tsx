@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {AppRoute} from "../../const.js";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {Operation as DataOperation} from "../../reducer/data/data.js";
+import {AppRoute} from "../../const";
+import {AuthorizationStatus} from "../../reducer/user/user";
+import {Operation as DataOperation} from "../../reducer/data/data";
 
 const SaveButton = (props) => {
   const {className, iconClassName, width, height, offerId, authorizationStatus, onSaveButtonClick, isFavorite} = props;

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import City from "../city/city.jsx";
+import City from "../city/city";
 
 const CitiesList = React.memo(function CitiesList(props) {
   const {cities, currentCity, onCityNameClick} = props;

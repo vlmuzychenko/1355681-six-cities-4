@@ -1,4 +1,4 @@
-import {SortType} from "../const.js";
+import {SortType} from "../const";
 
 export const getRatingInPercent = (rating) => {
   return `${Math.round(rating) * 100 / 5}%`;

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
-import {getRatingInPercent} from "../../utils/common.js";
+import {getRatingInPercent} from "../../utils/common";
 
 const Review = (props) => {
   const {review: {user, rating, comment, date}} = props;

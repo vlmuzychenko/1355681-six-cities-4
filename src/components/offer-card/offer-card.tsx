@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SaveButton from "../save-button/save-button.jsx";
+import SaveButton from "../save-button/save-button";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {getRatingInPercent} from "../../utils/common.js";
-import {OfferTypes} from "../../const.js";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {getRatingInPercent} from "../../utils/common";
+import {OfferTypes} from "../../const";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
 
 const OfferCard = (props) => {
   const {authorizationStatus, offer, onOfferHover, className, imageWrapperClassName} = props;

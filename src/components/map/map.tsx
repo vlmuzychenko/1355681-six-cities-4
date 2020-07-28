@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
-import {MapIconUrl} from "../../const.js";
+import {MapIconUrl} from "../../const";
 
 class Map extends PureComponent {
   constructor(props) {

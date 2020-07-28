@@ -1,20 +1,20 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import ReviewsList from "../reviews-list/reviews-list.jsx";
-import ReviewForm from "../review-form/review-form.jsx";
-import NearOffersList from "../near-offers-list/near-offers-list.jsx";
-import Map from "../map/map.jsx";
-import PropertySaveButton from "../property-save-button/property-save-button.jsx";
-import withHandleForm from "../../hocs/with-handle-form/with-handle-form.js";
-import {getRatingInPercent, getPluralizedString} from "../../utils/common.js";
+import ReviewsList from "../reviews-list/reviews-list";
+import ReviewForm from "../review-form/review-form";
+import NearOffersList from "../near-offers-list/near-offers-list";
+import Map from "../map/map";
+import PropertySaveButton from "../property-save-button/property-save-button";
+import withHandleForm from "../../hocs/with-handle-form/with-handle-form";
+import {getRatingInPercent, getPluralizedString} from "../../utils/common";
 import {connect} from "react-redux";
-import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews.js";
-import {Operation as NearbyOperation} from "../../reducer/nearby/nearby.js";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {getCurrentOffer} from "../../reducer/data/selectors.js";
-import {getCurrentReviews} from "../../reducer/reviews/selectors.js";
-import {getNearOffers} from "../../reducer/nearby/selectors.js";
-import {OfferTypes} from "../../const.js";
+import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews";
+import {Operation as NearbyOperation} from "../../reducer/nearby/nearby";
+import {AuthorizationStatus} from "../../reducer/user/user";
+import {getCurrentOffer} from "../../reducer/data/selectors";
+import {getCurrentReviews} from "../../reducer/reviews/selectors";
+import {getNearOffers} from "../../reducer/nearby/selectors";
+import {OfferTypes} from "../../const";
 
 const ReviewFormWithHandler = withHandleForm(ReviewForm);
 

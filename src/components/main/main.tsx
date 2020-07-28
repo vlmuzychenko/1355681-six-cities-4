@@ -1,16 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CityOffersList from "../city-offers-list/city-offers-list.jsx";
-import CitiesList from "../cities-list/cities-list.jsx";
-import Map from "../map/map.jsx";
-import Sort from "../sort/sort.jsx";
-import NoResults from "../no-results/no-results.jsx";
-import withOpenedCondition from "../../hocs/with-opened-condition/with-opened-condition.js";
+import CityOffersList from "../city-offers-list/city-offers-list";
+import CitiesList from "../cities-list/cities-list";
+import Map from "../map/map";
+import Sort from "../sort/sort";
+import NoResults from "../no-results/no-results";
+import withOpenedCondition from "../../hocs/with-opened-condition/with-opened-condition";
 import {connect} from "react-redux";
-import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
-import {getCities} from "../../reducer/data/selectors.js";
-import {getActiveSortType} from "../../reducer/main/selectors.js";
-import {getSortedOffers} from "../../utils/common.js";
+import {ActionCreator as MainActionCreator} from "../../reducer/main/main";
+import {getCities} from "../../reducer/data/selectors";
+import {getActiveSortType} from "../../reducer/main/selectors";
+import {getSortedOffers} from "../../utils/common";
 
 const SortWrapped = withOpenedCondition(Sort);
 

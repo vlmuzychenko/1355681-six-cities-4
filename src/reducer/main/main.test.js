@@ -1,4 +1,4 @@
-import {reducer, ActionCreator, ActionType} from "./main.js";
+import {reducer, ActionCreator, ActionType} from "./main";
 
 const SortTypeMock = {
   DEFAULT: `popular`,

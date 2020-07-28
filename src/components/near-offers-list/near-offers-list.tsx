@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import OffersList from "../offers-list/offers-list.jsx";
-import {PlaceCardTypes} from "../../const.js";
+import OffersList from "../offers-list/offers-list";
+import {PlaceCardTypes} from "../../const";
 
 const NearOffersList = (props) => {
   const className = `near-places__list ${props.className || ``}`;
