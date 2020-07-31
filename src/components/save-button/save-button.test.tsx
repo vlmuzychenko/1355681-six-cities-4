@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
-import NameSpace from "../../reducer/name-space.js";
+import NameSpace from "../../reducer/name-space";
 import SaveButton from "./save-button";
 
 const mockStore = configureStore([]);

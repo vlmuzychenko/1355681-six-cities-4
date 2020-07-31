@@ -1,14 +1,18 @@
 import React from "react";
 import SaveButton from "../save-button/save-button";
+import {Subtract} from "utility-types";
 
-interface Props {
-  authorizationStatus: string;
-  isFavorite: boolean;
-  offerId: number;
+interface InjectingProps {
   className?: string;
+  iconClassName?: string;
+  width?: string;
+  height?: string;
 }
 
-const PropertySaveButton: React.FunctionComponent<Props> = (props: Props) => {
+type P = React.ComponentProps<typeof SaveButton>;
+type T = Subtract<P, InjectingProps>;
+
+const PropertySaveButton: React.FunctionComponent<T> = (props: T) => {
   const cardClassName = `property__bookmark-button${ props.className || ``}`;
   const iconClassName = `property__bookmark-icon`;
   const width = `31`;

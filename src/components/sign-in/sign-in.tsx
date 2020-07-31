@@ -1,7 +1,7 @@
 import React, {PureComponent, createRef} from "react";
 
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   onSubmit: (userData: {login: string; password: string}) => void;
 }
 

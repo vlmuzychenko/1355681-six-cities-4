@@ -2,13 +2,14 @@ import React from "react";
 import renderer from "react-test-renderer";
 import CityOffersList from "./city-offers-list";
 import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
+import NameSpace from "../../reducer/name-space";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
+import {OfferInterface} from "../../types";
 
 const mockStore = configureStore([]);
 
-const offersMock = [
+const offersMock: OfferInterface[] = [
   {
     id: 1,
     title: `Beautiful & luxurious apartment at great location`,
@@ -27,12 +28,14 @@ const offersMock = [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+      id: 1,
     },
+    coords: [52.3909553943508, 4.85309666406198],
     city: {
       name: `Paris`,
       coords: [48.865, 2.35],
+      zoom: 13,
     },
-    coords: [52.3909553943508, 4.85309666406198],
   },
   {
     id: 2,
@@ -52,12 +55,14 @@ const offersMock = [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+      id: 2,
     },
+    coords: [52.3909553943508, 4.85309666406198],
     city: {
       name: `Paris`,
       coords: [48.865, 2.35],
+      zoom: 13,
     },
-    coords: [52.369553943508, 4.85309666406198],
   }
 ];
 

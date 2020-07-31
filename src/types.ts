@@ -1,6 +1,7 @@
 export interface CityInterface {
   name: string,
   coords: number[],
+  zoom: number,
 }
 
 export interface OfferInterface {
@@ -21,6 +22,7 @@ export interface OfferInterface {
     name: string,
     super: boolean,
     avatarUrl: string,
+    id: number
   },
   city: CityInterface,
   coords: number[],

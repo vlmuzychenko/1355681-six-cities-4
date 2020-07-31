@@ -1,8 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Map from "./map";
+import {OfferInterface, CityInterface} from "../../types";
 
-const offersMock = [
+const offersMock: OfferInterface[] = [
   {
     id: 1,
     title: `Beautiful & luxurious apartment at great location`,
@@ -15,15 +16,18 @@ const offersMock = [
     type: `apartment`,
     bedrooms: 4,
     maxAdults: 4,
+    isFavorite: false,
     goods: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitche`, `Dishwasher`, `Cabel TV`, `Fridge`],
     host: {
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+      id: 1,
     },
     city: {
       name: `Paris`,
       coords: [48.865, 2.35],
+      zoom: 12,
     },
     coords: [52.3909553943508, 4.85309666406198],
   },
@@ -36,6 +40,7 @@ const offersMock = [
     description: `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
     rating: 4,
     isPremium: false,
+    isFavorite: false,
     type: `hotel`,
     bedrooms: 4,
     maxAdults: 4,
@@ -44,18 +49,21 @@ const offersMock = [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+      id: 1,
     },
     city: {
       name: `Paris`,
       coords: [48.865, 2.35],
+      zoom: 12,
     },
     coords: [52.369553943508, 4.85309666406198],
   }
 ];
 
-const currentCityMock = {
+const currentCityMock: CityInterface = {
   name: `Paris`,
   coords: [48.865, 2.35],
+  zoom: 12,
 };
 
 it(`Should Map render correctly`, () => {

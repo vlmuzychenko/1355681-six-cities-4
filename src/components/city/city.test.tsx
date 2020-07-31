@@ -1,10 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import City from "./city";
+import {CityInterface} from "../../types";
+import {noop} from "../../utils/common";
 
-const cityMock = {
+const cityMock: CityInterface = {
   name: `Paris`,
   coords: [48.865, 2.35],
+  zoom: 12,
 };
 
 const isActiveTrueMock = true;
@@ -16,7 +19,7 @@ it(`Should Active City render correctly`, () => {
         <City
           city={cityMock}
           isActive={isActiveTrueMock}
-          onCityNameClick={() => {}}
+          onCityNameClick={noop}
         />
     )
     .toJSON();
@@ -30,7 +33,7 @@ it(`Should City render correctly`, () => {
         <City
           city={cityMock}
           isActive={isActiveFalseMock}
-          onCityNameClick={() => {}}
+          onCityNameClick={noop}
         />
     )
     .toJSON();

@@ -4,10 +4,12 @@ import configureStore from "redux-mock-store";
 import {OfferCard} from "./offer-card";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
+import {OfferInterface} from "../../types";
+import {noop} from "../../utils/common";
 
 const mockStore = configureStore([]);
 
-const offerCardMock = {
+const offerCardMock: OfferInterface = {
   id: 1,
   title: `Beautiful & luxurious apartment at great location`,
   price: 120,
@@ -25,10 +27,12 @@ const offerCardMock = {
     name: `Angelina`,
     super: true,
     avatarUrl: `img/avatar-angelina.jpg`,
+    id: 1,
   },
   city: {
     name: `Paris`,
     coords: [48.865, 2.35],
+    zoom: 12,
   },
   coords: [52.3909553943508, 4.85309666406198],
 };
@@ -48,7 +52,9 @@ it(`Should Offer render correctly`, () => {
             <OfferCard
               authorizationStatus={AuthorizationStatusMock.NO_AUTH}
               offer={offerCardMock}
-              onOfferHover={() => {}}
+              className={``}
+              imageWrapperClassName={``}
+              onOfferHover={noop}
             />
           </Provider>
         </BrowserRouter>

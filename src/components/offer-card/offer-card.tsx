@@ -10,8 +10,8 @@ import {OfferInterface} from "../../types";
 interface Props {
   authorizationStatus: string;
   offer: OfferInterface;
-  className: string;
-  imageWrapperClassName: string;
+  className?: string;
+  imageWrapperClassName?: string;
   onOfferHover: (offer) => void;
 }
 

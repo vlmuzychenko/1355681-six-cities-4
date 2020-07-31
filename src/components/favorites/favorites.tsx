@@ -9,7 +9,7 @@ import {getCitiesList} from "../../utils/common";
 import {OfferInterface} from "../../types";
 
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   favorites: OfferInterface[];
   onFavoritesPageLoad: () => void;
 }

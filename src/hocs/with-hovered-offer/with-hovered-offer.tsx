@@ -1,11 +1,10 @@
 import React, {PureComponent} from "react";
-import {OfferInterface, CityInterface} from "../../types";
+import {Subtract} from "utility-types";
+import {OfferInterface} from "../../types";
 
-interface Props {
-  authorizationStatus: string;
-  currentOffers: OfferInterface[];
-  currentCity: CityInterface;
-  onCityNameClick: () => void;
+interface InjectingProps {
+  hoveredOffer: OfferInterface[];
+  onOfferHover: () => void;
 }
 
 interface State {
@@ -13,8 +12,11 @@ interface State {
 }
 
 const withHoveredOffer = (Component) => {
-  class WithHoveredOffer extends PureComponent<Props, State> {
-    constructor(props) {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithHoveredOffer extends PureComponent<T, State> {
+    constructor(props: T) {
       super(props);
 
       this._handleOfferHover = this._handleOfferHover.bind(this);

@@ -1,14 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
+import NameSpace from "../../reducer/name-space";
 import {OfferDetails} from "./offer-details";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
+import {OfferInterface, ReviewInterface} from "../../types";
 
 const mockStore = configureStore([]);
 
-const offerMock = {
+const offerMock: OfferInterface = {
   id: 1,
   title: `Beautiful & luxurious apartment at great location`,
   price: 120,
@@ -26,15 +27,17 @@ const offerMock = {
     name: `Angelina`,
     super: true,
     avatarUrl: `img/avatar-angelina.jpg`,
+    id: 1,
   },
   city: {
     name: `Paris`,
     coords: [48.865, 2.35],
+    zoom: 12,
   },
   coords: [52.3909553943508, 4.85309666406198],
 };
 
-const reviewsMock = [
+const reviewsMock: ReviewInterface[] = [
   {
     comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
     date: `2019-05-08T14:13:56.569Z`,
@@ -81,9 +84,9 @@ it(`Should Offer Details render correctly`, () => {
             <OfferDetails
               id={`1`}
               authorizationStatus={AuthorizationStatusMock.NO_AUTH}
-              offer={offerMock}
+              currentOffer={offerMock}
               nearOffers={[offerMock]}
-              reviews={reviewsMock}
+              currentReviews={reviewsMock}
               onSubmit={onSubmit}
               getOfferData={getOfferData}
             />

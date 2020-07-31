@@ -1,7 +1,15 @@
 import React, {PureComponent} from "react";
+import {Subtract} from "utility-types";
 
-interface Props {
+interface InjectingProps {
   offerId: number;
+  comment: string;
+  rating: string;
+  formDisabled: boolean;
+  buttonDisabled: boolean;
+  showError: boolean;
+  handleCommentChange: (value: string) => void;
+  handleRatingChange: (value: string) => void;
   onSubmit: (offerId: number, offerData: object, callback: (status: boolean) => void) => void;
 }
 
@@ -19,8 +27,11 @@ const ValidCommentLength = {
 };
 
 const withHandleForm = (Component) => {
-  class WithHandleForm extends PureComponent<Props, State> {
-    constructor(props: Props) {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithHandleForm extends PureComponent<T, State> {
+    constructor(props: T) {
       super(props);
 
       this._handleCommentChange = this._handleCommentChange.bind(this);

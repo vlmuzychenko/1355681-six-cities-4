@@ -17,7 +17,7 @@ import {OfferTypes} from "../../const";
 import {OfferInterface, ReviewInterface} from "../../types";
 
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   authorizationStatus: string;
   id: string;
   currentOffer?: OfferInterface;

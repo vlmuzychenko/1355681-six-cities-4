@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import withOpenedCondition from "./with-opened-condition";
+import {noop} from "../../utils/common";
 
 const SortTypeMock = {
   DEFAULT: `popular`,
@@ -20,7 +21,7 @@ const MockComponentWrapped = withOpenedCondition(MockComponent);
 it(`withOpenedCondition is rendered correctly`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
-      onSortTypeClick={() => {}}
+      onSortTypeClick={noop}
       activeSortType={SortTypeMock.DEFAULT}
     />
   ), {

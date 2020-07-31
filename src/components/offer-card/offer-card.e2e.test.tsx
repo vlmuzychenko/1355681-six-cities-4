@@ -2,8 +2,9 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {OfferCard} from "./offer-card";
+import {OfferInterface} from "../../types";
 
-const offerCardMock = {
+const offerCardMock: OfferInterface = {
   id: 1,
   title: `Beautiful & luxurious apartment at great location`,
   price: 120,
@@ -21,10 +22,12 @@ const offerCardMock = {
     name: `Angelina`,
     super: true,
     avatarUrl: `img/avatar-angelina.jpg`,
+    id: 1,
   },
   city: {
     name: `Paris`,
     coords: [48.865, 2.35],
+    zoom: 12,
   },
   coords: [52.3909553943508, 4.85309666406198],
 };

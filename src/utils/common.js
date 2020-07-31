@@ -48,3 +48,7 @@ export const getCitiesList = (offers, maxCities) => {
 
   return unrepeatedCities.slice(0, maxCities);
 };
+
+export const noop = () => {
+  // do nothing
+};

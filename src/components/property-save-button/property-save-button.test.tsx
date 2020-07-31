@@ -34,7 +34,7 @@ it(`Should PropertySaveButton render correctly`, () => {
             width={widthMock}
             height={heightMock}
             isFavorite={true}
-            authStatus={AuthorizationStatusMock.AUTH}
+            authorizationStatus={AuthorizationStatusMock.AUTH}
             offerId={1}
           />
         </Provider>

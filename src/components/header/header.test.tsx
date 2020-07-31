@@ -3,12 +3,13 @@ import renderer from "react-test-renderer";
 import Header from "./header";
 import {Router} from "react-router-dom";
 import {createMemoryHistory} from "history";
+import {AuthorizationInfoInterface} from "../../types";
 
 const history = createMemoryHistory(`/`);
 
 const authorizationStatusMock = `AUTH`;
 
-const authorizationInfoMock = {
+const authorizationInfoMock: AuthorizationInfoInterface = {
   avatarUrl: `img/1.png`,
   email: `Oliver.conner@gmail.com`,
   id: 1,

@@ -1,13 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
+import NameSpace from "../../reducer/name-space";
 import {Provider} from "react-redux";
 import {App} from "./app";
+import {OfferInterface, CityInterface, AuthorizationInfoInterface} from "../../types";
+import {noop} from "../../utils/common";
 
 const mockStore = configureStore([]);
 
-const offersMock = [
+const offersMock: OfferInterface[] = [
   {
     id: 1,
     title: `Beautiful & luxurious apartment at great location`,
@@ -29,7 +31,6 @@ const offersMock = [
       id: 1,
     },
     coords: [52.3909553943508, 4.85309666406198],
-    zoom: 13,
     city: {
       name: `Paris`,
       coords: [48.865, 2.35],
@@ -57,7 +58,6 @@ const offersMock = [
       id: 2,
     },
     coords: [52.3909553943508, 4.85309666406198],
-    zoom: 13,
     city: {
       name: `Paris`,
       coords: [48.865, 2.35],
@@ -78,13 +78,15 @@ const AuthorizationStatusMock = {
   NO_AUTH: `NO_AUTH`,
 };
 
-const authorizationInfoMock = {
+const authorizationInfoMock: AuthorizationInfoInterface = {
   avatarUrl: `img/1.png`,
   email: `Oliver.conner@gmail.com`,
   id: 1,
   isPro: false,
   name: `Oliver.conner`
 };
+
+const cityMock: CityInterface = offersMock[0].city;
 
 it(`Render App`, () => {
   const store = mockStore({
@@ -109,10 +111,9 @@ it(`Render App`, () => {
             authorizationStatus={AuthorizationStatusMock.AUTH}
             authorizationInfo={authorizationInfoMock}
             currentOffers={offersMock.slice(0, 1)}
-            currentOffer={offersMock[0]}
-            currentCity={offersMock[0].city}
-            onCityNameClick={() => {}}
-            login={() => {}}
+            currentCity={cityMock}
+            onCityNameClick={noop}
+            login={noop}
           />
         </Provider>,
         {

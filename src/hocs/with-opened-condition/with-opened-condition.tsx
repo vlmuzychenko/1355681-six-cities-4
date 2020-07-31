@@ -1,8 +1,10 @@
 import React, {PureComponent} from "react";
+import {Subtract} from "utility-types";
 
-interface Props {
-  activeSortType: string;
-  onSortTypeClick: (sortType: string) => void;
+interface InjectingProps {
+  isOpened: boolean;
+  onSortDropdownClick: () => void;
+  onSortTypeClick: () => void;
 }
 
 interface State {
@@ -10,8 +12,11 @@ interface State {
 }
 
 const withOpenedCondition = (Component) => {
-  class WithOpenedCondition extends PureComponent<Props, State> {
-    constructor(props: Props) {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithOpenedCondition extends PureComponent<T, State> {
+    constructor(props: T) {
       super(props);
 
       this._handleSortClick = this._handleSortClick.bind(this);

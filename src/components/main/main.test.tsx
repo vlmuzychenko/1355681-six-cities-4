@@ -1,14 +1,16 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
+import NameSpace from "../../reducer/name-space";
 import {Provider} from "react-redux";
 import {Main} from "./main";
 import {BrowserRouter} from "react-router-dom";
+import {OfferInterface, CityInterface} from "../../types";
+import {noop} from "../../utils/common";
 
 const mockStore = configureStore([]);
 
-const offersMock = [
+const offersMock: OfferInterface[] = [
   {
     id: 1,
     title: `Beautiful & luxurious apartment at great location`,
@@ -27,10 +29,12 @@ const offersMock = [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+      id: 1,
     },
     city: {
       name: `Paris`,
       coords: [48.865, 2.35],
+      zoom: 12,
     },
     coords: [52.3909553943508, 4.85309666406198],
   },
@@ -52,32 +56,38 @@ const offersMock = [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+      id: 1,
     },
     city: {
       name: `Paris`,
       coords: [48.865, 2.35],
+      zoom: 12,
     },
     coords: [52.369553943508, 4.85309666406198],
   }
 ];
 
-const currentCityMock = {
+const currentCityMock: CityInterface = {
   name: `Paris`,
   coords: [48.865, 2.35],
+  zoom: 12,
 };
 
-const citiesMock = [
+const citiesMock: CityInterface[] = [
   {
     name: `Amsterdam`,
     coords: [48.865, 2.35],
+    zoom: 12,
   },
   {
     name: `Paris`,
     coords: [48.865, 2.35],
+    zoom: 12,
   },
   {
     name: `Berlin`,
     coords: [48.865, 2.35],
+    zoom: 12,
   }
 ];
 
@@ -114,14 +124,13 @@ describe(`Main render correctly`, () => {
           <BrowserRouter>
             <Provider store={store}>
               <Main
-                authorizationStatus={AuthorizationStatusMock.NO_AUTH}
                 currentOffers={offersMock.slice(0, 2)}
                 currentCity={currentCityMock}
                 cities={citiesMock}
-                onCityNameClick={() => {}}
-                onSortTypeClick={() => {}}
+                onCityNameClick={noop}
+                onSortTypeClick={noop}
                 activeSortType={SortTypeMock.DEFAULT}
-                onOfferHover={() => {}}
+                onOfferHover={noop}
                 hoveredOffer={null}
               />
             </Provider>
@@ -155,14 +164,13 @@ describe(`Main render correctly`, () => {
           <BrowserRouter>
             <Provider store={store}>
               <Main
-                authorizationStatus={AuthorizationStatusMock.NO_AUTH}
                 currentOffers={offersMock.slice(0, 1)}
                 currentCity={currentCityMock}
                 cities={citiesMock}
-                onCityNameClick={() => {}}
-                onSortTypeClick={() => {}}
+                onCityNameClick={noop}
+                onSortTypeClick={noop}
                 activeSortType={SortTypeMock.DEFAULT}
-                onOfferHover={() => {}}
+                onOfferHover={noop}
                 hoveredOffer={offersMock[2]}
               />
             </Provider>

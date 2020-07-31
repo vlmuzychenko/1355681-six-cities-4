@@ -13,7 +13,7 @@ import {getSortedOffers} from "../../utils/common";
 import {OfferInterface, CityInterface} from "../../types";
 
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   currentOffers?: OfferInterface[];
   hoveredOffer?: OfferInterface;
   cities?: CityInterface[];

@@ -1,13 +1,16 @@
 import React from "react";
 import OfferCard from "../offer-card/offer-card";
-import {OfferInterface} from "../../types";
+import {Subtract} from "utility-types";
 
-interface Props {
+interface InjectingProps {
   className?: string;
-  offer: OfferInterface;
+  imageWrapperClassName?: string;
 }
 
-const NearOfferCard: React.FunctionComponent<Props> = (props: Props) => {
+type P = React.ComponentProps<typeof OfferCard>;
+type T = Subtract<P, InjectingProps>;
+
+const NearOfferCard: React.FunctionComponent<T> = (props: T) => {
   const className = `near-places__card ${props.className || ``}`;
   const imageWrapperClassName = `near-places__image-wrapper`;
 

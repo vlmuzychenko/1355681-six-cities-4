@@ -2,13 +2,15 @@ import React from "react";
 import renderer from "react-test-renderer";
 import OffersList from "./offers-list";
 import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
+import NameSpace from "../../reducer/name-space";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
+import {OfferInterface} from "../../types";
+import {noop} from "../../utils/common";
 
 const mockStore = configureStore([]);
 
-const offersMock = [
+const offersMock: OfferInterface[] = [
   {
     id: 1,
     title: `Beautiful & luxurious apartment at great location`,
@@ -27,10 +29,12 @@ const offersMock = [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+      id: 1,
     },
     city: {
       name: `Paris`,
       coords: [48.865, 2.35],
+      zoom: 12,
     },
     coords: [52.3909553943508, 4.85309666406198],
   },
@@ -52,10 +56,12 @@ const offersMock = [
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
+      id: 1,
     },
     city: {
       name: `Paris`,
       coords: [48.865, 2.35],
+      zoom: 12,
     },
     coords: [52.369553943508, 4.85309666406198],
   }
@@ -79,7 +85,7 @@ it(`Should Offer List render correctly`, () => {
           <Provider store={store}>
             <OffersList
               offers={offersMock}
-              onOfferHover={() => {}}
+              onOfferHover={noop}
             />
           </Provider>
         </BrowserRouter>

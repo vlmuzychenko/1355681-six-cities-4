@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import withHandleForm from "./with-handle-form";
+import {noop} from "../../utils/common";
 
 const offerIdMock = 1;
 
@@ -16,7 +17,7 @@ it(`withHandleForm is rendered correctly`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
       offerId={offerIdMock}
-      onSubmit={() => {}}
+      onSubmit={noop}
     />
   ), {
     createNodeMock() {

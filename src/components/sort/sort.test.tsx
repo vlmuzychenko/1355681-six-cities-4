@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Sort from "./sort";
+import {noop} from "../../utils/common";
 
 const SortTypeMock = {
   DEFAULT: `popular`,
@@ -13,8 +14,8 @@ it(`Should Sort render correctly`, () => {
   const tree = renderer
     .create(
         <Sort
-          onSortTypeClick={() => {}}
-          onSortDropdownClick={() => {}}
+          onSortTypeClick={noop}
+          onSortDropdownClick={noop}
           activeSortType={SortTypeMock.DEFAULT}
           isOpened={false}
         />

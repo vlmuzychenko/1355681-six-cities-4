@@ -36,7 +36,7 @@ const SaveButton: React.FunctionComponent<Props> = (props: Props) => {
         <span className="visually-hidden">{isFavorite ? `In` : `To`} bookmarks</span>
       </Link> :
 
-      <button className={`${classNameFinal} ${isFavorite && activeClassName } button`}
+      <button className={`${classNameFinal} ${isFavorite ? activeClassName : `` } button`}
         type="button"
         onClick={() => {
           onSaveButtonClick(offerId, !isFavorite);
@@ -53,6 +53,8 @@ const SaveButton: React.FunctionComponent<Props> = (props: Props) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onSaveButtonClick(offerId, isFavorite) {
+    console.log(offerId, isFavorite);
+    
     dispatch(DataOperation.sendFavorite(offerId, isFavorite));
   }
 });
