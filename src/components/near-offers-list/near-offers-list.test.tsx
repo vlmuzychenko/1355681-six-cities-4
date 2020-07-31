@@ -1,6 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Map from "./map.jsx";
+import NearOffersList from "./near-offers-list";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
+import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore([]);
 
 const offersMock = [
   {
@@ -15,6 +21,7 @@ const offersMock = [
     type: `apartment`,
     bedrooms: 4,
     maxAdults: 4,
+    isFavorite: false,
     goods: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitche`, `Dishwasher`, `Cabel TV`, `Fridge`],
     host: {
       name: `Angelina`,
@@ -39,6 +46,7 @@ const offersMock = [
     type: `hotel`,
     bedrooms: 4,
     maxAdults: 4,
+    isFavorite: false,
     goods: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitche`, `Dishwasher`, `Cabel TV`, `Fridge`],
     host: {
       name: `Angelina`,
@@ -53,21 +61,37 @@ const offersMock = [
   }
 ];
 
-const currentCityMock = {
-  name: `Paris`,
-  coords: [48.865, 2.35],
+const AuthorizationStatusMock = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
 };
 
-it(`Should Map render correctly`, () => {
+const PageTypeMock = {
+  CITY: `city`,
+  NEAR: `near`,
+};
+
+const classNameMock = `near-places__list`;
+
+it(`Should Near Offer List render correctly`, () => {
+  const store = mockStore({
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatusMock.NO_AUTH,
+      authorizationInfo: null,
+    }
+  });
+
   const tree = renderer
     .create(
-        <Map
-          offers={offersMock}
-          currentCity={currentCityMock}
-        />,
-        {
-          createNodeMock: () => document.createElement(`div`)
-        }
+        <BrowserRouter>
+          <Provider store={store}>
+            <NearOffersList
+              className={classNameMock}
+              offers={offersMock}
+              type={PageTypeMock.NEAR}
+            />
+          </Provider>
+        </BrowserRouter>
     )
     .toJSON();
 

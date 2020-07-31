@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Header from "./header.jsx";
+import Header from "./header";
 import {Router} from "react-router-dom";
 import {createMemoryHistory} from "history";
 

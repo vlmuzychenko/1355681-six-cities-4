@@ -3,19 +3,24 @@ import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import NameSpace from "../../reducer/name-space.js";
-import SaveButton from "./save-button.jsx";
+import PropertySaveButton from "./property-save-button";
 
 const mockStore = configureStore([]);
 
-const AuthorizationStatus = {
+const AuthorizationStatusMock = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
 };
 
-it(`Should SaveButton render correctly`, () => {
+const cardClassNameMock = `property__bookmark-button`;
+const iconClassNameMock = `property__bookmark-icon`;
+const widthMock = `31`;
+const heightMock = `33`;
+
+it(`Should PropertySaveButton render correctly`, () => {
   const store = mockStore({
     [NameSpace.USER]: {
-      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      authorizationStatus: AuthorizationStatusMock.NO_AUTH,
       authorizationData: {},
     }
   });
@@ -23,9 +28,13 @@ it(`Should SaveButton render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <SaveButton
+          <PropertySaveButton
+            className={cardClassNameMock}
+            iconClassName={iconClassNameMock}
+            width={widthMock}
+            height={heightMock}
             isFavorite={true}
-            authStatus={AuthorizationStatus.AUTH}
+            authStatus={AuthorizationStatusMock.AUTH}
             offerId={1}
           />
         </Provider>
@@ -34,3 +43,4 @@ it(`Should SaveButton render correctly`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+

@@ -1,8 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {RATINGS} from "../../const";
 
-const ReviewForm = (props) => {
+interface Props {
+  comment: string;
+  rating: string;
+  formDisabled: boolean;
+  buttonDisabled: boolean;
+  showError: boolean;
+  handleCommentChange: () => void;
+  handleRatingChange: () => void;
+  handleReviewFormSubmit: () => void;
+}
+
+const ReviewForm: React.FunctionComponent<Props> = (props: Props) => {
   const {comment, rating, formDisabled, buttonDisabled, showError, handleCommentChange, handleRatingChange, handleReviewFormSubmit} = props;
 
   return (
@@ -64,17 +74,6 @@ const ReviewForm = (props) => {
       {showError ? <p className="reviews__help">Server Error</p> : null}
     </form>
   );
-};
-
-ReviewForm.propTypes = {
-  comment: PropTypes.string.isRequired,
-  rating: PropTypes.string.isRequired,
-  formDisabled: PropTypes.bool.isRequired,
-  buttonDisabled: PropTypes.bool.isRequired,
-  showError: PropTypes.bool.isRequired,
-  handleCommentChange: PropTypes.func.isRequired,
-  handleRatingChange: PropTypes.func.isRequired,
-  handleReviewFormSubmit: PropTypes.func.isRequired,
 };
 
 export default ReviewForm;

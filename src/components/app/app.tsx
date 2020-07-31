@@ -3,7 +3,6 @@ import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
 import OfferDetails from "../offer-details/offer-details";
 import Header from "../header/header";
-import PropTypes from "prop-types";
 import withHoveredOffer from "../../hocs/with-hovered-offer/with-hovered-offer";
 import PrivateRoute from "../private-route/private-route";
 import {AuthorizationStatus} from "../../reducer/user/user";
@@ -16,10 +15,20 @@ import {Operation as UserOperation} from "../../reducer/user/user";
 import history from "../../history";
 import {AppRoute} from "../../const";
 import Favorites from "../favorites/favorites";
+import {OfferInterface, CityInterface, AuthorizationInfoInterface} from "../../types";
+
+interface Props {
+  authorizationStatus: string;
+  authorizationInfo: AuthorizationInfoInterface;
+  currentOffers?: OfferInterface[];
+  currentCity?: CityInterface;
+  login: () => void;
+  onCityNameClick: () => void;
+}
 
 const MainWithHoveredOffer = withHoveredOffer(Main);
 
-const App = (props) => {
+const App: React.FunctionComponent<Props> = (props: Props) => {
   const {
     authorizationStatus,
     authorizationInfo,
@@ -101,50 +110,6 @@ const App = (props) => {
       </Switch>
     </Router>
   );
-};
-
-App.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  authorizationInfo: PropTypes.shape({
-    avatarUrl: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    isPro: PropTypes.bool.isRequired,
-    name: PropTypes.string.isRequired,
-  }),
-  login: PropTypes.func.isRequired,
-  currentOffers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        previewImage: PropTypes.string.isRequired,
-        images: PropTypes.arrayOf(PropTypes.string).isRequired,
-        description: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        type: PropTypes.string.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        maxAdults: PropTypes.number.isRequired,
-        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-        host: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          super: PropTypes.bool.isRequired,
-          avatarUrl: PropTypes.string.isRequired,
-        }).isRequired,
-        city: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-        }).isRequired,
-        coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-      }).isRequired
-  ),
-  currentCity: PropTypes.shape({
-    name: PropTypes.string,
-    coords: PropTypes.arrayOf(PropTypes.number),
-    zoom: PropTypes.number,
-  }),
-  onCityNameClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

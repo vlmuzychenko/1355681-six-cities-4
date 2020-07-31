@@ -1,14 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import NearOfferCard from "./near-offer-card.jsx";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
+import {OfferDetails} from "./offer-details";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
 const mockStore = configureStore([]);
 
-const offerCardMock = {
+const offerMock = {
   id: 1,
   title: `Beautiful & luxurious apartment at great location`,
   price: 120,
@@ -34,37 +34,64 @@ const offerCardMock = {
   coords: [52.3909553943508, 4.85309666406198],
 };
 
+const reviewsMock = [
+  {
+    comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+    date: `2019-05-08T14:13:56.569Z`,
+    id: 1,
+    rating: 4,
+    user: {
+      avatarUrl: `img/1.png`,
+      id: 4,
+      isPro: false,
+      name: `Max`
+    }
+  }
+];
+
 const AuthorizationStatusMock = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
 };
 
-const PageTypeMock = {
-  CITY: `city`,
-  NEAR: `near`,
-};
-
-const classNameMock = `near-places__list`;
-
-it(`Should Near Offer render correctly`, () => {
+it(`Should Offer Details render correctly`, () => {
   const store = mockStore({
+    [NameSpace.DATA]: {
+      currentOffer: offerMock,
+    },
+    [NameSpace.REVIEWS]: {
+      currentReviews: reviewsMock,
+    },
+    [NameSpace.NEARBY]: {
+      nearOffers: [offerMock],
+    },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatusMock.NO_AUTH,
       authorizationInfo: null,
-    }
+    },
   });
+
+  const onSubmit = jest.fn();
+  const getOfferData = jest.fn();
+
   const tree = renderer
     .create(
         <BrowserRouter>
           <Provider store={store}>
-            <NearOfferCard
-              type={PageTypeMock.NEAR}
-              className={classNameMock}
-              offer={offerCardMock}
-              onOfferHover={() => {}}
+            <OfferDetails
+              id={`1`}
+              authorizationStatus={AuthorizationStatusMock.NO_AUTH}
+              offer={offerMock}
+              nearOffers={[offerMock]}
+              reviews={reviewsMock}
+              onSubmit={onSubmit}
+              getOfferData={getOfferData}
             />
           </Provider>
-        </BrowserRouter>
+        </BrowserRouter>,
+        {
+          createNodeMock: () => document.createElement(`div`)
+        }
     )
     .toJSON();
 

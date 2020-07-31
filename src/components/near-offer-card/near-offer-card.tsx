@@ -1,8 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card";
+import {OfferInterface} from "../../types";
 
-const NearOfferCard = (props) => {
+interface Props {
+  className?: string;
+  offer: OfferInterface;
+}
+
+const NearOfferCard: React.FunctionComponent<Props> = (props: Props) => {
   const className = `near-places__card ${props.className || ``}`;
   const imageWrapperClassName = `near-places__image-wrapper`;
 
@@ -16,10 +21,6 @@ const NearOfferCard = (props) => {
       {...restProps}
     />
   );
-};
-
-NearOfferCard.propTypes = {
-  className: PropTypes.string
 };
 
 export default NearOfferCard;

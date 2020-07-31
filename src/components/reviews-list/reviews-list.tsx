@@ -1,11 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Review from "../review/review";
 import moment from "moment";
+import {ReviewInterface} from "../../types";
 
-const ReviewsList = (props) => {
+interface Props {
+  reviews: ReviewInterface[];
+}
+
+const ReviewsList: React.FunctionComponent<Props> = (props: Props) => {
   const {reviews} = props;
-  const sortedReviews = reviews.sort((a, b) => moment(a.date) - moment(b.date));
+  const sortedReviews = reviews.sort((a, b) => Number(moment(a.date)) - Number(moment(b.date)));
   const slisedReviews = sortedReviews.slice(0, 10);
 
 
@@ -23,21 +27,6 @@ const ReviewsList = (props) => {
       }
     </ul>
   );
-};
-
-ReviewsList.propTypes = {
-  reviews: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        user: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          avatarUrl: PropTypes.string.isRequired,
-        }).isRequired,
-        rating: PropTypes.number.isRequired,
-        comment: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      })
-  ),
 };
 
 export default ReviewsList;

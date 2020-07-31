@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import withHandleForm from "./with-handle-form.js";
+import withHandleForm from "./with-handle-form";
 
 const offerIdMock = 1;
 

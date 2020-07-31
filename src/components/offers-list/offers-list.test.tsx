@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import OffersList from "./offers-list";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
-import {Favorites} from "./favorites.jsx";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
@@ -66,21 +66,20 @@ const AuthorizationStatusMock = {
   NO_AUTH: `NO_AUTH`,
 };
 
-it(`Should Favorites render correctly`, () => {
+it(`Should Offer List render correctly`, () => {
   const store = mockStore({
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatusMock.NO_AUTH,
       authorizationInfo: null,
     }
   });
-
   const tree = renderer
     .create(
         <BrowserRouter>
           <Provider store={store}>
-            <Favorites
-              favorites={offersMock}
-              onFavoritesPageLoad={() => {}}
+            <OffersList
+              offers={offersMock}
+              onOfferHover={() => {}}
             />
           </Provider>
         </BrowserRouter>

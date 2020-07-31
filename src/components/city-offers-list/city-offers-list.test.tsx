@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import CityOffersList from "./city-offers-list.jsx";
+import CityOffersList from "./city-offers-list";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
 import {BrowserRouter} from "react-router-dom";

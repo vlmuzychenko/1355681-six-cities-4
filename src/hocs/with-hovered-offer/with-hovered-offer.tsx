@@ -1,7 +1,19 @@
 import React, {PureComponent} from "react";
+import {OfferInterface, CityInterface} from "../../types";
+
+interface Props {
+  authorizationStatus: string;
+  currentOffers: OfferInterface[];
+  currentCity: CityInterface;
+  onCityNameClick: () => void;
+}
+
+interface State {
+  hoveredOffer: OfferInterface;
+}
 
 const withHoveredOffer = (Component) => {
-  class WithHoveredOffer extends PureComponent {
+  class WithHoveredOffer extends PureComponent<Props, State> {
     constructor(props) {
       super(props);
 

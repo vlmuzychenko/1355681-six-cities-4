@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import NearOffersList from "./near-offers-list.jsx";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
+import {Favorites} from "./favorites";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
@@ -66,14 +66,7 @@ const AuthorizationStatusMock = {
   NO_AUTH: `NO_AUTH`,
 };
 
-const PageTypeMock = {
-  CITY: `city`,
-  NEAR: `near`,
-};
-
-const classNameMock = `near-places__list`;
-
-it(`Should Near Offer List render correctly`, () => {
+it(`Should Favorites render correctly`, () => {
   const store = mockStore({
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatusMock.NO_AUTH,
@@ -85,10 +78,9 @@ it(`Should Near Offer List render correctly`, () => {
     .create(
         <BrowserRouter>
           <Provider store={store}>
-            <NearOffersList
-              className={classNameMock}
-              offers={offersMock}
-              type={PageTypeMock.NEAR}
+            <Favorites
+              favorites={offersMock}
+              onFavoritesPageLoad={() => {}}
             />
           </Provider>
         </BrowserRouter>

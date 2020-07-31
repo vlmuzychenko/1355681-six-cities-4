@@ -1,8 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card";
+import {OfferInterface} from "../../types";
 
-const CityOfferCard = (props) => {
+interface Props {
+  className?: string;
+  offer: OfferInterface;
+  onOfferHover: () => void;
+}
+
+const CityOfferCard: React.FunctionComponent<Props> = (props: Props) => {
   const className = `cities__place-card ${props.className || ``}`;
   const imageWrapperClassName = `cities__image-wrapper`;
 
@@ -16,10 +22,6 @@ const CityOfferCard = (props) => {
       {...restProps}
     />
   );
-};
-
-CityOfferCard.propTypes = {
-  className: PropTypes.string
 };
 
 export default CityOfferCard;

@@ -1,5 +1,4 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
 import FavoritesOffersList from "../favorites-offers-list/favorites-offers-list";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
@@ -7,9 +6,16 @@ import {getFavorites} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {AppRoute, MAX_CITIES_IN_LIST} from "../../const";
 import {getCitiesList} from "../../utils/common";
+import {OfferInterface} from "../../types";
 
-class Favorites extends PureComponent {
-  constructor(props) {
+interface Props {
+  children: React.ReactNode;
+  favorites: OfferInterface[];
+  onFavoritesPageLoad: () => void;
+}
+
+class Favorites extends PureComponent<Props, {}> {
+  constructor(props: Props) {
     super(props);
   }
 
@@ -38,7 +44,7 @@ class Favorites extends PureComponent {
                           <div className="favorites__locations locations locations--current">
                             <div className="locations__item">
                               <a className="locations__item-link" href="#">
-                                <span>city.name</span>
+                                <span>{city.name}</span>
                               </a>
                             </div>
                           </div>
@@ -70,37 +76,6 @@ class Favorites extends PureComponent {
     );
   }
 }
-
-Favorites.propTypes = {
-  children: PropTypes.element,
-  favorites: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        previewImage: PropTypes.string.isRequired,
-        images: PropTypes.arrayOf(PropTypes.string).isRequired,
-        description: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        type: PropTypes.string.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        maxAdults: PropTypes.number.isRequired,
-        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-        host: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          super: PropTypes.bool.isRequired,
-          avatarUrl: PropTypes.string.isRequired,
-        }).isRequired,
-        city: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-        }).isRequired,
-        coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-      }).isRequired
-  ),
-  onFavoritesPageLoad: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   favorites: getFavorites(state),

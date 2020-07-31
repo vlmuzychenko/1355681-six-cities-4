@@ -1,12 +1,22 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {Operation as DataOperation} from "../../reducer/data/data";
 
-const SaveButton = (props) => {
+interface Props {
+  offerId: number;
+  className?: string;
+  iconClassName?: string;
+  width?: string;
+  height?: string;
+  isFavorite: boolean;
+  authorizationStatus: string;
+  onSaveButtonClick: (offerId, isFavorite) => void;
+}
+
+const SaveButton: React.FunctionComponent<Props> = (props: Props) => {
   const {className, iconClassName, width, height, offerId, authorizationStatus, onSaveButtonClick, isFavorite} = props;
 
   const classNameFinal = className ? className : `place-card__bookmark-button`;
@@ -39,17 +49,6 @@ const SaveButton = (props) => {
         <span className="visually-hidden">{isFavorite ? `In` : `To`} bookmarks</span>
       </button>
   );
-};
-
-SaveButton.propTypes = {
-  offerId: PropTypes.number.isRequired,
-  className: PropTypes.string,
-  iconClassName: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string,
-  isFavorite: PropTypes.bool.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-  onSaveButtonClick: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

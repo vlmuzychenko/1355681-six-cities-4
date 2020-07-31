@@ -1,10 +1,21 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
 import leaflet from "leaflet";
 import {MapIconUrl} from "../../const";
+import {OfferInterface, CityInterface} from "../../types";
 
-class Map extends PureComponent {
-  constructor(props) {
+interface Props {
+  offers: OfferInterface[];
+  currentOffer?: OfferInterface;
+  hoveredOffer?: OfferInterface;
+  currentCity?: CityInterface;
+}
+
+class Map extends PureComponent<Props, {}> {
+  private _map: L.Map | null;
+  private _markers: L.LayerGroup;
+  private _mapContainer: React.RefObject<HTMLDivElement>;
+
+  constructor(props: Props) {
     super(props);
 
     this._map = null;
@@ -54,7 +65,6 @@ class Map extends PureComponent {
       center: city,
       zoom,
       zoomControl: false,
-      marker: true
     });
   }
 
@@ -70,7 +80,7 @@ class Map extends PureComponent {
       .addTo(this._map);
   }
 
-  _renderMarkers(offers, hoveredOffer, currentOffer, icon = this._getIcon(MapIconUrl.DEFAULT)) {
+  _renderMarkers(offers, hoveredOffer?, currentOffer?, icon = this._getIcon(MapIconUrl.DEFAULT)) {
     offers.map((offer) => {
       if (currentOffer && offer.id === currentOffer.id) {
         this._renderMarker(offer, this._getIcon(MapIconUrl.ACTIVE));
@@ -100,86 +110,5 @@ class Map extends PureComponent {
     });
   }
 }
-
-Map.propTypes = {
-  currentOffer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string).isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-    host: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    }).isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-  }),
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        previewImage: PropTypes.string.isRequired,
-        images: PropTypes.arrayOf(PropTypes.string).isRequired,
-        description: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        type: PropTypes.string.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        maxAdults: PropTypes.number.isRequired,
-        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-        host: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          super: PropTypes.bool.isRequired,
-          avatarUrl: PropTypes.string.isRequired,
-        }).isRequired,
-        city: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-        }).isRequired,
-        coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-      }).isRequired
-  ).isRequired,
-  currentCity: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-  }).isRequired,
-  hoveredOffer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string).isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-    host: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    }).isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-  }),
-};
 
 export default Map;

@@ -1,8 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 import City from "../city/city";
+import {CityInterface} from "../../types";
 
-const CitiesList = React.memo(function CitiesList(props) {
+interface Props {
+  cities: CityInterface[];
+  currentCity: CityInterface;
+  onCityNameClick: () => void;
+}
+
+const CitiesList: React.FunctionComponent<Props> = (props: Props) => {
   const {cities, currentCity, onCityNameClick} = props;
 
   return (
@@ -21,21 +27,6 @@ const CitiesList = React.memo(function CitiesList(props) {
       </ul>
     </section>
   );
-});
-
-CitiesList.propTypes = {
-  cities: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-      }).isRequired
-  ).isRequired,
-  currentCity: PropTypes.shape({
-    name: PropTypes.string,
-    coords: PropTypes.arrayOf(PropTypes.number),
-    zoom: PropTypes.number,
-  }).isRequired,
-  onCityNameClick: PropTypes.func.isRequired,
 };
 
-export default CitiesList;
+export default React.memo(CitiesList);

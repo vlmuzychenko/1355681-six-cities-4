@@ -1,5 +1,17 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
+
+interface Props {
+  offerId: number;
+  onSubmit: (offerId: number, offerData: object, callback: (status: boolean) => void) => void;
+}
+
+interface State {
+  comment: string;
+  rating: string;
+  formDisabled: boolean;
+  buttonDisabled: boolean;
+  showError: boolean;
+}
 
 const ValidCommentLength = {
   MIN_LENGTH: 50,
@@ -7,8 +19,8 @@ const ValidCommentLength = {
 };
 
 const withHandleForm = (Component) => {
-  class WithHandleForm extends PureComponent {
-    constructor(props) {
+  class WithHandleForm extends PureComponent<Props, State> {
+    constructor(props: Props) {
       super(props);
 
       this._handleCommentChange = this._handleCommentChange.bind(this);
@@ -100,12 +112,6 @@ const withHandleForm = (Component) => {
       );
     }
   }
-
-  WithHandleForm.propTypes = {
-    offerId: PropTypes.number.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-  };
-
   return WithHandleForm;
 };
 

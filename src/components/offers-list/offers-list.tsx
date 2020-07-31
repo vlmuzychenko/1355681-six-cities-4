@@ -1,10 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
 import CityOfferCard from "../city-offer-card/city-offer-card";
 import NearOfferCard from "../near-offer-card/near-offer-card";
 import FavoriteOfferCard from "../favorite-offer-card/favorite-offer-card";
 import OfferCard from "../offer-card/offer-card";
 import {PlaceCardTypes} from "../../const";
+import {OfferInterface} from "../../types";
+
+interface Props {
+  offers: OfferInterface[];
+  type?: string;
+  className?: string;
+  onOfferHover?: () => void;
+}
 
 const _getOfferCardByType = (offer, type, onOfferHover) => {
   switch (type) {
@@ -41,7 +48,7 @@ const _getOfferCardByType = (offer, type, onOfferHover) => {
   }
 };
 
-const OffersList = (props) => {
+const OffersList: React.FunctionComponent<Props> = (props: Props) => {
   const {offers, onOfferHover, type, className} = props;
 
   return (
@@ -51,38 +58,6 @@ const OffersList = (props) => {
       })}
     </div>
   );
-};
-
-OffersList.propTypes = {
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        previewImage: PropTypes.string.isRequired,
-        images: PropTypes.arrayOf(PropTypes.string).isRequired,
-        description: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        type: PropTypes.string.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        maxAdults: PropTypes.number.isRequired,
-        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-        host: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          super: PropTypes.bool.isRequired,
-          avatarUrl: PropTypes.string.isRequired,
-        }).isRequired,
-        city: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-        }).isRequired,
-        coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-      })
-  ).isRequired,
-  onOfferHover: PropTypes.func,
-  type: PropTypes.string,
-  className: PropTypes.string
 };
 
 export default OffersList;

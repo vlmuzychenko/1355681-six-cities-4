@@ -1,13 +1,21 @@
 import React from "react";
-import PropTypes from "prop-types";
 import SaveButton from "../save-button/save-button";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {getRatingInPercent} from "../../utils/common";
 import {OfferTypes} from "../../const";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {OfferInterface} from "../../types";
 
-const OfferCard = (props) => {
+interface Props {
+  authorizationStatus: string;
+  offer: OfferInterface;
+  className: string;
+  imageWrapperClassName: string;
+  onOfferHover: (offer) => void;
+}
+
+const OfferCard: React.FunctionComponent<Props> = (props: Props) => {
   const {authorizationStatus, offer, onOfferHover, className, imageWrapperClassName} = props;
   const {id, title, price, previewImage, type, rating, isPremium, isFavorite} = offer;
   const premiumMark = isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ``;
@@ -50,38 +58,6 @@ const OfferCard = (props) => {
       </div>
     </article>
   );
-};
-
-OfferCard.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  offer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string).isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-    host: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    }).isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-  }).isRequired,
-  onOfferHover: PropTypes.func,
-  className: PropTypes.string,
-  imageWrapperClassName: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({

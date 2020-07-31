@@ -4,7 +4,7 @@ import {BrowserRouter} from 'react-router-dom';
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import NameSpace from "../../reducer/name-space.js";
-import PrivateRoute from "./private-route.jsx";
+import PrivateRoute from "./private-route";
 
 const mockStore = configureStore([]);
 

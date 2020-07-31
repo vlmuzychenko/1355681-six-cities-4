@@ -1,8 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card";
+import {OfferInterface} from "../../types";
 
-const FavoriteOfferCard = (props) => {
+interface Props {
+  className?: string;
+  offer: OfferInterface;
+}
+
+const FavoriteOfferCard: React.FunctionComponent<Props> = (props: Props) => {
   const className = `favorites__card ${props.className || ``}`;
   const imageWrapperClassName = `favorites__image-wrapper`;
 
@@ -16,10 +21,6 @@ const FavoriteOfferCard = (props) => {
       {...restProps}
     />
   );
-};
-
-FavoriteOfferCard.propTypes = {
-  className: PropTypes.string
 };
 
 export default FavoriteOfferCard;

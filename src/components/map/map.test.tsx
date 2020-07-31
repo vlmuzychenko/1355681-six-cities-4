@@ -1,11 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
-import {Provider} from "react-redux";
-import {App} from "./app.jsx";
-
-const mockStore = configureStore([]);
+import Map from "./map";
 
 const offersMock = [
   {
@@ -20,21 +15,17 @@ const offersMock = [
     type: `apartment`,
     bedrooms: 4,
     maxAdults: 4,
-    isFavorite: false,
     goods: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitche`, `Dishwasher`, `Cabel TV`, `Fridge`],
     host: {
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
-      id: 1,
     },
-    coords: [52.3909553943508, 4.85309666406198],
-    zoom: 13,
     city: {
       name: `Paris`,
       coords: [48.865, 2.35],
-      zoom: 13,
     },
+    coords: [52.3909553943508, 4.85309666406198],
   },
   {
     id: 2,
@@ -48,73 +39,32 @@ const offersMock = [
     type: `hotel`,
     bedrooms: 4,
     maxAdults: 4,
-    isFavorite: false,
     goods: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitche`, `Dishwasher`, `Cabel TV`, `Fridge`],
     host: {
       name: `Angelina`,
       super: true,
       avatarUrl: `img/avatar-angelina.jpg`,
-      id: 2,
     },
-    coords: [52.3909553943508, 4.85309666406198],
-    zoom: 13,
     city: {
       name: `Paris`,
       coords: [48.865, 2.35],
-      zoom: 13,
     },
+    coords: [52.369553943508, 4.85309666406198],
   }
 ];
 
-const SortTypeMock = {
-  DEFAULT: `popular`,
-  PRICE_TO_HIGH: `to-high`,
-  PRICE_TO_LOW: `to-low`,
-  TOP_RATED: `top-rated`,
+const currentCityMock = {
+  name: `Paris`,
+  coords: [48.865, 2.35],
 };
 
-const AuthorizationStatusMock = {
-  AUTH: `AUTH`,
-  NO_AUTH: `NO_AUTH`,
-};
-
-const authorizationInfoMock = {
-  avatarUrl: `img/1.png`,
-  email: `Oliver.conner@gmail.com`,
-  id: 1,
-  isPro: false,
-  name: `Oliver.conner`
-};
-
-it(`Render App`, () => {
-  const store = mockStore({
-    [NameSpace.DATA]: {
-      currentCity: offersMock[0].city,
-      offers: offersMock,
-      currentOffer: null,
-    },
-    [NameSpace.MAIN]: {
-      activeSortType: SortTypeMock.DEFAULT,
-    },
-    [NameSpace.USER]: {
-      authorizationStatus: AuthorizationStatusMock.AUTH,
-      authorizationInfo: authorizationInfoMock,
-    }
-  });
-
+it(`Should Map render correctly`, () => {
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <App
-            authorizationStatus={AuthorizationStatusMock.AUTH}
-            authorizationInfo={authorizationInfoMock}
-            currentOffers={offersMock.slice(0, 1)}
-            currentOffer={offersMock[0]}
-            currentCity={offersMock[0].city}
-            onCityNameClick={() => {}}
-            login={() => {}}
-          />
-        </Provider>,
+        <Map
+          offers={offersMock}
+          currentCity={currentCityMock}
+        />,
         {
           createNodeMock: () => document.createElement(`div`)
         }

@@ -1,9 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list";
 import {PlaceCardTypes} from "../../const";
+import {OfferInterface} from "../../types";
 
-const FavoritesOffersList = (props) => {
+interface Props {
+  className?: string;
+  type?: string;
+  offers: OfferInterface[];
+  onOfferHover?: () => void;
+}
+
+const FavoritesOffersList: React.FunctionComponent<Props> = (props: Props) => {
   const className = `favorites__list ${props.className || ``}`;
 
   const restProps = Object.assign({}, props);
@@ -16,10 +23,6 @@ const FavoritesOffersList = (props) => {
       {...restProps}
     />
   );
-};
-
-FavoritesOffersList.propTypes = {
-  className: PropTypes.string
 };
 
 export default FavoritesOffersList;

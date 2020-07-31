@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import CityOffersList from "../city-offers-list/city-offers-list";
 import CitiesList from "../cities-list/cities-list";
 import Map from "../map/map";
@@ -11,10 +10,23 @@ import {ActionCreator as MainActionCreator} from "../../reducer/main/main";
 import {getCities} from "../../reducer/data/selectors";
 import {getActiveSortType} from "../../reducer/main/selectors";
 import {getSortedOffers} from "../../utils/common";
+import {OfferInterface, CityInterface} from "../../types";
+
+interface Props {
+  children: React.ReactNode;
+  currentOffers?: OfferInterface[];
+  hoveredOffer?: OfferInterface;
+  cities?: CityInterface[];
+  currentCity?: CityInterface;
+  activeSortType: string;
+  onCityNameClick: () => void;
+  onSortTypeClick: () => void;
+  onOfferHover: () => void;
+}
 
 const SortWrapped = withOpenedCondition(Sort);
 
-const Main = (props) => {
+const Main: React.FunctionComponent<Props> = (props: Props) => {
   const {
     currentOffers,
     currentCity,
@@ -79,75 +91,6 @@ const Main = (props) => {
       </div>
     </React.Fragment>
   );
-};
-
-Main.propTypes = {
-  children: PropTypes.element,
-  currentOffers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        previewImage: PropTypes.string.isRequired,
-        images: PropTypes.arrayOf(PropTypes.string).isRequired,
-        description: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        type: PropTypes.string.isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        maxAdults: PropTypes.number.isRequired,
-        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-        host: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          super: PropTypes.bool.isRequired,
-          avatarUrl: PropTypes.string.isRequired,
-        }).isRequired,
-        city: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-        }).isRequired,
-        coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-      })
-  ),
-  cities: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-      }).isRequired
-  ),
-  currentCity: PropTypes.shape({
-    name: PropTypes.string,
-    coords: PropTypes.arrayOf(PropTypes.number),
-    zoom: PropTypes.number,
-  }).isRequired,
-  onCityNameClick: PropTypes.func.isRequired,
-  onSortTypeClick: PropTypes.func.isRequired,
-  activeSortType: PropTypes.string.isRequired,
-  onOfferHover: PropTypes.func.isRequired,
-  hoveredOffer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string).isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-    host: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    }).isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-  }),
 };
 
 const mapStateToProps = (state) => ({

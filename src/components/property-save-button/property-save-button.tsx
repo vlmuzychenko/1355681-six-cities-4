@@ -1,8 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 import SaveButton from "../save-button/save-button";
 
-const PropertySaveButton = (props) => {
+interface Props {
+  authorizationStatus: string;
+  isFavorite: boolean;
+  offerId: number;
+  className?: string;
+}
+
+const PropertySaveButton: React.FunctionComponent<Props> = (props: Props) => {
   const cardClassName = `property__bookmark-button${ props.className || ``}`;
   const iconClassName = `property__bookmark-icon`;
   const width = `31`;
@@ -19,10 +25,6 @@ const PropertySaveButton = (props) => {
       height={height}
       {...restProps}/>
   );
-};
-
-PropertySaveButton.propTypes = {
-  className: PropTypes.string
 };
 
 export default PropertySaveButton;

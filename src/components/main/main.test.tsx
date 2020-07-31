@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
 import {Provider} from "react-redux";
-import {Main} from "./main.jsx";
+import {Main} from "./main";
 import {BrowserRouter} from "react-router-dom";
 
 const mockStore = configureStore([]);

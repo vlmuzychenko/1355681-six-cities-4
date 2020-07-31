@@ -1,5 +1,4 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
 import ReviewsList from "../reviews-list/reviews-list";
 import ReviewForm from "../review-form/review-form";
 import NearOffersList from "../near-offers-list/near-offers-list";
@@ -15,11 +14,23 @@ import {getCurrentOffer} from "../../reducer/data/selectors";
 import {getCurrentReviews} from "../../reducer/reviews/selectors";
 import {getNearOffers} from "../../reducer/nearby/selectors";
 import {OfferTypes} from "../../const";
+import {OfferInterface, ReviewInterface} from "../../types";
+
+interface Props {
+  children: React.ReactNode;
+  authorizationStatus: string;
+  id: string;
+  currentOffer?: OfferInterface;
+  nearOffers?: OfferInterface[];
+  currentReviews?: ReviewInterface[];
+  onSubmit: () => void;
+  getOfferData: (id: string) => void;
+}
 
 const ReviewFormWithHandler = withHandleForm(ReviewForm);
 
-class OfferDetails extends PureComponent {
-  constructor(props) {
+class OfferDetails extends PureComponent<Props, {}> {
+  constructor(props: Props) {
     super(props);
   }
 
@@ -164,75 +175,6 @@ class OfferDetails extends PureComponent {
     );
   }
 }
-
-OfferDetails.propTypes = {
-  children: PropTypes.element,
-  authorizationStatus: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  currentOffer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string).isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-    host: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    }).isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  }),
-  nearOffers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string).isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-    host: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-    }).isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired,
-  })),
-  currentReviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    user: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-      isPro: PropTypes.bool.isRequired,
-    }),
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-  })),
-  onSubmit: PropTypes.func,
-  getOfferData: PropTypes.func,
-};
 
 const mapStateToProps = (state, ownProps) => ({
   currentOffer: getCurrentOffer(state, ownProps.id),

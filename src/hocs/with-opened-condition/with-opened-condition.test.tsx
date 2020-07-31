@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import withOpenedCondition from "./with-opened-condition.js";
+import withOpenedCondition from "./with-opened-condition";
 
 const SortTypeMock = {
   DEFAULT: `popular`,

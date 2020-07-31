@@ -1,10 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {AppRoute} from "../../const";
+import {AuthorizationInfoInterface} from "../../types";
 
-const Header = (props) => {
+interface Props {
+  authorizationStatus: string;
+  authorizationInfo: AuthorizationInfoInterface;
+}
+
+const Header: React.FunctionComponent<Props> = (props: Props) => {
   const {authorizationStatus, authorizationInfo} = props;
 
   return (
@@ -38,17 +43,6 @@ const Header = (props) => {
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  authorizationInfo: PropTypes.shape({
-    avatarUrl: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    isPro: PropTypes.bool.isRequired,
-    name: PropTypes.string.isRequired,
-  }),
 };
 
 export default Header;

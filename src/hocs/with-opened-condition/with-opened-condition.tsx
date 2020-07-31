@@ -1,9 +1,17 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
+
+interface Props {
+  activeSortType: string;
+  onSortTypeClick: (sortType: string) => void;
+}
+
+interface State {
+  isOpened: boolean;
+}
 
 const withOpenedCondition = (Component) => {
-  class WithOpenedCondition extends PureComponent {
-    constructor(props) {
+  class WithOpenedCondition extends PureComponent<Props, State> {
+    constructor(props: Props) {
       super(props);
 
       this._handleSortClick = this._handleSortClick.bind(this);
@@ -35,11 +43,6 @@ const withOpenedCondition = (Component) => {
       );
     }
   }
-
-  WithOpenedCondition.propTypes = {
-    activeSortType: PropTypes.string.isRequired,
-    onSortTypeClick: PropTypes.func.isRequired
-  };
 
   return WithOpenedCondition;
 };

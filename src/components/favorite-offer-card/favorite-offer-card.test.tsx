@@ -1,7 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import FavoriteOfferCard from "./favorite-offer-card";
 import configureStore from "redux-mock-store";
-import {OfferCard} from "./offer-card.jsx";
+import NameSpace from "../../reducer/name-space.js";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
@@ -38,15 +39,30 @@ const AuthorizationStatusMock = {
   NO_AUTH: `NO_AUTH`,
 };
 
-it(`Should Offer render correctly`, () => {
-  const store = mockStore({});
+const PageTypeMock = {
+  CITY: `city`,
+  NEAR: `near`,
+};
+
+const classNameMock = `favorites__card`;
+const imageWrapperClassNameMock = `favorites__image-wrapper`;
+
+it(`Should Favorite Offer render correctly`, () => {
+  const store = mockStore({
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatusMock.NO_AUTH,
+      authorizationInfo: null,
+    }
+  });
 
   const tree = renderer
     .create(
         <BrowserRouter>
           <Provider store={store}>
-            <OfferCard
-              authorizationStatus={AuthorizationStatusMock.NO_AUTH}
+            <FavoriteOfferCard
+              type={PageTypeMock.CITY}
+              className={classNameMock}
+              imageWrapperClassName={imageWrapperClassNameMock}
               offer={offerCardMock}
               onOfferHover={() => {}}
             />

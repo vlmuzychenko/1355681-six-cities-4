@@ -1,9 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list";
 import {PlaceCardTypes} from "../../const";
+import {OfferInterface} from "../../types";
 
-const CityOffersList = (props) => {
+interface Props {
+  className?: string;
+  type?: string;
+  offers: OfferInterface[];
+  onOfferHover?: () => void;
+}
+
+const CityOffersList: React.FunctionComponent<Props> = (props: Props) => {
   const className = `cities__places-list tabs__content ${props.className || ``}`;
 
   const restProps = Object.assign({}, props);
@@ -16,10 +23,6 @@ const CityOffersList = (props) => {
       {...restProps}
     />
   );
-};
-
-CityOffersList.propTypes = {
-  className: PropTypes.string
 };
 
 export default CityOffersList;

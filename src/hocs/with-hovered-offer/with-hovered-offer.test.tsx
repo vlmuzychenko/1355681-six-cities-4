@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import withHoveredOffer from "./with-hovered-offer.js";
+import withHoveredOffer from "./with-hovered-offer";
 
 const offerMock = {
   id: 1,

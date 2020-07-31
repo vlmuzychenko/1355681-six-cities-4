@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import City from "./city.jsx";
+import City from "./city";
 
 const cityMock = {
   name: `Paris`,

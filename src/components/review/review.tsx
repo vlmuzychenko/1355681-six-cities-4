@@ -1,9 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 import moment from "moment";
 import {getRatingInPercent} from "../../utils/common";
+import {ReviewInterface} from "../../types";
 
-const Review = (props) => {
+interface Props {
+  review: ReviewInterface;
+}
+
+const Review: React.FunctionComponent<Props> = (props: Props) => {
   const {review: {user, rating, comment, date}} = props;
 
   return (
@@ -30,19 +34,6 @@ const Review = (props) => {
       </div>
     </li>
   );
-};
-
-Review.propTypes = {
-  review: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    user: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-  }),
 };
 
 export default Review;
