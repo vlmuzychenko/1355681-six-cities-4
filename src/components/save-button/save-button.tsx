@@ -53,8 +53,6 @@ const SaveButton: React.FunctionComponent<Props> = (props: Props) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onSaveButtonClick(offerId, isFavorite) {
-    console.log(offerId, isFavorite);
-    
     dispatch(DataOperation.sendFavorite(offerId, isFavorite));
   }
 });
