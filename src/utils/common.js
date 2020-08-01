@@ -1,4 +1,4 @@
-import {SortType} from "../const.js";
+import {SortType} from "../const";
 
 export const getRatingInPercent = (rating) => {
   return `${Math.round(rating) * 100 / 5}%`;
@@ -47,4 +47,8 @@ export const getCitiesList = (offers, maxCities) => {
   });
 
   return unrepeatedCities.slice(0, maxCities);
+};
+
+export const noop = () => {
+  // do nothing
 };

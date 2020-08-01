@@ -1,5 +1,5 @@
-import {authorizationInfoModel} from "../../models/authorization-info.js";
-import {AppRoute} from "../../const.js";
+import {authorizationInfoModel} from "../../models/authorization-info";
+import {AppRoute} from "../../const";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,

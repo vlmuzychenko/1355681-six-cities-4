@@ -1,4 +1,4 @@
-import {reviewsModel} from "../../models/reviews.js";
+import {reviewsModel} from "../../models/reviews";
 
 const initialState = {
   currentReviews: [],

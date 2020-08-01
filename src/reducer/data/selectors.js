@@ -1,5 +1,5 @@
-import {getOffersByCity, getCitiesList} from "../../utils/common.js";
-import NameSpace from "../name-space.js";
+import {getOffersByCity, getCitiesList} from "../../utils/common";
+import NameSpace from "../name-space";
 
 const NAME_SPACE = NameSpace.DATA;
 
