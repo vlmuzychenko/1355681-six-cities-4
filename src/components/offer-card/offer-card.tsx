@@ -12,7 +12,7 @@ interface Props {
   offer: OfferInterface;
   className?: string;
   imageWrapperClassName?: string;
-  onOfferHover: (offer) => void;
+  onOfferHover?: (offer) => void;
 }
 
 const OfferCard: React.FunctionComponent<Props> = (props: Props) => {
@@ -65,4 +65,4 @@ const mapStateToProps = (state) => ({
 });
 
 export {OfferCard};
-export default connect(mapStateToProps, null)(OfferCard);
+export default connect(mapStateToProps, null)(OfferCard as React.FunctionComponent);

@@ -2,17 +2,17 @@ import React from "react";
 import SaveButton from "../save-button/save-button";
 import {Subtract} from "utility-types";
 
-interface InjectingProps {
+interface Props {
+  authorizationStatus: string;
+  isFavorite: boolean;
+  offerId: number;
   className?: string;
   iconClassName?: string;
   width?: string;
   height?: string;
 }
 
-type P = React.ComponentProps<typeof SaveButton>;
-type T = Subtract<P, InjectingProps>;
-
-const PropertySaveButton: React.FunctionComponent<T> = (props: T) => {
+const PropertySaveButton: React.FunctionComponent<Props> = (props: Props) => {
   const cardClassName = `property__bookmark-button${ props.className || ``}`;
   const iconClassName = `property__bookmark-icon`;
   const width = `31`;
