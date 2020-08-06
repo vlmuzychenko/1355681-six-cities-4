@@ -1,6 +1,5 @@
 import React from "react";
 import SaveButton from "../save-button/save-button";
-import {Subtract} from "utility-types";
 
 interface Props {
   authorizationStatus: string;
