@@ -2,7 +2,7 @@
 
 exports[`Should Favorite Offer render correctly 1`] = `
 <article
-  className="place-card favorites__card favorites__card"
+  className="place-card favorites__card"
   onMouseEnter={null}
   onMouseLeave={null}
 >

@@ -431,7 +431,7 @@ Array [
             className="places__list near-places__list "
           >
             <article
-              className="place-card near-places__card "
+              className="place-card near-places__card"
               onMouseEnter={null}
               onMouseLeave={null}
             >

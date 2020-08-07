@@ -44,7 +44,7 @@ exports[`Should Favorites render correctly 1`] = `
               className="places__list favorites__list "
             >
               <article
-                className="place-card favorites__card "
+                className="place-card favorites__card"
                 onMouseEnter={null}
                 onMouseLeave={null}
               >
@@ -152,7 +152,7 @@ exports[`Should Favorites render correctly 1`] = `
                 </div>
               </article>
               <article
-                className="place-card favorites__card "
+                className="place-card favorites__card"
                 onMouseEnter={null}
                 onMouseLeave={null}
               >

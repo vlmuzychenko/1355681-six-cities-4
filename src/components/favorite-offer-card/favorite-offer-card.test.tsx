@@ -42,8 +42,6 @@ const AuthorizationStatusMock = {
   NO_AUTH: `NO_AUTH`,
 };
 
-const classNameMock = `favorites__card`;
-
 it(`Should Favorite Offer render correctly`, () => {
   const store = mockStore({
     [NameSpace.USER]: {
@@ -57,7 +55,6 @@ it(`Should Favorite Offer render correctly`, () => {
         <BrowserRouter>
           <Provider store={store}>
             <FavoriteOfferCard
-              className={classNameMock}
               offer={offerCardMock}
             />
           </Provider>

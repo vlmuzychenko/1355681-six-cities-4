@@ -1,14 +1,19 @@
 import React from "react";
 import SaveButton from "../save-button/save-button";
-import {connect} from "react-redux";
+import {connect, ConnectedProps} from "react-redux";
 import {Link} from "react-router-dom";
 import {getRatingInPercent} from "../../utils/common";
 import {OfferTypes} from "../../const";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {OfferInterface} from "../../types";
 
-interface Props {
+interface RootState {
   authorizationStatus: string;
+}
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & {
   offer: OfferInterface;
   className?: string;
   imageWrapperClassName?: string;
@@ -60,9 +65,11 @@ const OfferCard: React.FunctionComponent<Props> = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   authorizationStatus: getAuthorizationStatus(state),
 });
 
+const connector = connect(mapStateToProps, null);
+
 export {OfferCard};
-export default connect(mapStateToProps, null)(OfferCard as React.FunctionComponent);
+export default connector(OfferCard);

@@ -8,8 +8,8 @@ interface InjectingProps {
   formDisabled: boolean;
   buttonDisabled: boolean;
   showError: boolean;
-  handleCommentChange: (value: string) => void;
-  handleRatingChange: (value: string) => void;
+  onCommentChange: (value: string) => void;
+  onRatingChange: (value: string) => void;
   onSubmit: (offerId: number, offerData: object, callback: (status: boolean) => void) => void;
 }
 
@@ -116,9 +116,9 @@ const withHandleForm = (Component) => {
           formDisabled={this.state.formDisabled}
           buttonDisabled={this.state.buttonDisabled}
           showError={this.state.showError}
-          handleCommentChange={this._handleCommentChange}
-          handleRatingChange={this._handleRatingChange}
-          handleReviewFormSubmit={this._handleReviewFormSubmit}
+          onCommentChange={this._handleCommentChange}
+          onRatingChange={this._handleRatingChange}
+          onReviewFormSubmit={this._handleReviewFormSubmit}
         />
       );
     }

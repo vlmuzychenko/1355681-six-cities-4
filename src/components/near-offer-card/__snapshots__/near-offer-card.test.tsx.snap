@@ -2,7 +2,7 @@
 
 exports[`Should Near Offer render correctly 1`] = `
 <article
-  className="place-card near-places__card near-places__list"
+  className="place-card near-places__card"
   onMouseEnter={null}
   onMouseLeave={null}
 >

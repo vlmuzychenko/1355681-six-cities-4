@@ -43,8 +43,6 @@ const AuthorizationStatusMock = {
   NO_AUTH: `NO_AUTH`,
 };
 
-const classNameMock = `cities__place-card`;
-
 it(`Should City Offer render correctly`, () => {
   const store = mockStore({
     [NameSpace.USER]: {
@@ -58,7 +56,6 @@ it(`Should City Offer render correctly`, () => {
         <BrowserRouter>
           <Provider store={store}>
             <CityOfferCard
-              className={classNameMock}
               offer={offerCardMock}
               onOfferHover={noop}
             />

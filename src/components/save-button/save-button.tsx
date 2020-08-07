@@ -1,11 +1,13 @@
 import React from "react";
-import {connect} from "react-redux";
+import {connect, ConnectedProps} from "react-redux";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {Operation as DataOperation} from "../../reducer/data/data";
 
-interface Props {
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & {
   offerId: number;
   className?: string;
   iconClassName?: string;
@@ -13,7 +15,6 @@ interface Props {
   height?: string;
   isFavorite: boolean;
   authorizationStatus: string;
-  onSaveButtonClick: (offerId, isFavorite) => void;
 }
 
 const SaveButton: React.FunctionComponent<Props> = (props: Props) => {
@@ -56,6 +57,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataOperation.sendFavorite(offerId, isFavorite));
   }
 });
+
+const connector = connect(null, mapDispatchToProps);
 
 export {SaveButton};
 export default connect(null, mapDispatchToProps)(SaveButton);

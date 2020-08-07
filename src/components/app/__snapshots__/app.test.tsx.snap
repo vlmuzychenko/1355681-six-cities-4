@@ -222,7 +222,7 @@ Array [
               className="places__list cities__places-list tabs__content "
             >
               <article
-                className="place-card cities__place-card "
+                className="place-card cities__place-card"
                 onMouseEnter={[Function]}
                 onMouseLeave={[Function]}
               >

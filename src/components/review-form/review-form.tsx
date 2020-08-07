@@ -7,20 +7,20 @@ interface Props {
   formDisabled: boolean;
   buttonDisabled: boolean;
   showError: boolean;
-  handleCommentChange: () => void;
-  handleRatingChange: () => void;
-  handleReviewFormSubmit: () => void;
+  onCommentChange: () => void;
+  onRatingChange: () => void;
+  onReviewFormSubmit: () => void;
 }
 
 const ReviewForm: React.FunctionComponent<Props> = (props: Props) => {
-  const {comment, rating, formDisabled, buttonDisabled, showError, handleCommentChange, handleRatingChange, handleReviewFormSubmit} = props;
+  const {comment, rating, formDisabled, buttonDisabled, showError, onCommentChange, onRatingChange, onReviewFormSubmit} = props;
 
   return (
     <form
       className={`reviews__form form`}
       action="#"
       method="post"
-      onSubmit={handleReviewFormSubmit}
+      onSubmit={onReviewFormSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
@@ -32,7 +32,7 @@ const ReviewForm: React.FunctionComponent<Props> = (props: Props) => {
                 value={ratingItem.value}
                 id={`${ratingItem.value}-stars`}
                 type="radio"
-                onChange={handleRatingChange}
+                onChange={onRatingChange}
                 checked={rating === ratingItem.value ? true : false}
                 disabled={formDisabled}
               />
@@ -58,7 +58,7 @@ const ReviewForm: React.FunctionComponent<Props> = (props: Props) => {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={comment}
-        onChange={handleCommentChange}
+        onChange={onCommentChange}
         disabled={formDisabled}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

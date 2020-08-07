@@ -25,7 +25,7 @@ it(`Should SaveButton render correctly`, () => {
         <Provider store={store}>
           <SaveButton
             isFavorite={true}
-            authStatus={AuthorizationStatusMock.AUTH}
+            authorizationStatus={AuthorizationStatusMock.AUTH}
             offerId={1}
           />
         </Provider>

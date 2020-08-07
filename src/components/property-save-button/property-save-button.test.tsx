@@ -12,11 +12,6 @@ const AuthorizationStatusMock = {
   NO_AUTH: `NO_AUTH`,
 };
 
-const cardClassNameMock = `property__bookmark-button`;
-const iconClassNameMock = `property__bookmark-icon`;
-const widthMock = `31`;
-const heightMock = `33`;
-
 it(`Should PropertySaveButton render correctly`, () => {
   const store = mockStore({
     [NameSpace.USER]: {
@@ -29,10 +24,6 @@ it(`Should PropertySaveButton render correctly`, () => {
     .create(
         <Provider store={store}>
           <PropertySaveButton
-            className={cardClassNameMock}
-            iconClassName={iconClassNameMock}
-            width={widthMock}
-            height={heightMock}
             isFavorite={true}
             authorizationStatus={AuthorizationStatusMock.AUTH}
             offerId={1}

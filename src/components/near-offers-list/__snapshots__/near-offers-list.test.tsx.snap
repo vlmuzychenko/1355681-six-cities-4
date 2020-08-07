@@ -5,7 +5,7 @@ exports[`Should Near Offer List render correctly 1`] = `
   className="places__list near-places__list near-places__list"
 >
   <article
-    className="place-card near-places__card "
+    className="place-card near-places__card"
     onMouseEnter={null}
     onMouseLeave={null}
   >
@@ -113,7 +113,7 @@ exports[`Should Near Offer List render correctly 1`] = `
     </div>
   </article>
   <article
-    className="place-card near-places__card "
+    className="place-card near-places__card"
     onMouseEnter={null}
     onMouseLeave={null}
   >

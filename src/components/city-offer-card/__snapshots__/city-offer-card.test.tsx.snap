@@ -2,7 +2,7 @@
 
 exports[`Should City Offer render correctly 1`] = `
 <article
-  className="place-card cities__place-card cities__place-card"
+  className="place-card cities__place-card"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >

@@ -42,7 +42,7 @@ const AuthorizationStatusMock = {
   NO_AUTH: `NO_AUTH`,
 };
 
-const classNameMock = `near-places__list`;
+// const classNameMock = `near-places__list`;
 
 it(`Should Near Offer render correctly`, () => {
   const store = mockStore({
@@ -56,7 +56,6 @@ it(`Should Near Offer render correctly`, () => {
         <BrowserRouter>
           <Provider store={store}>
             <NearOfferCard
-              className={classNameMock}
               offer={offerCardMock}
             />
           </Provider>

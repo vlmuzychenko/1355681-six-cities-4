@@ -5,7 +5,7 @@ exports[`Should City Offer List render correctly 1`] = `
   className="places__list cities__places-list tabs__content cities__places-list tabs__content"
 >
   <article
-    className="place-card cities__place-card "
+    className="place-card cities__place-card"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
@@ -113,7 +113,7 @@ exports[`Should City Offer List render correctly 1`] = `
     </div>
   </article>
   <article
-    className="place-card cities__place-card "
+    className="place-card cities__place-card"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >

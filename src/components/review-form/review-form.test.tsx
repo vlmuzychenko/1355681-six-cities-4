@@ -12,9 +12,9 @@ it(`Should Reviews List render correctly`, () => {
           formDisabled={false}
           buttonDisabled={true}
           showError={false}
-          handleCommentChange={noop}
-          handleRatingChange={noop}
-          handleReviewFormSubmit={noop}
+          onCommentChange={noop}
+          onRatingChange={noop}
+          onReviewFormSubmit={noop}
         />
     )
     .toJSON();
